@@ -4,7 +4,7 @@ import io.android.projectx.data.model.RecipeEntity
 import io.android.projectx.domain.model.Recipe
 import javax.inject.Inject
 
-class RecipeMapper @Inject constructor() : EntityMapper<RecipeEntity, Recipe> {
+open class RecipeMapper @Inject constructor() : EntityMapper<RecipeEntity, Recipe> {
 
     override fun mapFromEntity(entity: RecipeEntity): Recipe {
         return Recipe(
