@@ -7,7 +7,7 @@ import io.reactivex.Completable
 import io.reactivex.Observable
 import javax.inject.Inject
 
-open class RecipesRemoteDateStore @Inject constructor(
+open class RecipesRemoteDataStore @Inject constructor(
     private val recipesRemote: RecipesRemote
 ) : RecipesDataStore {
 

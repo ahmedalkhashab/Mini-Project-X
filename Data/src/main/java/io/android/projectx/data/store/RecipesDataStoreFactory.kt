@@ -5,12 +5,12 @@ import javax.inject.Inject
 
 open class RecipesDataStoreFactory @Inject constructor(
     private val recipesCacheDateStore: RecipesCacheDateStore,
-    private val recipesRemoteDateStore: RecipesRemoteDateStore
+    private val recipesRemoteDataStore: RecipesRemoteDataStore
 ) {
 
     open fun getDataStore(recipesCached: Boolean, cacheExpired: Boolean): RecipesDataStore {
         return if (recipesCached && !cacheExpired) recipesCacheDateStore
-        else recipesRemoteDateStore
+        else recipesRemoteDataStore
     }
 
     open fun getCacheDataStore(): RecipesDataStore {

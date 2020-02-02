@@ -7,7 +7,7 @@ import kotlin.test.assertEquals
 class RecipesDataStoreFactoryTest {
 
     private val cacheStore = mock<RecipesCacheDateStore>()
-    private val remoteStore = mock<RecipesRemoteDateStore>()
+    private val remoteStore = mock<RecipesRemoteDataStore>()
     private val factory = RecipesDataStoreFactory(cacheStore, remoteStore)
 
     @Test
