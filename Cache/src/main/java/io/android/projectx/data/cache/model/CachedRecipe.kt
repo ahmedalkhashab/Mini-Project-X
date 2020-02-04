@@ -4,7 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import io.android.projectx.data.cache.db.RecipeConstants
-import java.util.*
 
 @Entity(tableName = RecipeConstants.TABLE_NAME)
 data class CachedRecipe(
@@ -16,7 +15,7 @@ data class CachedRecipe(
     val description: String,
     val url: String,
     val urlToImage: String,
-    val publishedAt: Date,
+    val publishedAt: String,
     val content: String,
     @ColumnInfo(name = RecipeConstants.COLUMN_IS_BOOKMARKED)
     var isBookmarked: Boolean

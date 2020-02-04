@@ -37,7 +37,8 @@ object RecipeDataFactory {
             DataFactory.randomString(),
             DataFactory.randomString(),
             DataFactory.randomDate(),
-            DataFactory.randomString()
+            DataFactory.randomString(),
+            DataFactory.randomBoolean()
         )
     }
 

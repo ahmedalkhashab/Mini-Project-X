@@ -9,7 +9,7 @@ class CachedRecipeMapper @Inject constructor() : CacheMapper<CachedRecipe, Recip
     override fun mapFromCached(type: CachedRecipe): RecipeEntity {
         return RecipeEntity(
             type.id, type.author, type.title, type.description,
-            type.url, type.urlToImage, type.publishedAt, type.content,
+            type.url, type.urlToImage, type.publishedAt.getDate()!!, type.content,
             type.isBookmarked
         )
     }
@@ -17,7 +17,7 @@ class CachedRecipeMapper @Inject constructor() : CacheMapper<CachedRecipe, Recip
     override fun mapToCached(type: RecipeEntity): CachedRecipe {
         return CachedRecipe(
             type.id, type.author, type.title, type.description,
-            type.url, type.urlToImage, type.publishedAt, type.content,
+            type.url, type.urlToImage, type.publishedAt.getOffsetDate(), type.content,
             type.isBookmarked
         )
     }

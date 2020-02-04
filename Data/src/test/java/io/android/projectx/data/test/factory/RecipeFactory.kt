@@ -10,7 +10,7 @@ object RecipeFactory {
             DataFactory.uniqueId(), DataFactory.randomString(),
             DataFactory.randomString(), DataFactory.randomString(),
             DataFactory.randomString(), DataFactory.randomString(), DataFactory.randomDate(),
-            DataFactory.randomString()
+            DataFactory.randomString(), DataFactory.randomBoolean()
         )
     }
 
@@ -19,7 +19,7 @@ object RecipeFactory {
             DataFactory.uniqueId(), DataFactory.randomString(),
             DataFactory.randomString(), DataFactory.randomString(),
             DataFactory.randomString(), DataFactory.randomString(), DataFactory.randomDate(),
-            DataFactory.randomString()
+            DataFactory.randomString(), DataFactory.randomBoolean()
         )
     }
 
