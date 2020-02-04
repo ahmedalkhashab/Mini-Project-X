@@ -2,6 +2,7 @@ package io.android.projectx.data.cache.mapper
 
 import io.android.projectx.data.cache.model.CachedRecipe
 import io.android.projectx.data.model.RecipeEntity
+import java.util.*
 import javax.inject.Inject
 
 class CachedRecipeMapper @Inject constructor() : CacheMapper<CachedRecipe, RecipeEntity> {
@@ -9,7 +10,7 @@ class CachedRecipeMapper @Inject constructor() : CacheMapper<CachedRecipe, Recip
     override fun mapFromCached(type: CachedRecipe): RecipeEntity {
         return RecipeEntity(
             type.id, type.author, type.title, type.description,
-            type.url, type.urlToImage, type.publishedAt.getDate()!!, type.content,
+            type.url, type.urlToImage, type.publishedAt.getDate() ?: Date(), type.content,
             type.isBookmarked
         )
     }

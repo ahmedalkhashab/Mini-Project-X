@@ -1,5 +1,6 @@
 package io.android.projectx.data.cache.test.factory
 
+import io.android.projectx.data.cache.mapper.getOffsetDate
 import io.android.projectx.data.cache.model.CachedRecipe
 import io.android.projectx.data.model.RecipeEntity
 
@@ -10,7 +11,7 @@ object RecipeDataFactory {
             DataFactory.uniqueId(), DataFactory.randomString(),
             DataFactory.randomString(), DataFactory.randomString(),
             DataFactory.randomString(), DataFactory.randomString(),
-            DataFactory.randomString(), DataFactory.randomString(),
+            DataFactory.randomDate().getOffsetDate(), DataFactory.randomString(),
             false
         )
     }
@@ -20,7 +21,7 @@ object RecipeDataFactory {
             DataFactory.uniqueId(), DataFactory.randomString(),
             DataFactory.randomString(), DataFactory.randomString(),
             DataFactory.randomString(), DataFactory.randomString(),
-            DataFactory.randomString(), DataFactory.randomString(),
+            DataFactory.randomDate().getOffsetDate(), DataFactory.randomString(),
             true
         )
     }
