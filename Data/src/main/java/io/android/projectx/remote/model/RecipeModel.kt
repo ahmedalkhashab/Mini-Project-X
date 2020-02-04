@@ -5,7 +5,7 @@ import java.util.*
 
 class RecipeModel(
     @SerializedName("id") val id: Long,
-    @SerializedName("author") val author: String,
+    @SerializedName("author") val author: AuthorModel,
     @SerializedName("title") val title: String,
     @SerializedName("description") val description: String,
     @SerializedName("url") val url: String,
