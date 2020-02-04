@@ -31,7 +31,7 @@ abstract class CachedRecipesDao {
     @Query(QUERY_UPDATE_BOOKMARK_STATUS)
     abstract fun setBookmarkStatus(
         isBookmarked: Boolean,
-        recipeId: String
+        recipeId: Long
     )
 
 }
