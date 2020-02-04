@@ -11,6 +11,9 @@ ext {
     rxKotlinVersion = '2.4.0'
     javaxAnnotationVersion = '1.0'
     javaxInjectVersion = '1'
+    gsonVersion = '2.8.1'
+    okHttpVersion = '3.8.1'
+    retrofitVersion = '2.3.0'
 
     //Testing
     jUnitVersion = '4.12'
@@ -21,7 +24,7 @@ ext {
     domainDependencies = [
             javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             javaxInject: "javax.inject:javax.inject:${javaxInjectVersion}",
-            rxJava: "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
+            rxKotlin: "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
             kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
     ]
 
@@ -34,7 +37,7 @@ ext {
     dataDependencies = [
             javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             javaxInject: "javax.inject:javax.inject:${javaxInjectVersion}",
-            rxJava: "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
+            rxKotlin: "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
             kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
     ]
 
@@ -45,4 +48,29 @@ ext {
             assertj: "org.assertj:assertj-core:${assertJVersion}",
             robolectric: "org.robolectric:robolectric:${robolectricVersion}"
     ]
+
+    remoteDependencies = [
+            // because we will merge remote module with data module
+
+            gson:               "com.google.code.gson:gson:${gsonVersion}",
+            //rxKotlin:           "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
+            //kotlin:             "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
+            //javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            //javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
+            okHttp:             "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+            okHttpLogger:       "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
+            retrofit:           "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitConverter:  "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            retrofitAdapter:    "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
+    ]
+
+    remoteTestDependencies = [
+            // because we will merge remote module with data module
+
+            //junit:              "junit:junit:${jUnitVersion}",
+            // // // kotlinJUnit:        "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}",
+            //assertj:            "org.assertj:assertj-core:${assertJVersion}",
+            //mockito:            "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}"
+    ]
+
 }
