@@ -26,6 +26,7 @@ ext {
     archCompVersion = '1.1.1'
     androidJUnitVersion = '1.1.1'
     espressoVersion = '3.2.0'
+    androidxTestCoreVersion = '1.0.0'
 
     domainDependencies = [
             javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
@@ -91,13 +92,14 @@ ext {
     ]
 
     cacheTestDependencies = [
-            junit      : "junit:junit:${jUnitVersion}",
-            kotlinJUnit: "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}",
-            mockito    : "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockitoVersion}",
-            assertj    : "org.assertj:assertj-core:${assertJVersion}",
-            robolectric: "org.robolectric:robolectric:${robolectricVersion}",
-            roomTesting: "android.arch.persistence.room:testing:${roomVersion}",
-            archTesting: "android.arch.core:core-testing:${archCompVersion}",
+            junit           : "junit:junit:${jUnitVersion}",
+            kotlinJUnit     : "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}",
+            mockito         : "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockitoVersion}",
+            assertj         : "org.assertj:assertj-core:${assertJVersion}",
+            robolectric     : "org.robolectric:robolectric:${robolectricVersion}",
+            roomTesting     : "android.arch.persistence.room:testing:${roomVersion}",
+            archTesting     : "android.arch.core:core-testing:${archCompVersion}",
+            androidxTestCore: "androidx.test:core:${androidxTestCoreVersion}",
     ]
 
 }
