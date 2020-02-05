@@ -43,7 +43,10 @@ object RecipeDataFactory {
     }
 
     fun makeRecipesResponse(): RecipesResponseModel {
-        return RecipesResponseModel(listOf(makeRecipe(), makeRecipe()))
+        return RecipesResponseModel(listOf(
+            makeRecipe(),
+            makeRecipe()
+        ))
     }
 
 }

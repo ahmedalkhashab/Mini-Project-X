@@ -53,17 +53,14 @@ ext {
             kotlinJUnit: "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}",
             mockito    : "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockitoVersion}",
             assertj    : "org.assertj:assertj-core:${assertJVersion}",
-            robolectric: "org.robolectric:robolectric:${robolectricVersion}"
     ]
 
     remoteDependencies = [
-            // because we will merge remote module with data module
-
             gson             : "com.google.code.gson:gson:${gsonVersion}",
-            //rxKotlin:           "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
-            //kotlin:             "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
-            //javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-            //javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
+            rxKotlin         : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
+            kotlin           : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
+            javaxAnnotation  : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            javaxInject      : "javax.inject:javax.inject:${javaxInjectVersion}",
             okHttp           : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
             okHttpLogger     : "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
             retrofit         : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
@@ -72,12 +69,10 @@ ext {
     ]
 
     remoteTestDependencies = [
-            // because we will merge remote module with data module
-
-            //junit:              "junit:junit:${jUnitVersion}",
-            // // // kotlinJUnit:        "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}",
-            //assertj:            "org.assertj:assertj-core:${assertJVersion}",
-            //mockito:            "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}"
+            junit      : "junit:junit:${jUnitVersion}",
+            kotlinJUnit: "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}",
+            mockito    : "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockitoVersion}",
+            assertj    : "org.assertj:assertj-core:${assertJVersion}",
     ]
 
     cacheDependencies = [

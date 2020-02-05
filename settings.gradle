@@ -1,2 +1,2 @@
-include ':Domain', ':Data', ':Cache'
+include ':Domain', ':Data', ':Cache', ':Remote'
 rootProject.name='ProjectX'
