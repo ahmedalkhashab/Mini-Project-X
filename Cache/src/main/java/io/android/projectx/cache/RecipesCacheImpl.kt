@@ -1,8 +1,8 @@
-package io.android.projectx.data.cache
+package io.android.projectx.cache
 
-import io.android.projectx.data.cache.db.RecipesDatabase
-import io.android.projectx.data.cache.mapper.CachedRecipeMapper
-import io.android.projectx.data.cache.model.Config
+import io.android.projectx.cache.db.RecipesDatabase
+import io.android.projectx.cache.mapper.CachedRecipeMapper
+import io.android.projectx.cache.model.Config
 import io.android.projectx.data.model.RecipeEntity
 import io.android.projectx.data.repository.RecipesCache
 import io.reactivex.Completable

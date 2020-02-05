@@ -1,8 +1,8 @@
-package io.android.projectx.data.cache.model
+package io.android.projectx.cache.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import io.android.projectx.data.cache.db.ConfigConstants
+import io.android.projectx.cache.db.ConfigConstants
 
 @Entity(tableName = ConfigConstants.TABLE_NAME)
 data class Config(

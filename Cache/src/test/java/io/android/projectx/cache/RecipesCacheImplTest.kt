@@ -1,11 +1,11 @@
-package io.android.projectx.data.cache
+package io.android.projectx.cache
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import io.android.projectx.data.cache.db.RecipesDatabase
-import io.android.projectx.data.cache.mapper.CachedRecipeMapper
-import io.android.projectx.data.cache.test.factory.RecipeDataFactory
+import io.android.projectx.cache.db.RecipesDatabase
+import io.android.projectx.cache.mapper.CachedRecipeMapper
+import io.android.projectx.cache.test.factory.RecipeDataFactory
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -1,13 +1,13 @@
-package io.android.projectx.data.cache.db
+package io.android.projectx.cache.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import io.android.projectx.data.cache.dao.CachedRecipesDao
-import io.android.projectx.data.cache.dao.ConfigDao
-import io.android.projectx.data.cache.model.CachedRecipe
-import io.android.projectx.data.cache.model.Config
+import io.android.projectx.cache.dao.CachedRecipesDao
+import io.android.projectx.cache.dao.ConfigDao
+import io.android.projectx.cache.model.CachedRecipe
+import io.android.projectx.cache.model.Config
 import javax.inject.Inject
 
 @Database(entities = arrayOf(CachedRecipe::class, Config::class), version = 1)

@@ -1,6 +1,6 @@
-package io.android.projectx.data.cache.mapper
+package io.android.projectx.cache.mapper
 
-import io.android.projectx.data.cache.model.CachedRecipe
+import io.android.projectx.cache.model.CachedRecipe
 import io.android.projectx.data.model.RecipeEntity
 import java.util.*
 import javax.inject.Inject

@@ -1,10 +1,10 @@
-package io.android.projectx.data.cache.dao
+package io.android.projectx.cache.dao
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import io.android.projectx.data.cache.db.RecipesDatabase
-import io.android.projectx.data.cache.test.factory.ConfigDataFactory
+import io.android.projectx.cache.db.RecipesDatabase
+import io.android.projectx.cache.test.factory.ConfigDataFactory
 import org.junit.After
 import org.junit.Rule
 import org.junit.Test

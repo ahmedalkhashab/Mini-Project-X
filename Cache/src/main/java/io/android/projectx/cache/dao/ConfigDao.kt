@@ -1,11 +1,11 @@
-package io.android.projectx.data.cache.dao
+package io.android.projectx.cache.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import io.android.projectx.data.cache.db.ConfigConstants
-import io.android.projectx.data.cache.model.Config
+import io.android.projectx.cache.db.ConfigConstants
+import io.android.projectx.cache.model.Config
 import io.reactivex.Flowable
 
 @Dao

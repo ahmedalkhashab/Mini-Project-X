@@ -1,4 +1,4 @@
-package io.android.projectx.data.cache.test.factory
+package io.android.projectx.cache.test.factory
 
 import java.time.LocalDate
 import java.util.*

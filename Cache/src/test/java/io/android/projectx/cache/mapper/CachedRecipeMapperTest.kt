@@ -1,7 +1,7 @@
-package io.android.projectx.data.cache.mapper
+package io.android.projectx.cache.mapper
 
-import io.android.projectx.data.cache.model.CachedRecipe
-import io.android.projectx.data.cache.test.factory.RecipeDataFactory
+import io.android.projectx.cache.model.CachedRecipe
+import io.android.projectx.cache.test.factory.RecipeDataFactory
 import io.android.projectx.data.model.RecipeEntity
 import org.junit.Test
 

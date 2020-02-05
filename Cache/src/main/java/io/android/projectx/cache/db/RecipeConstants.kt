@@ -1,4 +1,4 @@
-package io.android.projectx.data.cache.db
+package io.android.projectx.cache.db
 
 object RecipeConstants {
 

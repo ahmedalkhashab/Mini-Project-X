@@ -1,4 +1,4 @@
-package io.android.projectx.data.cache.mapper
+package io.android.projectx.cache.mapper
 
 import java.text.ParseException
 import java.text.SimpleDateFormat
