@@ -1,4 +1,4 @@
-apply plugin: 'com.android.library'
+apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -10,50 +10,24 @@ android {
     buildToolsVersion globalConfiguration["androidBuildToolsVersion"]
 
     defaultConfig {
+        applicationId "io.android.projectx"
+
         minSdkVersion globalConfiguration["androidMinSdkVersion"]
         targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
-        multiDexEnabled = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    dexOptions {
-        preDexLibraries = false
-        dexInProcess = false
-        javaMaxHeapSize "4g"
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
-    packagingOptions {
-        exclude 'LICENSE.txt'
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/ASL2.0'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/LICENSE'
-    }
-
-    lintOptions {
-        quiet true
-        abortOnError false
-        ignoreWarnings true
-        disable 'InvalidPackage'            //Some libraries have issues with this.
-        disable 'OldTargetApi'              //Lint gives this warning but SDK 20 would be Android L Beta.
-        disable 'IconDensities'             //For testing purpose. This is safe to remove.
-        disable 'IconMissingDensityFolder'  //For testing purpose. This is safe to remove.
-    }
-
-    testOptions {
-        unitTests.all {
-            jvmArgs '-noverify'
-        }
-    }
-}
-
-kapt {
-    correctErrorTypes = true
-    generateStubs = true
 }
 
 dependencies {
@@ -61,22 +35,53 @@ dependencies {
     def presentationTestDependencies = rootProject.ext.presentationTestDependencies
 
     implementation project(':Domain')
+    implementation project(':Data')
+    implementation project(':Remote')
+    implementation project(':Cache')
 
-    implementation presentationDependencies.kotlin
+    implementation presentationDependencies.javaxAnnotation
     implementation presentationDependencies.javaxInject
     implementation presentationDependencies.rxKotlin
-    implementation presentationDependencies.archRuntime
-    implementation presentationDependencies.archExtensions
-    kapt presentationDependencies.archCompiler
+    implementation presentationDependencies.kotlin
+    implementation presentationDependencies.rxAndroid
+    implementation presentationDependencies.androidxCoreKtx
+    implementation presentationDependencies.androidxAnnotations
+    implementation presentationDependencies.lifecycleRuntime
+    implementation presentationDependencies.lifecycleExtensions
+    implementation presentationDependencies.roomRuntime
+    implementation presentationDependencies.roomRxJava
+    implementation presentationDependencies.legacyV4
+    implementation presentationDependencies.legacyV13
+    implementation presentationDependencies.appCompat
+    implementation presentationDependencies.recyclerView
+    implementation presentationDependencies.constraintlayout
+    implementation presentationDependencies.material
+    implementation presentationDependencies.dagger
+    implementation presentationDependencies.daggerSupport
+    implementation presentationDependencies.timber
+    implementation presentationDependencies.glide
+    kapt presentationDependencies.lifecycleCompiler
+    kapt presentationDependencies.roomCompiler
+    kapt presentationDependencies.daggerCompiler
+    kapt presentationDependencies.daggerProcessor
 
     testImplementation presentationTestDependencies.junit
-    testImplementation presentationTestDependencies.mockito
+    testImplementation presentationTestDependencies.kotlinJUnit
     testImplementation presentationTestDependencies.assertj
+    testImplementation presentationTestDependencies.mockito
+    testImplementation presentationTestDependencies.mockitoAndroid
     testImplementation presentationTestDependencies.robolectric
     testImplementation presentationTestDependencies.archTesting
+    kaptTest presentationDependencies.daggerCompiler
 
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.2.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    // Instrumentation test dependencies
+    androidTestImplementation presentationTestDependencies.junit
+    androidTestImplementation presentationTestDependencies.mockito
+    androidTestImplementation presentationTestDependencies.mockitoAndroid
+    androidTestImplementation presentationTestDependencies.espressoCore
+    androidTestImplementation presentationTestDependencies.androidxRunner
+    androidTestImplementation presentationTestDependencies.androidxRules
+    androidTestImplementation presentationTestDependencies.espressoIntents
+    androidTestImplementation presentationTestDependencies.espressoContrib
+    kaptAndroidTest presentationDependencies.daggerCompiler
 }
