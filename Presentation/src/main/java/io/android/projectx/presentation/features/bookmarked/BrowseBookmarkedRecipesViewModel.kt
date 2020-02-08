@@ -1,4 +1,4 @@
-package io.android.projectx.presentation.features
+package io.android.projectx.presentation.features.bookmarked
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

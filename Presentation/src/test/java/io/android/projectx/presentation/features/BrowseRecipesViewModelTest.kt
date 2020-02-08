@@ -6,6 +6,7 @@ import io.android.projectx.domain.interactor.bookmarked.BookmarkRecipe
 import io.android.projectx.domain.interactor.bookmarked.UnBookmarkRecipe
 import io.android.projectx.domain.interactor.browse.GetRecipes
 import io.android.projectx.domain.model.Recipe
+import io.android.projectx.presentation.features.browse.BrowseRecipesViewModel
 import io.android.projectx.presentation.mapper.RecipeViewMapper
 import io.android.projectx.presentation.model.RecipeView
 import io.android.projectx.presentation.state.ResourceState
@@ -26,7 +27,12 @@ class BrowseRecipesViewModelTest {
     var unBookmarkRecipe = mock<UnBookmarkRecipe>()
     var recipeMapper = mock<RecipeViewMapper>()
     var recipeViewModel =
-        BrowseRecipesViewModel(getRecipes, bookmarkRecipe, unBookmarkRecipe, recipeMapper)
+        BrowseRecipesViewModel(
+            getRecipes,
+            bookmarkRecipe,
+            unBookmarkRecipe,
+            recipeMapper
+        )
 
     @Captor
     val captor = argumentCaptor<DisposableObserver<List<Recipe>>>()

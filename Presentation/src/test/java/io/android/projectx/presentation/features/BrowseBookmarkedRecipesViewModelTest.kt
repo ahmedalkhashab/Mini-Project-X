@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.*
 import io.android.projectx.domain.interactor.bookmarked.GetBookmarkedRecipes
 import io.android.projectx.domain.model.Recipe
+import io.android.projectx.presentation.features.bookmarked.BrowseBookmarkedRecipesViewModel
 import io.android.projectx.presentation.mapper.RecipeViewMapper
 import io.android.projectx.presentation.model.RecipeView
 import io.android.projectx.presentation.state.ResourceState
@@ -24,9 +25,10 @@ class BrowseBookmarkedRecipesViewModelTest {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
     var getBookmarkedRecipes = mock<GetBookmarkedRecipes>()
     var mapper = mock<RecipeViewMapper>()
-    var recipeViewModel = BrowseBookmarkedRecipesViewModel(
-        getBookmarkedRecipes, mapper
-    )
+    var recipeViewModel =
+        BrowseBookmarkedRecipesViewModel(
+            getBookmarkedRecipes, mapper
+        )
 
     @Captor
     val captor = argumentCaptor<DisposableObserver<List<Recipe>>>()
