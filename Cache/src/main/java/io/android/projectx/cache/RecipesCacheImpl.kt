@@ -6,7 +6,7 @@ import io.android.projectx.cache.model.Config
 import io.android.projectx.data.model.RecipeEntity
 import io.android.projectx.data.repository.RecipesCache
 import io.reactivex.Completable
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -30,17 +30,15 @@ class RecipesCacheImpl @Inject constructor(
         }
     }
 
-    override fun getRecipes(): Observable<List<RecipeEntity>> {
+    override fun getRecipes(): Flowable<List<RecipeEntity>> {
         return recipesDatabase.cachedRecipesDao().getRecipes()
-            .toObservable()
             .map {
                 it.map { cachedRecipe -> mapper.mapFromCached(cachedRecipe) }
             }
     }
 
-    override fun getBookmarkedRecipes(): Observable<List<RecipeEntity>> {
+    override fun getBookmarkedRecipes(): Flowable<List<RecipeEntity>> {
         return recipesDatabase.cachedRecipesDao().getBookmarkedRecipes()
-            .toObservable()
             .map {
                 it.map { cachedRecipe -> mapper.mapFromCached(cachedRecipe) }
             }
@@ -74,11 +72,11 @@ class RecipesCacheImpl @Inject constructor(
         }
     }
 
-    override fun isRecipesCacheExpired(): Single<Boolean> {
+    override fun isRecipesCacheExpired(): Flowable<Boolean> {
         val currentTime = System.currentTimeMillis()
         val expirationTime = (60 * 10 * 1000).toLong()
         return recipesDatabase.configDao().getConfig()
-            .single(Config(lastCacheTime = 0))
+            .onErrorReturn { Config(lastCacheTime = 0) }
             .map {
                 currentTime - it.lastCacheTime > expirationTime
             }

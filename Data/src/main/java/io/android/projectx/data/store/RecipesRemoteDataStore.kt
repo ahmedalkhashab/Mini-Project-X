@@ -4,14 +4,14 @@ import io.android.projectx.data.model.RecipeEntity
 import io.android.projectx.data.repository.RecipesDataStore
 import io.android.projectx.data.repository.RecipesRemote
 import io.reactivex.Completable
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import javax.inject.Inject
 
 open class RecipesRemoteDataStore @Inject constructor(
     private val recipesRemote: RecipesRemote
 ) : RecipesDataStore {
 
-    override fun getRecipes(): Observable<List<RecipeEntity>> {
+    override fun getRecipes(): Flowable<List<RecipeEntity>> {
         return recipesRemote.getRecipes()
     }
 
@@ -31,8 +31,8 @@ open class RecipesRemoteDataStore @Inject constructor(
         throw UnsupportedOperationException("Setting bookmarks isn't supported here...")
     }
 
-    override fun getBookmarkedRecipes(): Observable<List<RecipeEntity>> {
+    override fun getBookmarkedRecipes(): Flowable<List<RecipeEntity>> {
         throw UnsupportedOperationException("Getting Bookmarked Recipes isn't supported here...")
     }
-    
+
 }

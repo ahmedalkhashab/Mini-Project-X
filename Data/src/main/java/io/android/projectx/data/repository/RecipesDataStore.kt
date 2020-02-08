@@ -2,11 +2,11 @@ package io.android.projectx.data.repository
 
 import io.android.projectx.data.model.RecipeEntity
 import io.reactivex.Completable
-import io.reactivex.Observable
+import io.reactivex.Flowable
 
 interface RecipesDataStore {
 
-    fun getRecipes(): Observable<List<RecipeEntity>>
+    fun getRecipes(): Flowable<List<RecipeEntity>>
 
     fun clearRecipes(): Completable
 
@@ -16,6 +16,6 @@ interface RecipesDataStore {
 
     fun setRecipeAsNotBookmarked(recipeId: Long): Completable
 
-    fun getBookmarkedRecipes(): Observable<List<RecipeEntity>>
+    fun getBookmarkedRecipes(): Flowable<List<RecipeEntity>>
 
 }

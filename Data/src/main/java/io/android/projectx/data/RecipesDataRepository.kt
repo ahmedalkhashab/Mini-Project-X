@@ -23,7 +23,8 @@ class RecipesDataRepository @Inject constructor(
                 Pair(areCached, isExpired)
             })
             .flatMap {
-                factory.getDataStore(it.first, it.second).getRecipes()
+                factory.getDataStore(it.first, it.second).getRecipes().toObservable()
+                    .distinctUntilChanged()
             }
             .flatMap { recipes ->
                 factory.getCacheDataStore()
@@ -44,10 +45,8 @@ class RecipesDataRepository @Inject constructor(
     }
 
     override fun getBookmarkedRecipes(): Observable<List<Recipe>> {
-        return factory.getCacheDataStore().getBookmarkedRecipes()
-            .map {
-                it.map { mapper.mapFromEntity(it) }
-            }
+        return factory.getCacheDataStore().getBookmarkedRecipes().toObservable()
+            .map { it.map { mapper.mapFromEntity(it) } }
     }
 
 }

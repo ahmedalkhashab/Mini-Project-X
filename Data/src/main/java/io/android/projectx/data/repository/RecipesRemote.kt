@@ -1,10 +1,10 @@
 package io.android.projectx.data.repository
 
 import io.android.projectx.data.model.RecipeEntity
-import io.reactivex.Observable
+import io.reactivex.Flowable
 
 interface RecipesRemote {
 
-    fun getRecipes(): Observable<List<RecipeEntity>>
+    fun getRecipes(): Flowable<List<RecipeEntity>>
 
 }

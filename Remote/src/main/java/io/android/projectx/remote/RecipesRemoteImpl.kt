@@ -4,7 +4,7 @@ import io.android.projectx.data.model.RecipeEntity
 import io.android.projectx.data.repository.RecipesRemote
 import io.android.projectx.remote.mapper.RecipesResponseModelMapper
 import io.android.projectx.remote.service.RecipesService
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import javax.inject.Inject
 
 class RecipesRemoteImpl @Inject constructor(
@@ -12,7 +12,7 @@ class RecipesRemoteImpl @Inject constructor(
     private val mapper: RecipesResponseModelMapper
 ) : RecipesRemote {
 
-    override fun getRecipes(): Observable<List<RecipeEntity>> {
+    override fun getRecipes(): Flowable<List<RecipeEntity>> {
         //todo - move parameters
         return service.searchRepositories(1)
             .map {

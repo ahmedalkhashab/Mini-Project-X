@@ -2,7 +2,7 @@ package io.android.projectx.data.repository
 
 import io.android.projectx.data.model.RecipeEntity
 import io.reactivex.Completable
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import io.reactivex.Single
 
 interface RecipesCache {
@@ -11,9 +11,9 @@ interface RecipesCache {
 
     fun saveRecipes(recipes: List<RecipeEntity>): Completable
 
-    fun getRecipes(): Observable<List<RecipeEntity>>
+    fun getRecipes(): Flowable<List<RecipeEntity>>
 
-    fun getBookmarkedRecipes(): Observable<List<RecipeEntity>>
+    fun getBookmarkedRecipes(): Flowable<List<RecipeEntity>>
 
     fun setRecipeAsBookmarked(recipeId: Long): Completable
 
@@ -23,6 +23,6 @@ interface RecipesCache {
 
     fun setLastCacheTime(lastCache: Long): Completable
 
-    fun isRecipesCacheExpired(): Single<Boolean>
+    fun isRecipesCacheExpired(): Flowable<Boolean>
 
 }

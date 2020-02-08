@@ -4,14 +4,14 @@ import io.android.projectx.data.model.RecipeEntity
 import io.android.projectx.data.repository.RecipesCache
 import io.android.projectx.data.repository.RecipesDataStore
 import io.reactivex.Completable
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import javax.inject.Inject
 
 open class RecipesCacheDateStore @Inject constructor(
     private val recipesCache: RecipesCache
 ) : RecipesDataStore {
 
-    override fun getRecipes(): Observable<List<RecipeEntity>> {
+    override fun getRecipes(): Flowable<List<RecipeEntity>> {
         return recipesCache.getRecipes()
     }
 
@@ -32,7 +32,7 @@ open class RecipesCacheDateStore @Inject constructor(
         return recipesCache.setRecipeAsNotBookmarked(recipeId)
     }
 
-    override fun getBookmarkedRecipes(): Observable<List<RecipeEntity>> {
+    override fun getBookmarkedRecipes(): Flowable<List<RecipeEntity>> {
         return recipesCache.getBookmarkedRecipes()
     }
 
