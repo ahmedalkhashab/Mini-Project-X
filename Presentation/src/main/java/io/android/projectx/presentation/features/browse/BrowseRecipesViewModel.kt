@@ -24,10 +24,6 @@ class BrowseRecipesViewModel @Inject constructor(
 
     private val liveData: MutableLiveData<Resource<List<RecipeView>>> = MutableLiveData()
 
-    init {
-        fetchRecipes()
-    }
-
     override fun onCleared() {
         getRecipes?.dispose()
         super.onCleared()
