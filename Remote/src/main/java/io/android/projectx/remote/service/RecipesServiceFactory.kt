@@ -1,26 +1,30 @@
 package io.android.projectx.remote.service
 
+import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class RecipesServiceFactory {
+object RecipesServiceFactory {
 
     fun makeRecipesService(baseUrl: String, isDebug: Boolean): RecipesService {
         val okHttpClient = makeOkHttpClient(makeLoggingInterceptor((isDebug)))
-        return makeRecipesService(baseUrl, okHttpClient)
+        return makeRecipesService(baseUrl, okHttpClient, Gson())
     }
 
     private fun makeRecipesService(
         baseUrl: String,
-        okHttpClient: OkHttpClient
+        okHttpClient: OkHttpClient,
+        gson: Gson
     ): RecipesService {
         val retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(okHttpClient)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
         return retrofit.create(RecipesService::class.java)
     }
