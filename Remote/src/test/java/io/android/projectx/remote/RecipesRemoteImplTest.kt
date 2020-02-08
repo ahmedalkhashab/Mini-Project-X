@@ -37,7 +37,7 @@ class RecipesRemoteImplTest {
         stubRecipesResponseModelMapperMapFromModel(any(), RecipeDataFactory.makeRecipeEntity())
 
         remote.getRecipes().test()
-        verify(service).searchRepositories(any(), any(), any(), any())
+        verify(service).searchRepositories(any())
     }
 
     @Test
@@ -61,12 +61,12 @@ class RecipesRemoteImplTest {
 
         remote.getRecipes().test()
         //todo - retest this case after moving parameters
-        //verify(service).searchRepositories("meat", 7, "stars", "desc")
-        verify(service).searchRepositories("chicken", 1, "stars", "desc")
+        //verify(service).searchRepositories(1)
+        verify(service).searchRepositories(1)
     }
 
     private fun stubRecipesServiceSearch(observable: Observable<RecipesResponseModel>) {
-        whenever(service.searchRepositories(any(), any(), any(), any()))
+        whenever(service.searchRepositories(any()))
             .thenReturn(observable)
     }
 

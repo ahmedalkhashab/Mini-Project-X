@@ -14,7 +14,7 @@ class RecipesRemoteImpl @Inject constructor(
 
     override fun getRecipes(): Observable<List<RecipeEntity>> {
         //todo - move parameters
-        return service.searchRepositories("chicken", 1, "stars", "desc")
+        return service.searchRepositories(1)
             .map {
                 it.items.map { model -> mapper.mapFromModel(model) }
             }
