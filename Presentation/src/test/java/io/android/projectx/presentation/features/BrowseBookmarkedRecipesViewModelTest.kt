@@ -1,4 +1,4 @@
-package io.android.projectx.presentation
+package io.android.projectx.presentation.features
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.*

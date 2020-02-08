@@ -1,4 +1,4 @@
-package io.android.projectx.presentation
+package io.android.projectx.presentation.features
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
