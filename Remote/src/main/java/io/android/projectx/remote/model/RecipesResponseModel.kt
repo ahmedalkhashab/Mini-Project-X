@@ -1,3 +1,5 @@
 package io.android.projectx.remote.model
 
-class RecipesResponseModel(val items: List<RecipeModel>)
+import com.google.gson.annotations.SerializedName
+
+class RecipesResponseModel(@SerializedName("content") val items: List<RecipeModel>)
