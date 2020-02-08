@@ -14,7 +14,7 @@ android {
 
         minSdkVersion globalConfiguration["androidMinSdkVersion"]
         targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "io.android.projectx.presentation.test.TestRunner"
     }
 
     buildTypes {
