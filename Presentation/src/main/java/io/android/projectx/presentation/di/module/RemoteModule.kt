@@ -17,7 +17,10 @@ abstract class RemoteModule {
         @Provides
         @JvmStatic
         fun provideRecipesService(): RecipesService {
-            return RecipesServiceFactory.makeRecipesService("", BuildConfig.DEBUG)
+            return RecipesServiceFactory.makeRecipesService(
+                BuildConfig.API_BASE_URL,
+                BuildConfig.DEBUG
+            )
         }
     }
 

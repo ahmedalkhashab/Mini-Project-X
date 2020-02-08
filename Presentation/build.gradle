@@ -24,6 +24,31 @@ android {
         }
     }
 
+    productFlavors {
+        production {
+            applicationId "io.android.projectx"
+            versionNameSuffix "-demo"
+
+            buildConfigField("String", "API_BASE_URL", "\"${production_api_base_url}\"")
+        }
+        staging {
+            applicationId "io.android.projectx"
+            flavorDimensions "version"
+            applicationIdSuffix ".staging"
+            versionNameSuffix "-staging"
+
+            buildConfigField("String", "API_BASE_URL", "\"${staging_api_base_url}\"")
+        }
+        quality {
+            applicationId "io.android.projectx"
+            flavorDimensions "version"
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
+
+            buildConfigField("String", "API_BASE_URL", "\"${quality_api_base_url}\"")
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
