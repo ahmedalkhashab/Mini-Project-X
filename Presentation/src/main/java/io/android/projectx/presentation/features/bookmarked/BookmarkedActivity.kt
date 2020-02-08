@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.AndroidInjection
 import io.android.projectx.presentation.R
 import io.android.projectx.presentation.di.ViewModelFactory
-import io.android.projectx.presentation.mapper.RecipeViewMapper
 import io.android.projectx.presentation.model.RecipeView
 import io.android.projectx.presentation.state.Resource
 import io.android.projectx.presentation.state.ResourceState
+import kotlinx.android.synthetic.main.bookmarked_activity.*
 import javax.inject.Inject
 
 class BookmarkedActivity : AppCompatActivity() {
@@ -22,10 +22,8 @@ class BookmarkedActivity : AppCompatActivity() {
     @Inject
     lateinit var adapter: BookmarkedAdapter
     @Inject
-    lateinit var mapper: RecipeViewMapper
-    @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    lateinit var browseViewModel: BrowseBookmarkedRecipesViewModel
+    private lateinit var browseViewModel: BrowseBookmarkedRecipesViewModel
 
     companion object {
         fun getStartIntent(context: Context): Intent {
@@ -35,7 +33,7 @@ class BookmarkedActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bookmarked)
+        setContentView(R.layout.bookmarked_activity)
         AndroidInjection.inject(this)
 
         browseViewModel = ViewModelProviders.of(this, viewModelFactory)
@@ -56,23 +54,23 @@ class BookmarkedActivity : AppCompatActivity() {
     }
 
     private fun setupBrowseRecycler() {
-        recycler_recipes.layoutManager = LinearLayoutManager(this)
-        recycler_recipes.adapter = adapter
+        recyclerRecipes.layoutManager = LinearLayoutManager(this)
+        recyclerRecipes.adapter = adapter
     }
 
     private fun handleDataState(resource: Resource<List<RecipeView>>) {
         when (resource.status) {
             ResourceState.SUCCESS -> {
-                progress.visibility = View.GONE
-                recycler_recipes.visibility = View.VISIBLE
+                progressView.visibility = View.GONE
+                recyclerRecipes.visibility = View.VISIBLE
                 resource.data?.let {
                     adapter.recipes = it
                     adapter.notifyDataSetChanged()
                 }
             }
             ResourceState.LOADING -> {
-                progress.visibility = View.VISIBLE
-                recycler_recipes.visibility = View.GONE
+                progressView.visibility = View.VISIBLE
+                recyclerRecipes.visibility = View.GONE
             }
         }
     }

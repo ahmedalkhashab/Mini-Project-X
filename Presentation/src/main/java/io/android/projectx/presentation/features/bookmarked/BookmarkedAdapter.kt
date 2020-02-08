@@ -19,7 +19,7 @@ class BookmarkedAdapter @Inject constructor(): RecyclerView.Adapter<BookmarkedAd
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater
             .from(parent.context)
-            .inflate(R.layout.item_bookmarked_recipe, parent, false)
+            .inflate(R.layout.bookmarked_adapter_item_bookmarked_recipe, parent, false)
         return ViewHolder(itemView)
     }
 
@@ -29,17 +29,17 @@ class BookmarkedAdapter @Inject constructor(): RecyclerView.Adapter<BookmarkedAd
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val recipe = recipes[position]
-        holder.ownerNameText.text = recipe.ownerName
-        holder.recipeNameText.text = recipe.fullName
+        holder.ownerNameText.text = recipe.author
+        holder.recipeNameText.text = recipe.title
 
         Glide.with(holder.itemView.context)
-            .load(recipe.ownerAvatar)
+            .load(recipe.urlToImage)
             .apply(RequestOptions.circleCropTransform())
-            .into(holder.avatarImage)
+            .into(holder.recipeImage)
     }
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        var avatarImage: ImageView = view.findViewById(R.id.image_owner_avatar)
+        var recipeImage: ImageView = view.findViewById(R.id.image_recipe)
         var ownerNameText: TextView = view.findViewById(R.id.text_owner_name)
         var recipeNameText: TextView = view.findViewById(R.id.text_recipe_name)
     }

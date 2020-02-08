@@ -15,6 +15,7 @@ import io.android.projectx.presentation.features.bookmarked.BookmarkedActivity
 import io.android.projectx.presentation.model.RecipeView
 import io.android.projectx.presentation.state.Resource
 import io.android.projectx.presentation.state.ResourceState
+import kotlinx.android.synthetic.main.browse_activity.*
 import javax.inject.Inject
 
 class BrowseActivity : AppCompatActivity() {
@@ -27,7 +28,7 @@ class BrowseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_browse)
+        setContentView(R.layout.browse_activity)
         AndroidInjection.inject(this)
         browseViewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(BrowseRecipesViewModel::class.java)
@@ -58,8 +59,8 @@ class BrowseActivity : AppCompatActivity() {
 
     private fun setupBrowseRecycler() {
         browseAdapter.recipeListener = recipeListener
-        recycler_recipes.layoutManager = LinearLayoutManager(this)
-        recycler_recipes.adapter = browseAdapter
+        recyclerRecipes.layoutManager = LinearLayoutManager(this)
+        recyclerRecipes.adapter = browseAdapter
     }
 
     private fun handleDataState(resource: Resource<List<RecipeView>>) {
@@ -68,18 +69,18 @@ class BrowseActivity : AppCompatActivity() {
                 setupScreenForSuccess(resource.data)
             }
             ResourceState.LOADING -> {
-                progress.visibility = View.VISIBLE
-                recycler_recipes.visibility = View.GONE
+                progressView.visibility = View.VISIBLE
+                recyclerRecipes.visibility = View.GONE
             }
         }
     }
 
     private fun setupScreenForSuccess(recipes: List<RecipeView>?) {
-        progress.visibility = View.GONE
+        progressView.visibility = View.GONE
         recipes?.let {
             browseAdapter.recipes = it
             browseAdapter.notifyDataSetChanged()
-            recycler_recipes.visibility = View.VISIBLE
+            recyclerRecipes.visibility = View.VISIBLE
         } ?: run {
 
         }
