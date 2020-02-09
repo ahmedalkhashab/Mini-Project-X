@@ -10,7 +10,7 @@ import io.android.projectx.remote.model.RecipeModel
 import io.android.projectx.remote.model.RecipesResponseModel
 import io.android.projectx.remote.service.RecipesService
 import io.android.projectx.remote.test.factory.RecipeDataFactory
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -24,7 +24,7 @@ class RecipesRemoteImplTest {
 
     @Test
     fun getRecipesCompletes() {
-        stubRecipesServiceSearch(Observable.just(RecipeDataFactory.makeRecipesResponse()))
+        stubRecipesServiceSearch(Flowable.just(RecipeDataFactory.makeRecipesResponse()))
         stubRecipesResponseModelMapperMapFromModel(any(), RecipeDataFactory.makeRecipeEntity())
 
         val testObserver = remote.getRecipes().test()
@@ -33,7 +33,7 @@ class RecipesRemoteImplTest {
 
     @Test
     fun getRecipesCallServer() {
-        stubRecipesServiceSearch(Observable.just(RecipeDataFactory.makeRecipesResponse()))
+        stubRecipesServiceSearch(Flowable.just(RecipeDataFactory.makeRecipesResponse()))
         stubRecipesResponseModelMapperMapFromModel(any(), RecipeDataFactory.makeRecipeEntity())
 
         remote.getRecipes().test()
@@ -43,7 +43,7 @@ class RecipesRemoteImplTest {
     @Test
     fun getRecipesReturnsData() {
         val response = RecipeDataFactory.makeRecipesResponse()
-        stubRecipesServiceSearch(Observable.just(response))
+        stubRecipesServiceSearch(Flowable.just(response))
         val entities = mutableListOf<RecipeEntity>()
         response.items.forEach {
             val entity = RecipeDataFactory.makeRecipeEntity()
@@ -56,7 +56,7 @@ class RecipesRemoteImplTest {
 
     @Test
     fun getRecipesCallServerWithCorrectParameters() {
-        stubRecipesServiceSearch(Observable.just(RecipeDataFactory.makeRecipesResponse()))
+        stubRecipesServiceSearch(Flowable.just(RecipeDataFactory.makeRecipesResponse()))
         stubRecipesResponseModelMapperMapFromModel(any(), RecipeDataFactory.makeRecipeEntity())
 
         remote.getRecipes().test()
@@ -65,9 +65,9 @@ class RecipesRemoteImplTest {
         verify(service).searchRepositories(1)
     }
 
-    private fun stubRecipesServiceSearch(observable: Observable<RecipesResponseModel>) {
+    private fun stubRecipesServiceSearch(flowable: Flowable<RecipesResponseModel>) {
         whenever(service.searchRepositories(any()))
-            .thenReturn(observable)
+            .thenReturn(flowable)
     }
 
     private fun stubRecipesResponseModelMapperMapFromModel(
