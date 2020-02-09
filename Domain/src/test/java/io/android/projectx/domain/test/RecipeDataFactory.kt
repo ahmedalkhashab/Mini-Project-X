@@ -6,7 +6,6 @@ import java.util.*
 import java.util.UUID
 import java.util.concurrent.ThreadLocalRandom
 
-
 object RecipeDataFactory {
 
     fun randomString(): String {
@@ -30,7 +29,7 @@ object RecipeDataFactory {
 
     fun makeRecipe(): Recipe {
         return Recipe(uniqueId(), randomString(), randomString(), randomString(), randomString(),
-            randomString(), randomDate(), randomString())
+            randomString(), randomDate(), randomString(), randomBoolean())
     }
 
     fun makeRecipesList(count:Int):List<Recipe>{
@@ -38,4 +37,5 @@ object RecipeDataFactory {
         repeat(count){recipes.add(makeRecipe())}
         return recipes
     }
+
 }
