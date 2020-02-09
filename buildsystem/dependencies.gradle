@@ -5,46 +5,50 @@ ext {
     androidMinSdkVersion = 23
     androidTargetSdkVersion = 29
     androidCompileSdkVersion = 29
-    kotlinVersion = '1.3.61'
 
     //Libraries
     rxKotlinVersion = '2.4.0'
-    javaxAnnotationVersion = '1.0'
+    javaxAnnotationVersion = '1.3.2'
     javaxInjectVersion = '1'
-    gsonVersion = '2.8.1'
-    okHttpVersion = '3.8.1'
-    retrofitVersion = '2.3.0'
+    gsonVersion = '2.8.6'
+    okHttpVersion = '4.3.1'
+    retrofitVersion = '2.7.1'
     androidxAnnotationsVersion = '1.1.0'
     ktxVersion = '1.2.0'
-    lifecycleVersion = '2.1.0'
+    lifecycleVersion = '2.2.0'
     roomVersion = '2.2.3'
-    daggerVersion = '2.11'
-    rxAndroidVersion = '2.0.1'
+    daggerVersion = '2.11' // todo - look again
+    rxAndroidVersion = '2.1.1'
     appcompatVersion = '1.1.0'
-    recyclerviewVersion = '1.0.0'
+    recyclerviewVersion = '1.1.0'
     constraintlayoutVersion = '1.1.3'
-    materialVersion = '1.0.0-rc01'
+    materialVersion = '1.1.0-rc02'
     legacyVersion = '1.0.0'
-    timberVersion = '4.5.1'
-    glideVersion = '4.0.0'
+    timberVersion = '4.7.1'
+    glideVersion = '4.11.0'
 
     //Testing
-    jUnitVersion = '4.12'
-    assertJVersion = '3.8.0'
+    jUnitVersion = '4.13'
+    assertJVersion = '3.15.0'
     mockitoVersion = '2.2.0'
-    mockitoAndroidVersion = '2.8.9'
+    mockitoAndroidVersion = '2.23.4' // next versions throw
+                // "java.lang.IllegalStateException:
+                // Could not initialize plugin:
+                // interface org.mockito.plugins.MockMaker (alternate: null)"
+                // when run unit tests files of package "io.android.projectx.presentation.features"
+                // under "test" path
+                // module: "presentation"
     robolectricVersion = '4.3.1'
     archVersion = '2.1.0'
-    androidJUnitVersion = '1.1.1'
     espressoVersion = '3.2.0'
-    androidxTestCoreVersion = '1.0.0'
-    runnerVersion = '1.0.0'
+    androidxTestCoreVersion = '1.2.0'
+    runnerVersion = '1.2.0'
 
     domainDependencies = [
-            javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            javaxAnnotation: "javax.annotation:javax.annotation-api:${javaxAnnotationVersion}",
             javaxInject    : "javax.inject:javax.inject:${javaxInjectVersion}",
             rxKotlin       : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
-            kotlin         : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
+            kotlin         : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin_version}"
     ]
 
     domainTestDependencies = [
@@ -54,10 +58,10 @@ ext {
     ]
 
     dataDependencies = [
-            javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            javaxAnnotation: "javax.annotation:javax.annotation-api:${javaxAnnotationVersion}",
             javaxInject    : "javax.inject:javax.inject:${javaxInjectVersion}",
             rxKotlin       : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
-            kotlin         : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
+            kotlin         : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin_version}"
     ]
 
     dataTestDependencies = [
@@ -70,8 +74,8 @@ ext {
     remoteDependencies = [
             gson             : "com.google.code.gson:gson:${gsonVersion}",
             rxKotlin         : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
-            kotlin           : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
-            javaxAnnotation  : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            kotlin           : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}",
+            javaxAnnotation  : "javax.annotation:javax.annotation-api:${javaxAnnotationVersion}",
             javaxInject      : "javax.inject:javax.inject:${javaxInjectVersion}",
             okHttp           : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
             okHttpLogger     : "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
@@ -88,10 +92,10 @@ ext {
     ]
 
     cacheDependencies = [
-            javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            javaxAnnotation: "javax.annotation:javax.annotation-api:${javaxAnnotationVersion}",
             javaxInject    : "javax.inject:javax.inject:${javaxInjectVersion}",
             rxKotlin       : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
-            kotlin         : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}",
+            kotlin         : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin_version}",
             androidxCoreKtx: "androidx.core:core-ktx:${ktxVersion}",
             roomRuntime    : "androidx.room:room-runtime:${roomVersion}",
             roomCompiler   : "androidx.room:room-compiler:${roomVersion}",
@@ -110,10 +114,10 @@ ext {
     ]
 
     presentationDependencies = [
-            javaxAnnotation    : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            javaxAnnotation    : "javax.annotation:javax.annotation-api:${javaxAnnotationVersion}",
             javaxInject        : "javax.inject:javax.inject:${javaxInjectVersion}",
             rxKotlin           : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
-            kotlin             : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}",
+            kotlin             : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin_version}",
             rxAndroid          : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             androidxCoreKtx    : "androidx.core:core-ktx:${ktxVersion}",
             androidxAnnotations: "androidx.annotation:annotation:${androidxAnnotationsVersion}",
