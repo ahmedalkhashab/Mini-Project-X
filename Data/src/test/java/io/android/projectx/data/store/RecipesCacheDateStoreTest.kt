@@ -9,7 +9,7 @@ import io.android.projectx.data.repository.RecipesCache
 import io.android.projectx.data.test.factory.DataFactory
 import io.android.projectx.data.test.factory.RecipeFactory
 import io.reactivex.Completable
-import io.reactivex.Observable
+import io.reactivex.Flowable
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,7 +23,7 @@ class RecipesCacheDateStoreTest {
 
     @Test
     fun getRecipeCompletes() {
-        stubRecipesCacheGetRecipes(Observable.just(listOf(RecipeFactory.makeRecipeEntity())))
+        stubRecipesCacheGetRecipes(Flowable.just(listOf(RecipeFactory.makeRecipeEntity())))
         val testObserver = store.getRecipes().test()
         testObserver.assertComplete()
     }
@@ -31,14 +31,14 @@ class RecipesCacheDateStoreTest {
     @Test
     fun getRecipesReturnsData() {
         val data = listOf(RecipeFactory.makeRecipeEntity())
-        stubRecipesCacheGetRecipes(Observable.just(data))
+        stubRecipesCacheGetRecipes(Flowable.just(data))
         val testObserver = store.getRecipes().test()
         testObserver.assertValue(data)
     }
 
     @Test
     fun getRecipesCallsCacheSource() {
-        stubRecipesCacheGetRecipes(Observable.just(listOf(RecipeFactory.makeRecipeEntity())))
+        stubRecipesCacheGetRecipes(Flowable.just(listOf(RecipeFactory.makeRecipeEntity())))
         store.getRecipes().test()
         verify(cache).getRecipes()
     }
@@ -76,7 +76,7 @@ class RecipesCacheDateStoreTest {
 
     @Test
     fun getBookmarkedRecipeCompletes() {
-        stubRecipesCacheGetBookmarkedRecipes(Observable.just(listOf(RecipeFactory.makeRecipeEntity())))
+        stubRecipesCacheGetBookmarkedRecipes(Flowable.just(listOf(RecipeFactory.makeRecipeEntity())))
         val testObserver = store.getBookmarkedRecipes().test()
         testObserver.assertComplete()
     }
@@ -84,14 +84,14 @@ class RecipesCacheDateStoreTest {
     @Test
     fun getBookmarkedRecipesReturnsData() {
         val data = listOf(RecipeFactory.makeRecipeEntity())
-        stubRecipesCacheGetBookmarkedRecipes(Observable.just(data))
+        stubRecipesCacheGetBookmarkedRecipes(Flowable.just(data))
         val testObserver = store.getBookmarkedRecipes().test()
         testObserver.assertValue(data)
     }
 
     @Test
     fun getBookmarkedRecipesCallsCacheSource() {
-        stubRecipesCacheGetBookmarkedRecipes(Observable.just(listOf(RecipeFactory.makeRecipeEntity())))
+        stubRecipesCacheGetBookmarkedRecipes(Flowable.just(listOf(RecipeFactory.makeRecipeEntity())))
         store.getBookmarkedRecipes().test()
         verify(cache).getBookmarkedRecipes()
     }
@@ -126,9 +126,9 @@ class RecipesCacheDateStoreTest {
         verify(cache).setRecipeAsNotBookmarked(recipeId)
     }
 
-    private fun stubRecipesCacheGetRecipes(observable: Observable<List<RecipeEntity>>) {
+    private fun stubRecipesCacheGetRecipes(flowable: Flowable<List<RecipeEntity>>) {
         whenever(cache.getRecipes())
-            .thenReturn(observable)
+            .thenReturn(flowable)
     }
 
     private fun stubRecipesCacheSaveRecipes(completable: Completable) {
@@ -146,19 +146,19 @@ class RecipesCacheDateStoreTest {
             .thenReturn(completable)
     }
 
-    private fun stubRecipesCacheGetBookmarkedRecipes(observable: Observable<List<RecipeEntity>>) {
+    private fun stubRecipesCacheGetBookmarkedRecipes(flowable: Flowable<List<RecipeEntity>>) {
         whenever(cache.getBookmarkedRecipes())
-            .thenReturn(observable)
+            .thenReturn(flowable)
     }
 
     private fun stubRecipesCacheSetRecipesAsBookmarked(completable: Completable) {
         whenever(cache.setRecipeAsBookmarked(any()))
-            .thenReturn(Completable.complete())
+            .thenReturn(completable)
     }
 
     private fun stubRecipesCacheSetRecipesAsNotBookmarked(completable: Completable) {
         whenever(cache.setRecipeAsNotBookmarked(any()))
-            .thenReturn(Completable.complete())
+            .thenReturn(completable)
     }
 
 }

@@ -6,7 +6,7 @@ import io.android.projectx.data.model.RecipeEntity
 import io.android.projectx.data.repository.RecipesRemote
 import io.android.projectx.data.test.factory.DataFactory
 import io.android.projectx.data.test.factory.RecipeFactory
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -19,7 +19,7 @@ class RecipesRemoteDataStoreTest{
 
     @Test
     fun getRecipesCompletes() {
-        stubRemoteGetRecipes(Observable.just(listOf(RecipeFactory.makeRecipeEntity())))
+        stubRemoteGetRecipes(Flowable.just(listOf(RecipeFactory.makeRecipeEntity())))
         val testObserver = store.getRecipes().test()
         testObserver.assertComplete()
     }
@@ -27,7 +27,7 @@ class RecipesRemoteDataStoreTest{
     @Test
     fun getRecipesReturnsData() {
         val response = listOf(RecipeFactory.makeRecipeEntity())
-        stubRemoteGetRecipes(Observable.just(response))
+        stubRemoteGetRecipes(Flowable.just(response))
         val testObserver = store.getRecipes().test()
         testObserver.assertValue(response)
     }
@@ -57,9 +57,9 @@ class RecipesRemoteDataStoreTest{
         store.setRecipeAsNotBookmarked(DataFactory.uniqueId()).test()
     }
 
-    private fun stubRemoteGetRecipes(observable: Observable<List<RecipeEntity>>) {
+    private fun stubRemoteGetRecipes(flowable: Flowable<List<RecipeEntity>>) {
         whenever(remote.getRecipes())
-            .thenReturn(observable)
+            .thenReturn(flowable)
     }
 
 }
