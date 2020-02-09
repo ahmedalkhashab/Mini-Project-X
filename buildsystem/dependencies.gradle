@@ -38,6 +38,8 @@ ext {
                 // when run unit tests files of package "io.android.projectx.presentation.features"
                 // under "test" path
                 // module: "presentation"
+                // Note that you should use Mockito 2.6+ to get native support for Android.
+
     robolectricVersion = '4.3.1'
     archVersion = '2.1.0'
     espressoVersion = '3.2.0'
@@ -153,8 +155,8 @@ ext {
             espressoCore   : "androidx.test.espresso:espresso-core:${espressoVersion}",
             espressoIntents: "androidx.test.espresso:espresso-intents:${espressoVersion}",
             espressoContrib: "androidx.test.espresso:espresso-contrib:${espressoVersion}",
-            androidxRunner  : "androidx.test:runner:${runnerVersion}",
-            androidxRules   : "androidx.test:rules:${runnerVersion}"
+            androidxRunner : "androidx.test:runner:${runnerVersion}",
+            androidxRules  : "androidx.test:rules:${runnerVersion}"
     ]
 
 }
