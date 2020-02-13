@@ -17,7 +17,7 @@ ext {
     ktxVersion = '1.2.0'
     lifecycleVersion = '2.2.0'
     roomVersion = '2.2.3'
-    daggerVersion = '2.11' // todo - look again
+    daggerVersion = '2.22' // todo - look again
     rxAndroidVersion = '2.1.1'
     appcompatVersion = '1.1.0'
     recyclerviewVersion = '1.1.0'
@@ -32,13 +32,13 @@ ext {
     assertJVersion = '3.15.0'
     mockitoVersion = '2.2.0'
     mockitoAndroidVersion = '2.23.4' // next versions throw
-                // "java.lang.IllegalStateException:
-                // Could not initialize plugin:
-                // interface org.mockito.plugins.MockMaker (alternate: null)"
-                // when run unit tests files of package "io.android.projectx.presentation.features"
-                // under "test" path
-                // module: "presentation"
-                // Note that you should use Mockito 2.6+ to get native support for Android.
+    // "java.lang.IllegalStateException:
+    // Could not initialize plugin:
+    // interface org.mockito.plugins.MockMaker (alternate: null)"
+    // when run unit tests files of package "io.android.projectx.presentation.features"
+    // under "test" path
+    // module: "presentation"
+    // Note that you should use Mockito 2.6+ to get native support for Android.
 
     robolectricVersion = '4.3.1'
     archVersion = '2.1.0'
@@ -116,31 +116,32 @@ ext {
     ]
 
     presentationDependencies = [
-            javaxAnnotation    : "javax.annotation:javax.annotation-api:${javaxAnnotationVersion}",
-            javaxInject        : "javax.inject:javax.inject:${javaxInjectVersion}",
-            rxKotlin           : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
-            kotlin             : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin_version}",
-            rxAndroid          : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
-            androidxCoreKtx    : "androidx.core:core-ktx:${ktxVersion}",
-            androidxAnnotations: "androidx.annotation:annotation:${androidxAnnotationsVersion}",
-            lifecycleRuntime   : "androidx.lifecycle:lifecycle-runtime:${lifecycleVersion}",
-            lifecycleExtensions: "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}",
-            lifecycleCompiler  : "androidx.lifecycle:lifecycle-compiler:${lifecycleVersion}",
-            roomRuntime        : "androidx.room:room-runtime:${roomVersion}",
-            roomCompiler       : "androidx.room:room-compiler:${roomVersion}",
-            roomRxJava         : "androidx.room:room-rxjava2:${roomVersion}",
-            legacyV4           : "androidx.legacy:legacy-support-v4:${legacyVersion}",
-            legacyV13          : "androidx.legacy:legacy-support-v13:${legacyVersion}",
-            appCompat          : "androidx.appcompat:appcompat:${appcompatVersion}",
-            recyclerView       : "androidx.recyclerview:recyclerview:${recyclerviewVersion}",
-            constraintlayout   : "androidx.constraintlayout:constraintlayout:${constraintlayoutVersion}",
-            material           : "com.google.android.material:material:${materialVersion}",
-            dagger             : "com.google.dagger:dagger:${daggerVersion}",
-            daggerCompiler     : "com.google.dagger:dagger-compiler:${daggerVersion}",
-            daggerSupport      : "com.google.dagger:dagger-android-support:${daggerVersion}",
-            daggerProcessor    : "com.google.dagger:dagger-android-processor:${daggerVersion}",
-            timber             : "com.jakewharton.timber:timber:${timberVersion}",
-            glide              : "com.github.bumptech.glide:glide:${glideVersion}"
+            javaxAnnotation       : "javax.annotation:javax.annotation-api:${javaxAnnotationVersion}",
+            javaxInject           : "javax.inject:javax.inject:${javaxInjectVersion}",
+            rxKotlin              : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
+            kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin_version}",
+            rxAndroid             : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            androidxCoreKtx       : "androidx.core:core-ktx:${ktxVersion}",
+            androidxAnnotations   : "androidx.annotation:annotation:${androidxAnnotationsVersion}",
+            lifecycleRuntime      : "androidx.lifecycle:lifecycle-runtime:${lifecycleVersion}",
+            lifecycleExtensions   : "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}",
+            lifecycleCompiler     : "androidx.lifecycle:lifecycle-compiler:${lifecycleVersion}",
+            roomRuntime           : "androidx.room:room-runtime:${roomVersion}",
+            roomCompiler          : "androidx.room:room-compiler:${roomVersion}",
+            roomRxJava            : "androidx.room:room-rxjava2:${roomVersion}",
+            legacyV4              : "androidx.legacy:legacy-support-v4:${legacyVersion}",
+            legacyV13             : "androidx.legacy:legacy-support-v13:${legacyVersion}",
+            appCompat             : "androidx.appcompat:appcompat:${appcompatVersion}",
+            recyclerView          : "androidx.recyclerview:recyclerview:${recyclerviewVersion}",
+            constraintlayout      : "androidx.constraintlayout:constraintlayout:${constraintlayoutVersion}",
+            material              : "com.google.android.material:material:${materialVersion}",
+            dagger                : "com.google.dagger:dagger:${daggerVersion}",
+            daggerCompiler        : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            daggerAndroid         : "com.google.dagger:dagger-android-support:${daggerVersion}",
+            daggerAndroidSupport  : "com.google.dagger:dagger-android-support:${daggerVersion}",
+            daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:${daggerVersion}",
+            timber                : "com.jakewharton.timber:timber:${timberVersion}",
+            glide                 : "com.github.bumptech.glide:glide:${glideVersion}"
 
     ]
 

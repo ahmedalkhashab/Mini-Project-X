@@ -3,6 +3,7 @@ package io.android.projectx.presentation.di
 import android.app.Application
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import io.android.projectx.domain.repository.RecipesRepository
 import io.android.projectx.presentation.di.module.PresentationModule
@@ -21,18 +22,16 @@ import javax.inject.Singleton
         TestRemoteModule::class
     ]
 )
-interface TestApplicationComponent {
+interface TestAppComponent : AndroidInjector<TestApplication> {
 
     fun recipesRepository(): RecipesRepository
 
     @Component.Builder
     interface Builder {
         @BindsInstance
-        fun application(application: Application): TestApplicationComponent.Builder
+        fun application(application: Application): Builder
 
-        fun build(): TestApplicationComponent
+        fun build(): TestAppComponent
     }
-
-    fun inject(application: TestApplication)
 
 }

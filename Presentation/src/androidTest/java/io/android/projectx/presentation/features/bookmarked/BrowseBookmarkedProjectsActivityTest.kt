@@ -52,8 +52,8 @@ class BrowseBookmarkedRecipesActivityTest {
     }
 
     private fun stubRecipesRepositoryGetBookmarkedRecipes(observable: Observable<List<Recipe>>) {
-        whenever(TestApplication.appComponent().recipesRepository().getBookmarkedRecipes())
-            .thenReturn(observable)
+        /*whenever(TestApplication.appComponent().recipesRepository().getBookmarkedRecipes())
+            .thenReturn(observable)*/
     }
 
 }

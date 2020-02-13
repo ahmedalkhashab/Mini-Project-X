@@ -46,7 +46,9 @@ class BrowseRecipesActivityTest {
     }
 
     private fun stubRecipesRepositoryGetRecipes(observable: Observable<List<Recipe>>) {
+/*
         whenever(TestApplication.appComponent().recipesRepository().getRecipes())
             .thenReturn(observable)
+*/
     }
 }

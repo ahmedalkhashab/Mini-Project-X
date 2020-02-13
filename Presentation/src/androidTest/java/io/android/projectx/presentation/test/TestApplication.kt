@@ -1,34 +1,26 @@
 package io.android.projectx.presentation.test
 
-import android.app.Activity
-import android.app.Application
 import androidx.test.platform.app.InstrumentationRegistry
 import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import io.android.projectx.presentation.di.TestApplicationComponent
-import javax.inject.Inject
+import dagger.android.support.DaggerApplication
+import io.android.projectx.presentation.di.AppComponent
+import io.android.projectx.presentation.di.DaggerAppComponent
 
-class TestApplication: Application(), HasActivityInjector {
+class TestApplication: DaggerApplication() {
 
-    @Inject
-    lateinit var injector: DispatchingAndroidInjector<Activity>
-    private lateinit var appComponent: TestApplicationComponent
+    private lateinit var appComponent: AppComponent
 
     companion object {
-        fun appComponent(): TestApplicationComponent {
+        fun appComponent(): AppComponent {
             return (InstrumentationRegistry.getInstrumentation().targetContext
                     as TestApplication).appComponent
         }
     }
 
-    override fun onCreate() {
-        super.onCreate()
-        appComponent = DaggerTestApplicationComponent.builder().application(this).build()
-        appComponent.inject(this)
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        appComponent =  DaggerAppComponent.builder().application(this).build()
+
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun activityInjector(): AndroidInjector<Activity> {
-        return injector
-    }
 }

@@ -81,14 +81,18 @@ dependencies {
     implementation presentationDependencies.recyclerView
     implementation presentationDependencies.constraintlayout
     implementation presentationDependencies.material
-    implementation presentationDependencies.dagger
-    implementation presentationDependencies.daggerSupport
     implementation presentationDependencies.timber
     implementation presentationDependencies.glide
     kapt presentationDependencies.lifecycleCompiler
     kapt presentationDependencies.roomCompiler
+
+    //dagger
+    implementation presentationDependencies.dagger
     kapt presentationDependencies.daggerCompiler
-    kapt presentationDependencies.daggerProcessor
+
+    implementation presentationDependencies.daggerAndroid
+    implementation presentationDependencies.daggerAndroidSupport
+    kapt presentationDependencies.daggerAndroidProcessor
 
     testImplementation presentationTestDependencies.junit
     testImplementation presentationTestDependencies.kotlinJUnit
@@ -108,5 +112,4 @@ dependencies {
     androidTestImplementation presentationTestDependencies.androidxRules
     androidTestImplementation presentationTestDependencies.espressoIntents
     androidTestImplementation presentationTestDependencies.espressoContrib
-    kaptAndroidTest presentationDependencies.daggerCompiler
 }
