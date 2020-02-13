@@ -6,10 +6,8 @@ import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
-import com.nhaarman.mockitokotlin2.whenever
-import io.android.projectx.domain.model.Recipe
+import io.android.projectx.domain.features.recipes.model.Recipe
 import io.android.projectx.presentation.R
-import io.android.projectx.presentation.test.TestApplication
 import io.android.projectx.presentation.test.factory.RecipeDataFactory
 import io.reactivex.Observable
 import org.junit.Rule

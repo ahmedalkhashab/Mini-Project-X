@@ -2,7 +2,7 @@ package io.android.projectx.data.mapper
 
 import io.android.projectx.data.model.RecipeEntity
 import io.android.projectx.data.test.factory.RecipeFactory
-import io.android.projectx.domain.model.Recipe
+import io.android.projectx.domain.features.recipes.model.Recipe
 import org.junit.Test
 
 import org.junit.Assert.*

@@ -1,6 +1,6 @@
 package io.android.projectx.domain.test
 
-import io.android.projectx.domain.model.Recipe
+import io.android.projectx.domain.features.recipes.model.Recipe
 import java.time.LocalDate
 import java.util.*
 import java.util.UUID

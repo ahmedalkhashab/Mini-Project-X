@@ -1,4 +1,4 @@
-package io.android.projectx.domain.executor
+package io.android.projectx.domain.base.executor
 
 import io.reactivex.Scheduler
 

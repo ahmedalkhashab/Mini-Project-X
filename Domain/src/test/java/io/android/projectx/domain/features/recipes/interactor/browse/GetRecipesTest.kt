@@ -1,9 +1,9 @@
-package io.android.projectx.domain.interactor.browse
+package io.android.projectx.domain.features.recipes.interactor.browse
 
 import com.nhaarman.mockitokotlin2.whenever
-import io.android.projectx.domain.executor.PostExecutionThread
-import io.android.projectx.domain.model.Recipe
-import io.android.projectx.domain.repository.RecipesRepository
+import io.android.projectx.domain.base.executor.PostExecutionThread
+import io.android.projectx.domain.features.recipes.model.Recipe
+import io.android.projectx.domain.features.recipes.repository.RecipesRepository
 import io.android.projectx.domain.test.RecipeDataFactory
 import io.reactivex.Observable
 import org.mockito.Mock

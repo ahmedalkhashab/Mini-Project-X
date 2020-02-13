@@ -1,6 +1,6 @@
 package io.android.projectx.presentation.mapper
 
-import io.android.projectx.domain.model.Recipe
+import io.android.projectx.domain.features.recipes.model.Recipe
 import io.android.projectx.presentation.model.RecipeView
 import javax.inject.Inject
 

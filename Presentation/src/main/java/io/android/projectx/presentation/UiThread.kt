@@ -1,6 +1,6 @@
 package io.android.projectx.presentation
 
-import io.android.projectx.domain.executor.PostExecutionThread
+import io.android.projectx.domain.base.executor.PostExecutionThread
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject

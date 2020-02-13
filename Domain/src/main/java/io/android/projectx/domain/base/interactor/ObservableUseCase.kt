@@ -1,6 +1,6 @@
-package io.android.projectx.domain.interactor
+package io.android.projectx.domain.base.interactor
 
-import io.android.projectx.domain.executor.PostExecutionThread
+import io.android.projectx.domain.base.executor.PostExecutionThread
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable

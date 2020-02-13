@@ -3,8 +3,8 @@ package io.android.projectx.data
 import io.android.projectx.data.mapper.RecipeMapper
 import io.android.projectx.data.repository.RecipesCache
 import io.android.projectx.data.store.RecipesDataStoreFactory
-import io.android.projectx.domain.model.Recipe
-import io.android.projectx.domain.repository.RecipesRepository
+import io.android.projectx.domain.features.recipes.model.Recipe
+import io.android.projectx.domain.features.recipes.repository.RecipesRepository
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction

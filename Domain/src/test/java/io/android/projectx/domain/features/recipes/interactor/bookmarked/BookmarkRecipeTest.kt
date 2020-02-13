@@ -1,9 +1,9 @@
-package io.android.projectx.domain.interactor.bookmarked
+package io.android.projectx.domain.features.recipes.interactor.bookmarked
 
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
-import io.android.projectx.domain.executor.PostExecutionThread
-import io.android.projectx.domain.repository.RecipesRepository
+import io.android.projectx.domain.base.executor.PostExecutionThread
+import io.android.projectx.domain.features.recipes.repository.RecipesRepository
 import io.android.projectx.domain.test.RecipeDataFactory
 import io.reactivex.Completable
 import org.junit.Before

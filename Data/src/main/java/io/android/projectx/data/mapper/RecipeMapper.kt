@@ -1,7 +1,7 @@
 package io.android.projectx.data.mapper
 
 import io.android.projectx.data.model.RecipeEntity
-import io.android.projectx.domain.model.Recipe
+import io.android.projectx.domain.features.recipes.model.Recipe
 import javax.inject.Inject
 
 open class RecipeMapper @Inject constructor() : EntityMapper<RecipeEntity, Recipe> {

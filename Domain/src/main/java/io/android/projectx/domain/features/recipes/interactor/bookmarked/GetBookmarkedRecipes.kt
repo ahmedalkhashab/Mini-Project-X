@@ -1,9 +1,9 @@
-package io.android.projectx.domain.interactor.bookmarked
+package io.android.projectx.domain.features.recipes.interactor.bookmarked
 
-import io.android.projectx.domain.executor.PostExecutionThread
-import io.android.projectx.domain.interactor.ObservableUseCase
-import io.android.projectx.domain.model.Recipe
-import io.android.projectx.domain.repository.RecipesRepository
+import io.android.projectx.domain.base.executor.PostExecutionThread
+import io.android.projectx.domain.base.interactor.ObservableUseCase
+import io.android.projectx.domain.features.recipes.model.Recipe
+import io.android.projectx.domain.features.recipes.repository.RecipesRepository
 import io.reactivex.Observable
 import javax.inject.Inject
 

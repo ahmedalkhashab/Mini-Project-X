@@ -3,8 +3,8 @@ package io.android.projectx.presentation.features.bookmarked
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import io.android.projectx.domain.interactor.bookmarked.GetBookmarkedRecipes
-import io.android.projectx.domain.model.Recipe
+import io.android.projectx.domain.features.recipes.interactor.bookmarked.GetBookmarkedRecipes
+import io.android.projectx.domain.features.recipes.model.Recipe
 import io.android.projectx.presentation.mapper.RecipeViewMapper
 import io.android.projectx.presentation.model.RecipeView
 import io.android.projectx.presentation.state.Resource

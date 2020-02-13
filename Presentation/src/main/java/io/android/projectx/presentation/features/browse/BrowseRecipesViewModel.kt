@@ -3,10 +3,10 @@ package io.android.projectx.presentation.features.browse
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import io.android.projectx.domain.interactor.bookmarked.BookmarkRecipe
-import io.android.projectx.domain.interactor.bookmarked.UnBookmarkRecipe
-import io.android.projectx.domain.interactor.browse.GetRecipes
-import io.android.projectx.domain.model.Recipe
+import io.android.projectx.domain.features.recipes.interactor.bookmarked.BookmarkRecipe
+import io.android.projectx.domain.features.recipes.interactor.bookmarked.UnBookmarkRecipe
+import io.android.projectx.domain.features.recipes.interactor.browse.GetRecipes
+import io.android.projectx.domain.features.recipes.model.Recipe
 import io.android.projectx.presentation.mapper.RecipeViewMapper
 import io.android.projectx.presentation.model.RecipeView
 import io.android.projectx.presentation.state.Resource

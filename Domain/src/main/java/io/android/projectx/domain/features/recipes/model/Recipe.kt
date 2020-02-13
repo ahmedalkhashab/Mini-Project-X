@@ -1,4 +1,4 @@
-package io.android.projectx.domain.model
+package io.android.projectx.domain.features.recipes.model
 
 import java.util.*
 

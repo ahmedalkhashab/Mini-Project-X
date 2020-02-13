@@ -10,7 +10,7 @@ import io.android.projectx.data.repository.RecipesDataStore
 import io.android.projectx.data.store.RecipesDataStoreFactory
 import io.android.projectx.data.test.factory.DataFactory
 import io.android.projectx.data.test.factory.RecipeFactory
-import io.android.projectx.domain.model.Recipe
+import io.android.projectx.domain.features.recipes.model.Recipe
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single

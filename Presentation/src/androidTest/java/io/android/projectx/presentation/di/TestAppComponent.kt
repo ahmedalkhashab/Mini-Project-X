@@ -5,7 +5,7 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
-import io.android.projectx.domain.repository.RecipesRepository
+import io.android.projectx.domain.features.recipes.repository.RecipesRepository
 import io.android.projectx.presentation.di.module.PresentationModule
 import io.android.projectx.presentation.di.module.UiModule
 import io.android.projectx.presentation.test.TestApplication

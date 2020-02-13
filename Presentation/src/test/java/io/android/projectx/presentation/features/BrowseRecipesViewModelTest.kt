@@ -2,10 +2,10 @@ package io.android.projectx.presentation.features
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.*
-import io.android.projectx.domain.interactor.bookmarked.BookmarkRecipe
-import io.android.projectx.domain.interactor.bookmarked.UnBookmarkRecipe
-import io.android.projectx.domain.interactor.browse.GetRecipes
-import io.android.projectx.domain.model.Recipe
+import io.android.projectx.domain.features.recipes.interactor.bookmarked.BookmarkRecipe
+import io.android.projectx.domain.features.recipes.interactor.bookmarked.UnBookmarkRecipe
+import io.android.projectx.domain.features.recipes.interactor.browse.GetRecipes
+import io.android.projectx.domain.features.recipes.model.Recipe
 import io.android.projectx.presentation.features.browse.BrowseRecipesViewModel
 import io.android.projectx.presentation.mapper.RecipeViewMapper
 import io.android.projectx.presentation.model.RecipeView

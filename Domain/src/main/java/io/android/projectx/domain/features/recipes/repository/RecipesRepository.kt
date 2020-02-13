@@ -1,6 +1,6 @@
-package io.android.projectx.domain.repository
+package io.android.projectx.domain.features.recipes.repository
 
-import io.android.projectx.domain.model.Recipe
+import io.android.projectx.domain.features.recipes.model.Recipe
 import io.reactivex.Completable
 import io.reactivex.Observable
 
