@@ -1,4 +1,4 @@
-package io.android.projectx.cache.mapper
+package io.android.projectx.cache.recipes.mapper
 
 interface CacheMapper<C, E> {
 

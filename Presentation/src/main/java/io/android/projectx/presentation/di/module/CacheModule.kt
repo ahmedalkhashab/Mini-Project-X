@@ -4,8 +4,8 @@ import android.app.Application
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import io.android.projectx.cache.RecipesCacheImpl
-import io.android.projectx.cache.db.RecipesDatabase
+import io.android.projectx.cache.recipes.RecipesCacheImpl
+import io.android.projectx.cache.recipes.db.RecipesDatabase
 import io.android.projectx.data.repository.RecipesCache
 
 @Module

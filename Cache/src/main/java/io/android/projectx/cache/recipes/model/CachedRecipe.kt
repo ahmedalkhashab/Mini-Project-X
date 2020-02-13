@@ -1,9 +1,9 @@
-package io.android.projectx.cache.model
+package io.android.projectx.cache.recipes.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import io.android.projectx.cache.db.RecipeConstants
+import io.android.projectx.cache.recipes.db.RecipeConstants
 
 @Entity(tableName = RecipeConstants.TABLE_NAME)
 data class CachedRecipe(

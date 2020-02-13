@@ -1,7 +1,7 @@
 package io.android.projectx.cache.test.factory
 
-import io.android.projectx.cache.mapper.getOffsetDate
-import io.android.projectx.cache.model.CachedRecipe
+import io.android.projectx.cache.recipes.mapper.getOffsetDate
+import io.android.projectx.cache.recipes.model.CachedRecipe
 import io.android.projectx.data.model.RecipeEntity
 
 object RecipeDataFactory {

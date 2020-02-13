@@ -4,7 +4,7 @@ import android.app.Application
 import com.nhaarman.mockitokotlin2.mock
 import dagger.Module
 import dagger.Provides
-import io.android.projectx.cache.db.RecipesDatabase
+import io.android.projectx.cache.recipes.db.RecipesDatabase
 import io.android.projectx.data.repository.RecipesCache
 
 @Module

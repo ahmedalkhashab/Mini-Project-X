@@ -1,6 +1,6 @@
 package io.android.projectx.cache.test.factory
 
-import io.android.projectx.cache.model.Config
+import io.android.projectx.cache.recipes.model.Config
 
 object ConfigDataFactory {
 

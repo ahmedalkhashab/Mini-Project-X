@@ -1,4 +1,4 @@
-package io.android.projectx.cache.db
+package io.android.projectx.cache.recipes.db
 
 object ConfigConstants {
 

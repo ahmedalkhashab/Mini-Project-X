@@ -3,8 +3,9 @@ package io.android.projectx.cache
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import io.android.projectx.cache.db.RecipesDatabase
-import io.android.projectx.cache.mapper.CachedRecipeMapper
+import io.android.projectx.cache.recipes.RecipesCacheImpl
+import io.android.projectx.cache.recipes.db.RecipesDatabase
+import io.android.projectx.cache.recipes.mapper.CachedRecipeMapper
 import io.android.projectx.cache.test.factory.RecipeDataFactory
 import org.junit.Rule
 import org.junit.Test
@@ -24,7 +25,10 @@ class RecipesCacheImplTest {
         .allowMainThreadQueries()
         .build()
     private val entityMapper = CachedRecipeMapper()
-    private val cache = RecipesCacheImpl(database, entityMapper)
+    private val cache = RecipesCacheImpl(
+        database,
+        entityMapper
+    )
 
     @Test
     fun clearTablesCompletes() {
