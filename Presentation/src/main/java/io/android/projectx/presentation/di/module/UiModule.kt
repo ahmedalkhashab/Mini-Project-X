@@ -8,15 +8,9 @@ import io.android.projectx.presentation.UiThread
 import io.android.projectx.presentation.features.bookmarked.BookmarkedActivity
 import io.android.projectx.presentation.features.browse.BrowseActivity
 
-@Module
+@Module(includes = [ActivityBuildersModule::class])
 abstract class UiModule {
 
     @Binds
     abstract fun bindPostExecutionThread(uiThread: UiThread): PostExecutionThread
-
-    @ContributesAndroidInjector
-    abstract fun contributesBrowseActivity(): BrowseActivity
-
-    @ContributesAndroidInjector
-    abstract fun contributesBookmarkedActivity(): BookmarkedActivity
 }
