@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.AndroidInjection
 import io.android.projectx.presentation.R
@@ -36,7 +36,7 @@ class BookmarkedActivity : AppCompatActivity() {
         setContentView(R.layout.bookmarked_activity)
         AndroidInjection.inject(this)
 
-        browseViewModel = ViewModelProviders.of(this, viewModelFactory)
+        browseViewModel = ViewModelProvider(this, viewModelFactory)
             .get(BrowseBookmarkedRecipesViewModel::class.java)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setupBrowseRecycler()

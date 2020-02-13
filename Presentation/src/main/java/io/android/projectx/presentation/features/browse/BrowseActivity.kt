@@ -6,7 +6,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.AndroidInjection
 import io.android.projectx.presentation.R
@@ -30,7 +30,7 @@ class BrowseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.browse_activity)
         AndroidInjection.inject(this)
-        browseViewModel = ViewModelProviders.of(this, viewModelFactory)
+        browseViewModel = ViewModelProvider(this, viewModelFactory)
             .get(BrowseRecipesViewModel::class.java)
         setupBrowseRecycler()
     }
