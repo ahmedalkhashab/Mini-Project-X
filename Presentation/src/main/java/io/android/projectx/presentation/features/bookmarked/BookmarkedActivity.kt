@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.AndroidInjection
 import io.android.projectx.presentation.R
-import io.android.projectx.presentation.di.ViewModelFactory
+import io.android.projectx.presentation.di.ViewModelProviderFactory
 import io.android.projectx.presentation.model.RecipeView
 import io.android.projectx.presentation.state.Resource
 import io.android.projectx.presentation.state.ResourceState
@@ -22,8 +22,8 @@ class BookmarkedActivity : AppCompatActivity() {
     @Inject
     lateinit var adapter: BookmarkedAdapter
     @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-    private lateinit var browseViewModel: BrowseBookmarkedRecipesViewModel
+    lateinit var viewModelProviderFactory: ViewModelProviderFactory
+    private lateinit var viewModel: BookmarkedRecipesViewModel
 
     companion object {
         fun getStartIntent(context: Context): Intent {
@@ -36,21 +36,21 @@ class BookmarkedActivity : AppCompatActivity() {
         setContentView(R.layout.bookmarked_activity)
         AndroidInjection.inject(this)
 
-        browseViewModel = ViewModelProvider(this, viewModelFactory)
-            .get(BrowseBookmarkedRecipesViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelProviderFactory)
+            .get(BookmarkedRecipesViewModel::class.java)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setupBrowseRecycler()
     }
 
     override fun onStart() {
         super.onStart()
-        browseViewModel.getBookmarkedRecipes().observe(this,
+        viewModel.getBookmarkedRecipes().observe(this,
             Observer<Resource<List<RecipeView>>> {
                 it?.let {
                     handleDataState(it)
                 }
             })
-        browseViewModel.fetchBookmarkedRecipes()
+        viewModel.fetchBookmarkedRecipes()
     }
 
     private fun setupBrowseRecycler() {

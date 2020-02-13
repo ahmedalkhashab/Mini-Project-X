@@ -12,7 +12,7 @@ import io.android.projectx.presentation.state.ResourceState
 import io.reactivex.observers.DisposableObserver
 import javax.inject.Inject
 
-class BrowseBookmarkedRecipesViewModel @Inject constructor(
+class BookmarkedRecipesViewModel @Inject constructor(
     private val getBookmarkedRecipes: GetBookmarkedRecipes,
     private val mapper: RecipeViewMapper
 ) : ViewModel() {

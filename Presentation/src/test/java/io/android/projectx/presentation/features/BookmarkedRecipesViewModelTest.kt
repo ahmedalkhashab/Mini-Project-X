@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.*
 import io.android.projectx.domain.interactor.bookmarked.GetBookmarkedRecipes
 import io.android.projectx.domain.model.Recipe
-import io.android.projectx.presentation.features.bookmarked.BrowseBookmarkedRecipesViewModel
+import io.android.projectx.presentation.features.bookmarked.BookmarkedRecipesViewModel
 import io.android.projectx.presentation.mapper.RecipeViewMapper
 import io.android.projectx.presentation.model.RecipeView
 import io.android.projectx.presentation.state.ResourceState
@@ -19,14 +19,14 @@ import org.junit.runners.JUnit4
 import org.mockito.Captor
 
 @RunWith(JUnit4::class)
-class BrowseBookmarkedRecipesViewModelTest {
+class BookmarkedRecipesViewModelTest {
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
     var getBookmarkedRecipes = mock<GetBookmarkedRecipes>()
     var mapper = mock<RecipeViewMapper>()
     var recipeViewModel =
-        BrowseBookmarkedRecipesViewModel(
+        BookmarkedRecipesViewModel(
             getBookmarkedRecipes, mapper
         )
 

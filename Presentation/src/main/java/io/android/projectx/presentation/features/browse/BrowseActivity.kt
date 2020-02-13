@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.AndroidInjection
 import io.android.projectx.presentation.R
-import io.android.projectx.presentation.di.ViewModelFactory
+import io.android.projectx.presentation.di.ViewModelProviderFactory
 import io.android.projectx.presentation.features.bookmarked.BookmarkedActivity
 import io.android.projectx.presentation.model.RecipeView
 import io.android.projectx.presentation.state.Resource
@@ -23,14 +23,14 @@ class BrowseActivity : AppCompatActivity() {
     @Inject
     lateinit var browseAdapter: BrowseAdapter
     @Inject
-    lateinit var viewModelFactory: ViewModelFactory
+    lateinit var viewModelProviderFactory: ViewModelProviderFactory
     private lateinit var browseViewModel: BrowseRecipesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.browse_activity)
         AndroidInjection.inject(this)
-        browseViewModel = ViewModelProvider(this, viewModelFactory)
+        browseViewModel = ViewModelProvider(this, viewModelProviderFactory)
             .get(BrowseRecipesViewModel::class.java)
         setupBrowseRecycler()
     }
