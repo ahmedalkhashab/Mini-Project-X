@@ -4,7 +4,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import io.android.projectx.domain.base.executor.PostExecutionThread
 import io.android.projectx.domain.features.recipes.model.Recipe
 import io.android.projectx.domain.features.recipes.repository.RecipesRepository
-import io.android.projectx.domain.test.RecipeDataFactory
+import io.android.projectx.domain.features.recipes.test.RecipeDataFactory
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test

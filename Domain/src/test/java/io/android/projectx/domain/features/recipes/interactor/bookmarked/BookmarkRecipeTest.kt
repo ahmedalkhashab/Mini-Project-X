@@ -4,7 +4,7 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
 import io.android.projectx.domain.base.executor.PostExecutionThread
 import io.android.projectx.domain.features.recipes.repository.RecipesRepository
-import io.android.projectx.domain.test.RecipeDataFactory
+import io.android.projectx.domain.test.DataFactory
 import io.reactivex.Completable
 import org.junit.Before
 import org.junit.Test
@@ -28,7 +28,7 @@ class BookmarkRecipeTest {
     fun bookmarkRecipeCompletes(){
         stubBookmarkRecipe(Completable.complete())
         val testObserver = bookmarkRecipe.buildUseCaseCompletable(
-            BookmarkRecipe.Params.forRecipe(RecipeDataFactory.uniqueId())
+            BookmarkRecipe.Params.forRecipe(DataFactory.uniqueId())
         ).test()
         testObserver.assertComplete()
     }
