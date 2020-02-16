@@ -5,7 +5,7 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
-import io.android.projectx.presentation.BaseApplication
+import io.android.projectx.presentation.base.BaseApplication
 import io.android.projectx.presentation.di.module.*
 import javax.inject.Singleton
 

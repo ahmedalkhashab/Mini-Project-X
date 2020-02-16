@@ -3,8 +3,8 @@ package io.android.projectx.presentation.di
 import com.nhaarman.mockitokotlin2.mock
 import dagger.Module
 import dagger.Provides
-import io.android.projectx.data.repository.RecipesRemote
-import io.android.projectx.remote.service.RecipesService
+import io.android.projectx.data.features.recipes.repository.RecipesRemote
+import io.android.projectx.remote.features.recipes.service.RecipesService
 
 @Module
 object TestRemoteModule {

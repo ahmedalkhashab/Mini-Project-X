@@ -15,7 +15,9 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+                arguments = ["room.incremental"     : "true",
+                             "room.expandProjection": "true",
+                             "room.schemaLocation"  : "$projectDir/schemas".toString()]
             }
         }
     }
@@ -50,6 +52,9 @@ dependencies {
     //room
     implementation cacheDependencies.roomRuntime
     implementation cacheDependencies.roomRxJava
+    //gson
+    implementation cacheDependencies.gson
+
     kapt cacheDependencies.roomCompiler
 
     testImplementation cacheTestDependencies.junit

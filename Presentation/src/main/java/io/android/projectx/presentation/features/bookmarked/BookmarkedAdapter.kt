@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import io.android.projectx.presentation.R
-import io.android.projectx.presentation.model.RecipeView
+import io.android.projectx.presentation.base.model.RecipeView
 import javax.inject.Inject
 
 class BookmarkedAdapter @Inject constructor(): RecyclerView.Adapter<BookmarkedAdapter.ViewHolder>() {

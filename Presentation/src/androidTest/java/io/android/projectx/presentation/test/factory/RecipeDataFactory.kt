@@ -1,7 +1,7 @@
 package io.android.projectx.presentation.test.factory
 
 import io.android.projectx.domain.features.recipes.model.Recipe
-import io.android.projectx.presentation.model.RecipeView
+import io.android.projectx.presentation.base.model.RecipeView
 
 object RecipeDataFactory {
 

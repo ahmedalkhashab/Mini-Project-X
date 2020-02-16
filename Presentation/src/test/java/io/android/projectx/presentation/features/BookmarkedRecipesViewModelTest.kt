@@ -5,9 +5,9 @@ import com.nhaarman.mockitokotlin2.*
 import io.android.projectx.domain.features.recipes.interactor.bookmarked.GetBookmarkedRecipes
 import io.android.projectx.domain.features.recipes.model.Recipe
 import io.android.projectx.presentation.features.bookmarked.BookmarkedRecipesViewModel
-import io.android.projectx.presentation.mapper.RecipeViewMapper
-import io.android.projectx.presentation.model.RecipeView
-import io.android.projectx.presentation.state.ResourceState
+import io.android.projectx.presentation.base.mapper.RecipeViewMapper
+import io.android.projectx.presentation.base.model.RecipeView
+import io.android.projectx.presentation.base.state.ResourceState
 import io.android.projectx.presentation.test.factory.DataFactory
 import io.android.projectx.presentation.test.factory.RecipeFactory
 import io.reactivex.observers.DisposableObserver

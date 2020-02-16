@@ -7,10 +7,10 @@ import io.android.projectx.domain.features.recipes.interactor.bookmarked.Bookmar
 import io.android.projectx.domain.features.recipes.interactor.bookmarked.UnBookmarkRecipe
 import io.android.projectx.domain.features.recipes.interactor.browse.GetRecipes
 import io.android.projectx.domain.features.recipes.model.Recipe
-import io.android.projectx.presentation.mapper.RecipeViewMapper
-import io.android.projectx.presentation.model.RecipeView
-import io.android.projectx.presentation.state.Resource
-import io.android.projectx.presentation.state.ResourceState
+import io.android.projectx.presentation.base.mapper.RecipeViewMapper
+import io.android.projectx.presentation.base.model.RecipeView
+import io.android.projectx.presentation.base.state.Resource
+import io.android.projectx.presentation.base.state.ResourceState
 import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.observers.DisposableObserver
 import javax.inject.Inject

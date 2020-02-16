@@ -4,7 +4,7 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
 import io.android.projectx.domain.base.executor.PostExecutionThread
 import io.android.projectx.domain.features.recipes.repository.RecipesRepository
-import io.android.projectx.domain.test.DataFactory
+import io.android.projectx.domain.test.factory.DataFactory
 import io.reactivex.Completable
 import org.junit.Before
 import org.junit.Test

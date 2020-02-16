@@ -1,9 +1,9 @@
 package io.android.projectx.remote.test.factory
 
-import io.android.projectx.data.model.RecipeEntity
-import io.android.projectx.remote.model.AuthorModel
-import io.android.projectx.remote.model.RecipeModel
-import io.android.projectx.remote.model.RecipesResponseModel
+import io.android.projectx.data.features.recipes.model.RecipeEntity
+import io.android.projectx.remote.features.recipes.model.AuthorModel
+import io.android.projectx.remote.features.recipes.model.RecipeModel
+import io.android.projectx.remote.features.recipes.model.response.RecipesResponseModel
 
 object RecipeDataFactory {
 
@@ -43,10 +43,12 @@ object RecipeDataFactory {
     }
 
     fun makeRecipesResponse(): RecipesResponseModel {
-        return RecipesResponseModel(listOf(
-            makeRecipe(),
-            makeRecipe()
-        ))
+        return RecipesResponseModel(
+            listOf(
+                makeRecipe(),
+                makeRecipe()
+            )
+        )
     }
 
 }

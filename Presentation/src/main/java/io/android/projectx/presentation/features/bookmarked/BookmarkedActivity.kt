@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.AndroidInjection
 import io.android.projectx.presentation.R
 import io.android.projectx.presentation.di.ViewModelProviderFactory
-import io.android.projectx.presentation.model.RecipeView
-import io.android.projectx.presentation.state.Resource
-import io.android.projectx.presentation.state.ResourceState
+import io.android.projectx.presentation.base.model.RecipeView
+import io.android.projectx.presentation.base.state.Resource
+import io.android.projectx.presentation.base.state.ResourceState
 import kotlinx.android.synthetic.main.bookmarked_activity.*
 import javax.inject.Inject
 
@@ -71,6 +71,8 @@ class BookmarkedActivity : AppCompatActivity() {
             ResourceState.LOADING -> {
                 progressView.visibility = View.VISIBLE
                 recyclerRecipes.visibility = View.GONE
+            }
+            ResourceState.ERROR -> {
             }
         }
     }

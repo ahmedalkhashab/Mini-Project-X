@@ -4,7 +4,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import io.android.projectx.domain.base.executor.PostExecutionThread
 import io.android.projectx.domain.features.usermanagement.model.User
 import io.android.projectx.domain.features.usermanagement.repository.UserManagementRepository
-import io.android.projectx.domain.features.usermanagement.test.UserDataFactory
+import io.android.projectx.domain.test.factory.UserDataFactory
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
