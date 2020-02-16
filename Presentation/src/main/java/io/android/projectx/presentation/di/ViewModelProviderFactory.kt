@@ -4,9 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import javax.inject.Inject
 import javax.inject.Provider
-import javax.inject.Singleton
 
-@Singleton
 open class ViewModelProviderFactory : ViewModelProvider.Factory {
 
     private val creators: Map<Class<out ViewModel>, Provider<ViewModel>>
