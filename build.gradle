@@ -11,7 +11,8 @@ buildscript {
         Properties properties = new Properties()
         properties.load(project.rootProject.file('local.properties').newDataInputStream())
         def gradle_local_version = properties.getProperty('gradle.local.version')
-        gradle_version = gradle_local_version
+        // Now, Every developer can use any wanted version from Android Studio
+        if (gradle_local_version != null) gradle_version = gradle_local_version
     }
 
     repositories {
