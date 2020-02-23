@@ -1,5 +1,12 @@
 ext {
 
+    //app
+
+    //get Ci build number, this will be only available when build is running in BitBucket pipeline
+    bitbucketBuildNumber = System.getenv("BITBUCKET_BUILD_NUMBER")
+    app_default_version_code = 1
+    app_version_code = bitbucketBuildNumber != null ? bitbucketBuildNumber.toInteger() : app_default_version_code
+
     //Android
     androidBuildToolsVersion = "29.0.2"
     androidMinSdkVersion = 23
@@ -74,16 +81,16 @@ ext {
     ]
 
     remoteDependencies = [
-            gson             : "com.google.code.gson:gson:${gsonVersion}",
-            rxKotlin         : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
-            kotlin           : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}",
             javaxAnnotation  : "javax.annotation:javax.annotation-api:${javaxAnnotationVersion}",
             javaxInject      : "javax.inject:javax.inject:${javaxInjectVersion}",
+            rxKotlin         : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
+            kotlin           : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}",
             okHttp           : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
             okHttpLogger     : "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
             retrofit         : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             retrofitConverter: "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            retrofitAdapter  : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
+            retrofitAdapter  : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+            gson             : "com.google.code.gson:gson:${gsonVersion}"
     ]
 
     remoteTestDependencies = [
@@ -101,7 +108,8 @@ ext {
             androidxCoreKtx: "androidx.core:core-ktx:${ktxVersion}",
             roomRuntime    : "androidx.room:room-runtime:${roomVersion}",
             roomCompiler   : "androidx.room:room-compiler:${roomVersion}",
-            roomRxJava     : "androidx.room:room-rxjava2:${roomVersion}"
+            roomRxJava     : "androidx.room:room-rxjava2:${roomVersion}",
+            gson           : "com.google.code.gson:gson:${gsonVersion}"
     ]
 
     cacheTestDependencies = [
@@ -142,7 +150,6 @@ ext {
             daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:${daggerVersion}",
             timber                : "com.jakewharton.timber:timber:${timberVersion}",
             glide                 : "com.github.bumptech.glide:glide:${glideVersion}"
-
     ]
 
     presentationTestDependencies = [

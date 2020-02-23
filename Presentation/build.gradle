@@ -3,6 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+//load app.properties
+def appPropertiesFile = rootProject.file("app.properties")
+def appPropertiesObject = new Properties()
+//load all properties into appPropertiesObject
+appPropertiesObject.load(new FileInputStream(appPropertiesFile))
+
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
 
@@ -15,44 +21,71 @@ android {
         minSdkVersion globalConfiguration["androidMinSdkVersion"]
         targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
         testInstrumentationRunner "io.android.projectx.presentation.test.TestRunner"
-    }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
-    productFlavors {
-        production {
-            applicationId "io.android.projectx"
-            versionNameSuffix "-demo"
-
-            buildConfigField("String", "API_BASE_URL", "\"${production_api_base_url}\"")
-        }
-        staging {
-            applicationId "io.android.projectx"
-            flavorDimensions "version"
-            applicationIdSuffix ".staging"
-            versionNameSuffix "-staging"
-
-            buildConfigField("String", "API_BASE_URL", "\"${staging_api_base_url}\"")
-        }
-        quality {
-            applicationId "io.android.projectx"
-            flavorDimensions "version"
-            applicationIdSuffix ".dev"
-            versionNameSuffix "-dev"
-
-            buildConfigField("String", "API_BASE_URL", "\"${quality_api_base_url}\"")
-        }
+        versionCode rootProject.ext.app_version_code
+        versionName "1.0.0"
+        setProperty("archivesBaseName",
+                "ProjectX_" + new Date().format("hhmm-dd-MM-yy")
+                        + "_vn" + versionName + "_vc" + versionCode)
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kotlinOptions { jvmTarget = "1.8" }
+    dexOptions { javaMaxHeapSize "3g" }
+    lintOptions { abortOnError false }
+
+    signingConfigs {
+        release {
+            storeFile file(appPropertiesObject['storeFile'])
+            storePassword appPropertiesObject['storePassword']
+            keyAlias appPropertiesObject['keyAlias']
+            keyPassword appPropertiesObject['keyPassword']
+        }
+    }
+
+    flavorDimensions "default"
+    productFlavors {
+        production {
+            applicationId "io.android.projectx"
+            dimension "default"
+            // ConfigFields
+            buildConfigField("String", "API_BASE_URL", "\"${production_api_base_url}\"")
+        }
+        staging {
+            applicationId "io.android.projectx"
+            dimension "default"
+            applicationIdSuffix ".staging"
+            versionNameSuffix "-staging"
+            // ConfigFields
+            buildConfigField("String", "API_BASE_URL", "\"${staging_api_base_url}\"")
+        }
+        dev {
+            applicationId "io.android.projectx"
+            dimension "default"
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
+            // ConfigFields
+            buildConfigField("String", "API_BASE_URL", "\"${quality_api_base_url}\"")
+        }
+    }
+
+    buildTypes {
+        debug {
+            if (applicationIdSuffix == "") {applicationIdSuffix ".dev"}
+            //to speed up build disable Crashlytics plugin for debug builds
+            ext.enableCrashlytics = false
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
 }
 
 dependencies {

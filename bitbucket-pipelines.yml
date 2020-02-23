@@ -1,0 +1,56 @@
+# This is a sample build configuration for Java (Gradle).
+# Check our guides at https://confluence.atlassian.com/x/zd-5Mw for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: java:8
+
+pipelines:
+  default:
+    - step:
+        size: 2x
+        #caches:
+        #  - gradle
+        #  - android-sdk
+
+        script:
+          # Download and unzip android sdk
+          - wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
+          - unzip -o -qq android-sdk.zip -d android-sdk
+
+          # Define Android Home and add PATHs
+          - export ANDROID_HOME="/opt/atlassian/pipelines/agent/build/android-sdk"
+          - export PATH="$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH"
+
+          # Download packages.
+          - yes | sdkmanager "platform-tools"
+          - yes | sdkmanager "platforms;android-29"
+          - yes | sdkmanager "build-tools;29.0.2"
+          - yes | sdkmanager --licenses
+
+          # Build apk
+          - chmod a+x ./gradlew
+          #build the dev and prod release APKs
+          - ./gradlew app:assembleDevRelease app:assembleStagingRelease app:assembleProductionRelease
+          #Let's define the name of APKs that were built
+          - . ./setup_export.sh
+          ##########  UPLOAD APK TO SLACK #CHANNEL ##########
+          # Setup the following environment variables on BitBucket pipelines  &
+          # SLACK_TOKEN - Obtain this token from: https://api.slack.com/custom-integrations/legacy-tokens
+          - SLACK_TOKEN= # here ##########################################
+          # SLACK_CHANNEL - Channel name to upload the file.
+          - SLACK_CHANNEL= # here ##########################################
+          # SLACK_CHANNEL - Dev - upload apk file.
+          - curl -F content="---Dev server build, uploaded by bitbucket pipelines---" -F file=@"./app/build/outputs/apk/dev/release/$FILE_NAME_DEV" -F channels=${SLACK_CHANNEL} -F token=${SLACK_TOKEN} https://slack.com/api/files.upload
+          # SLACK_CHANNEL - Staging - upload apk file.
+          - curl -F content="---Staging server build, uploaded by bitbucket pipelines---" -F file=@"./app/build/outputs/apk/staging/release/$FILE_NAME_STAGING" -F channels=${SLACK_CHANNEL} -F token=${SLACK_TOKEN} https://slack.com/api/files.upload
+          # SLACK_CHANNEL - Production - upload apk file.
+          - curl -F content="---Production server build, uploaded by bitbucket pipelines---" -F file=@"./app/build/outputs/apk/production/release/$FILE_NAME_PRODUCTION" -F channels=${SLACK_CHANNEL} -F token=${SLACK_TOKEN} https://slack.com/api/files.upload
+
+          #upload Google Play
+          ###- ./gradlew publishBundle
+
+
+#definitions:
+    #caches:
+    #  android-sdk: android-sdk
