@@ -31,7 +31,7 @@ pipelines:
           # Build apk
           - chmod a+x ./gradlew
           #build the dev and prod release APKs
-          - ./gradlew app:assembleDevRelease app:assembleStagingRelease app:assembleProductionRelease
+          - ./gradlew Presentation:assembleDevRelease Presentation:assembleStagingRelease Presentation:assembleProductionRelease
           #Let's define the name of APKs that were built
           - . ./setup_export.sh
           ##########  UPLOAD APK TO SLACK #CHANNEL ##########
@@ -41,11 +41,11 @@ pipelines:
           # SLACK_CHANNEL - Channel name to upload the file.
           - SLACK_CHANNEL= # here ##########################################
           # SLACK_CHANNEL - Dev - upload apk file.
-          - curl -F content="---Dev server build, uploaded by bitbucket pipelines---" -F file=@"./app/build/outputs/apk/dev/release/$FILE_NAME_DEV" -F channels=${SLACK_CHANNEL} -F token=${SLACK_TOKEN} https://slack.com/api/files.upload
+          - curl -F content="---Dev server build, uploaded by bitbucket pipelines---" -F file=@"./Presentation/build/outputs/apk/dev/release/$FILE_NAME_DEV" -F channels=${SLACK_CHANNEL} -F token=${SLACK_TOKEN} https://slack.com/api/files.upload
           # SLACK_CHANNEL - Staging - upload apk file.
-          - curl -F content="---Staging server build, uploaded by bitbucket pipelines---" -F file=@"./app/build/outputs/apk/staging/release/$FILE_NAME_STAGING" -F channels=${SLACK_CHANNEL} -F token=${SLACK_TOKEN} https://slack.com/api/files.upload
+          - curl -F content="---Staging server build, uploaded by bitbucket pipelines---" -F file=@"./Presentation/build/outputs/apk/staging/release/$FILE_NAME_STAGING" -F channels=${SLACK_CHANNEL} -F token=${SLACK_TOKEN} https://slack.com/api/files.upload
           # SLACK_CHANNEL - Production - upload apk file.
-          - curl -F content="---Production server build, uploaded by bitbucket pipelines---" -F file=@"./app/build/outputs/apk/production/release/$FILE_NAME_PRODUCTION" -F channels=${SLACK_CHANNEL} -F token=${SLACK_TOKEN} https://slack.com/api/files.upload
+          - curl -F content="---Production server build, uploaded by bitbucket pipelines---" -F file=@"./Presentation/build/outputs/apk/production/release/$FILE_NAME_PRODUCTION" -F channels=${SLACK_CHANNEL} -F token=${SLACK_TOKEN} https://slack.com/api/files.upload
 
           #upload Google Play
           ###- ./gradlew publishBundle
