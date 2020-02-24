@@ -2,14 +2,14 @@ package io.android.projectx.data.features.recipes.store
 
 import io.android.projectx.data.features.recipes.model.RecipeEntity
 import io.android.projectx.data.features.recipes.repository.RecipesCache
-import io.android.projectx.data.features.recipes.repository.RecipesDataStore
 import io.reactivex.Completable
 import io.reactivex.Flowable
+import io.reactivex.Single
 import javax.inject.Inject
 
 open class RecipesCacheDateStore @Inject constructor(
     private val recipesCache: RecipesCache
-) : RecipesDataStore {
+) : RecipesCache {
 
     override fun getRecipes(): Flowable<List<RecipeEntity>> {
         return recipesCache.getRecipes()
@@ -24,6 +24,10 @@ open class RecipesCacheDateStore @Inject constructor(
             .andThen(recipesCache.setLastCacheTime(System.currentTimeMillis()))
     }
 
+    override fun getBookmarkedRecipes(): Flowable<List<RecipeEntity>> {
+        return recipesCache.getBookmarkedRecipes()
+    }
+
     override fun setRecipeAsBookmarked(recipeId: Long): Completable {
         return recipesCache.setRecipeAsBookmarked(recipeId)
     }
@@ -32,8 +36,16 @@ open class RecipesCacheDateStore @Inject constructor(
         return recipesCache.setRecipeAsNotBookmarked(recipeId)
     }
 
-    override fun getBookmarkedRecipes(): Flowable<List<RecipeEntity>> {
-        return recipesCache.getBookmarkedRecipes()
+    override fun areRecipesCached(): Single<Boolean> {
+        return recipesCache.areRecipesCached()
+    }
+
+    override fun setLastCacheTime(lastCache: Long): Completable {
+        return recipesCache.setLastCacheTime(lastCache)
+    }
+
+    override fun isRecipesCacheExpired(): Single<Boolean> {
+        return recipesCache.isRecipesCacheExpired()
     }
 
 }

@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 open class RestaurantsRemoteDataStore @Inject constructor(
     private val restaurantsRemote: RestaurantsRemote
-) : RestaurantsDataStore {
+) : RestaurantsRemote {
 
     override fun getRestaurants(): Flowable<List<RestaurantEntity>> {
         return restaurantsRemote.getRestaurants()

@@ -5,13 +5,11 @@ import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
 
-interface RecipesCache {
+interface RecipesCache : RecipesDataStore {
 
     fun clearRecipes(): Completable
 
     fun saveRecipes(recipes: List<RecipeEntity>): Completable
-
-    fun getRecipes(): Flowable<List<RecipeEntity>>
 
     fun getBookmarkedRecipes(): Flowable<List<RecipeEntity>>
 
