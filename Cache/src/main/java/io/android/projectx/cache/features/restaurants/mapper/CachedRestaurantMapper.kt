@@ -15,10 +15,10 @@ class CachedRestaurantMapper @Inject constructor() :
         )
     }
 
-    override fun mapToCached(type: RestaurantEntity): CachedRestaurant {
+    override fun mapToCached(entity: RestaurantEntity): CachedRestaurant {
         return CachedRestaurant(
-            type.id, type.title, type.description,
-            type.url, type.urlToImage
+            entity.id, entity.title, entity.description,
+            entity.url, entity.urlToImage
         )
     }
 

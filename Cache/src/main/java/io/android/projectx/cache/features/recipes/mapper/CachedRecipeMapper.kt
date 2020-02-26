@@ -19,11 +19,11 @@ class CachedRecipeMapper @Inject constructor() :
         )
     }
 
-    override fun mapToCached(type: RecipeEntity): CachedRecipe {
+    override fun mapToCached(entity: RecipeEntity): CachedRecipe {
         return CachedRecipe(
-            type.id, type.author, type.title, type.description,
-            type.url, type.urlToImage, type.publishedAt.getOffsetDate(), type.content,
-            type.isBookmarked
+            entity.id, entity.author, entity.title, entity.description,
+            entity.url, entity.urlToImage, entity.publishedAt.getOffsetDate(), entity.content,
+            entity.isBookmarked
         )
     }
 
