@@ -94,7 +94,6 @@ dependencies {
 
     implementation project(':Domain')
     implementation project(':Data')
-    implementation project(':Cache')
 
     implementation presentationDependencies.javaxAnnotation
     implementation presentationDependencies.javaxInject

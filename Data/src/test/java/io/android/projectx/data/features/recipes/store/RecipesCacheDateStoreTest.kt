@@ -1,165 +1,110 @@
 package io.android.projectx.data.features.recipes.store
 
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
-import io.android.projectx.data.features.recipes.model.RecipeEntity
-import io.android.projectx.data.features.recipes.repository.RecipesCache
-import io.android.projectx.data.test.factory.DataFactory
-import io.android.projectx.data.test.factory.RecipeFactory
-import io.reactivex.Completable
-import io.reactivex.Flowable
-
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.room.Room
+import androidx.test.core.app.ApplicationProvider
+import io.android.projectx.cache.AppDatabase
+import io.android.projectx.cache.features.recipes.mapper.CachedRecipeMapper
+import io.android.projectx.cache.test.factory.RecipeDataFactory
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
+import org.robolectric.RobolectricTestRunner
 
-@RunWith(JUnit4::class)
+@RunWith(RobolectricTestRunner::class)
 class RecipesCacheDateStoreTest {
 
-    private val cache = mock<RecipesCache>()
-    private val store =
-        RecipesCacheDateStore(cache)
+    @get:Rule
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
+
+    private val database = Room.inMemoryDatabaseBuilder(
+        ApplicationProvider.getApplicationContext(),
+        AppDatabase::class.java
+    )
+        .allowMainThreadQueries()
+        .build()
+    private val entityMapper =
+        CachedRecipeMapper()
+    private val cache =
+        RecipesCacheDateStore(
+            database,
+            entityMapper
+        )
 
     @Test
-    fun getRecipeCompletes() {
-        stubRecipesCacheGetRecipes(Flowable.just(listOf(RecipeFactory.makeRecipeEntity())))
-        val testObserver = store.getRecipes().test()
+    fun clearTablesCompletes() {
+        val testObserver = cache.clearRecipes().test()
+        testObserver.assertComplete()
+    }
+
+    @Test
+    fun saveRecipesCompletes() {
+        val recipes = listOf(RecipeDataFactory.makeRecipeEntity())
+
+        val testObserver = cache.saveRecipes(recipes).test()
         testObserver.assertComplete()
     }
 
     @Test
     fun getRecipesReturnsData() {
-        val data = listOf(RecipeFactory.makeRecipeEntity())
-        stubRecipesCacheGetRecipes(Flowable.just(data))
-        val testObserver = store.getRecipes().test()
-        testObserver.assertValue(data)
-    }
+        val recipes = listOf(RecipeDataFactory.makeRecipeEntity())
+        cache.saveRecipes(recipes).test()
 
-    @Test
-    fun getRecipesCallsCacheSource() {
-        stubRecipesCacheGetRecipes(Flowable.just(listOf(RecipeFactory.makeRecipeEntity())))
-        store.getRecipes().test()
-        verify(cache).getRecipes()
-    }
-
-    @Test
-    fun saveRecipesCompletes() {
-        stubRecipesCacheSaveRecipes(Completable.complete())
-        stubRecipesCacheSetLastCacheTime(Completable.complete())
-        val testObserver = store.saveRecipes(listOf(RecipeFactory.makeRecipeEntity())).test()
-        testObserver.assertComplete()
-    }
-
-    @Test
-    fun saveRecipesCallsCacheStore() {
-        val data = listOf(RecipeFactory.makeRecipeEntity())
-        stubRecipesCacheSaveRecipes(Completable.complete())
-        stubRecipesCacheSetLastCacheTime(Completable.complete())
-        store.saveRecipes(data).test()
-        verify(cache).saveRecipes(data)
-    }
-
-    @Test
-    fun clearRecipesCompletes() {
-        stubRecipesClearRecipes(Completable.complete())
-        val testObserver = store.clearRecipes().test()
-        testObserver.assertComplete()
-    }
-
-    @Test
-    fun clearRecipesCallsCacheStore() {
-        stubRecipesClearRecipes(Completable.complete())
-        store.clearRecipes().test()
-        verify(cache).clearRecipes()
-    }
-
-    @Test
-    fun getBookmarkedRecipeCompletes() {
-        stubRecipesCacheGetBookmarkedRecipes(Flowable.just(listOf(RecipeFactory.makeRecipeEntity())))
-        val testObserver = store.getBookmarkedRecipes().test()
-        testObserver.assertComplete()
+        val testObserver = cache.getRecipes().test()
+        testObserver.assertValue(recipes)
     }
 
     @Test
     fun getBookmarkedRecipesReturnsData() {
-        val data = listOf(RecipeFactory.makeRecipeEntity())
-        stubRecipesCacheGetBookmarkedRecipes(Flowable.just(data))
-        val testObserver = store.getBookmarkedRecipes().test()
-        testObserver.assertValue(data)
-    }
+        val bookmarkedRecipe = RecipeDataFactory.makeBookmarkedRecipeEntity()
+        val recipes = listOf(
+            RecipeDataFactory.makeRecipeEntity(),
+            bookmarkedRecipe
+        )
+        cache.saveRecipes(recipes).test()
 
-    @Test
-    fun getBookmarkedRecipesCallsCacheSource() {
-        stubRecipesCacheGetBookmarkedRecipes(Flowable.just(listOf(RecipeFactory.makeRecipeEntity())))
-        store.getBookmarkedRecipes().test()
-        verify(cache).getBookmarkedRecipes()
+        val testObserver = cache.getBookmarkedRecipes().test()
+        testObserver.assertValue(listOf(bookmarkedRecipe))
     }
 
     @Test
     fun setRecipeAsBookmarkedCompletes() {
-        stubRecipesCacheSetRecipesAsBookmarked(Completable.complete())
-        val testObserver = store.setRecipeAsBookmarked(DataFactory.uniqueId()).test()
-        testObserver.assertComplete()
-    }
+        val recipes = listOf(RecipeDataFactory.makeRecipeEntity())
+        cache.saveRecipes(recipes).test()
 
-    @Test
-    fun setRecipeAsBookmarkedCallsCacheSource() {
-        val recipeId = DataFactory.uniqueId()
-        stubRecipesCacheSetRecipesAsBookmarked(Completable.complete())
-        store.setRecipeAsBookmarked(recipeId).test()
-        verify(cache).setRecipeAsBookmarked(recipeId)
+        val testObserver = cache.setRecipeAsBookmarked(recipes[0].id).test()
+        testObserver.assertComplete()
     }
 
     @Test
     fun setRecipeAsNotBookmarkedCompletes() {
-        stubRecipesCacheSetRecipesAsNotBookmarked(Completable.complete())
-        val testObserver = store.setRecipeAsNotBookmarked(DataFactory.uniqueId()).test()
+        val recipes = listOf(RecipeDataFactory.makeBookmarkedRecipeEntity())
+        cache.saveRecipes(recipes).test()
+
+        val testObserver = cache.setRecipeAsNotBookmarked(recipes[0].id).test()
         testObserver.assertComplete()
     }
 
     @Test
-    fun setRecipeAsNotBookmarkedCallsCacheSource() {
-        val recipeId = DataFactory.uniqueId()
-        stubRecipesCacheSetRecipesAsNotBookmarked(Completable.complete())
-        store.setRecipeAsNotBookmarked(recipeId).test()
-        verify(cache).setRecipeAsNotBookmarked(recipeId)
+    fun areRecipesCacheReturnsData() {
+        val recipes = listOf(RecipeDataFactory.makeRecipeEntity())
+        cache.saveRecipes(recipes).test()
+
+        val testObserver = cache.areRecipesCached().test()
+        testObserver.assertValue(true)
     }
 
-    private fun stubRecipesCacheGetRecipes(flowable: Flowable<List<RecipeEntity>>) {
-        whenever(cache.getRecipes())
-            .thenReturn(flowable)
+    @Test
+    fun setLastCacheTimeCompletes() {
+        val testObserver = cache.setLastCacheTime(1000L).test()
+        testObserver.assertComplete()
     }
 
-    private fun stubRecipesCacheSaveRecipes(completable: Completable) {
-        whenever(cache.saveRecipes(any()))
-            .thenReturn(completable)
-    }
-
-    private fun stubRecipesCacheSetLastCacheTime(completable: Completable) {
-        whenever(cache.setLastCacheTime(any()))
-            .thenReturn(completable)
-    }
-
-    private fun stubRecipesClearRecipes(completable: Completable) {
-        whenever(cache.clearRecipes())
-            .thenReturn(completable)
-    }
-
-    private fun stubRecipesCacheGetBookmarkedRecipes(flowable: Flowable<List<RecipeEntity>>) {
-        whenever(cache.getBookmarkedRecipes())
-            .thenReturn(flowable)
-    }
-
-    private fun stubRecipesCacheSetRecipesAsBookmarked(completable: Completable) {
-        whenever(cache.setRecipeAsBookmarked(any()))
-            .thenReturn(completable)
-    }
-
-    private fun stubRecipesCacheSetRecipesAsNotBookmarked(completable: Completable) {
-        whenever(cache.setRecipeAsNotBookmarked(any()))
-            .thenReturn(completable)
+    @Test
+    fun isRecipesCacheExpiredReturnsNotExpired() {
+        cache.setLastCacheTime(1000L).test()
+        val testObserver = cache.isRecipesCacheExpired().test()
+        testObserver.assertValue(false)
     }
 
 }

@@ -4,11 +4,11 @@ import android.app.Application
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import io.android.projectx.cache.features.recipes.RecipesCacheImpl
 import io.android.projectx.cache.AppDatabase
-import io.android.projectx.cache.features.restaurants.RestaurantsCacheImpl
 import io.android.projectx.data.features.recipes.repository.RecipesCache
+import io.android.projectx.data.features.recipes.store.RecipesCacheDateStore
 import io.android.projectx.data.features.restaurants.repository.RestaurantsCache
+import io.android.projectx.data.features.restaurants.store.RestaurantsCacheDateStore
 
 @Module
 abstract class CacheModule {
@@ -23,8 +23,8 @@ abstract class CacheModule {
     }
 
     @Binds
-    abstract fun bindRecipesCache(recipesCache: RecipesCacheImpl): RecipesCache
+    abstract fun bindRecipesCache(recipesCacheImpl: RecipesCacheDateStore): RecipesCache
 
     @Binds
-    abstract fun bindRestaurantsCache(restaurantsCache: RestaurantsCacheImpl): RestaurantsCache
+    abstract fun bindRestaurantsCache(restaurantsCacheImpl: RestaurantsCacheDateStore): RestaurantsCache
 }

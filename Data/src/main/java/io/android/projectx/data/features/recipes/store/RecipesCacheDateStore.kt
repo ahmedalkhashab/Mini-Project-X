@@ -1,5 +1,8 @@
 package io.android.projectx.data.features.recipes.store
 
+import io.android.projectx.cache.AppDatabase
+import io.android.projectx.cache.features.recipes.mapper.CachedRecipeMapper
+import io.android.projectx.cache.features.recipes.model.Config
 import io.android.projectx.data.features.recipes.model.RecipeEntity
 import io.android.projectx.data.features.recipes.repository.RecipesCache
 import io.reactivex.Completable
@@ -8,44 +11,77 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 open class RecipesCacheDateStore @Inject constructor(
-    private val recipesCache: RecipesCache
+    private val appDatabase: AppDatabase,
+    private val mapper: CachedRecipeMapper
 ) : RecipesCache {
 
-    override fun getRecipes(): Flowable<List<RecipeEntity>> {
-        return recipesCache.getRecipes()
-    }
-
     override fun clearRecipes(): Completable {
-        return recipesCache.clearRecipes()
+        return Completable.defer {
+            appDatabase.cachedRecipesDao().deleteRecipes()
+            Completable.complete()
+        }
     }
 
     override fun saveRecipes(recipes: List<RecipeEntity>): Completable {
-        return recipesCache.saveRecipes(recipes)
-            .andThen(recipesCache.setLastCacheTime(System.currentTimeMillis()))
+        return Completable.defer {
+            appDatabase.cachedRecipesDao().insertRecipes(
+                recipes.map { mapper.mapToCached(it) })
+            Completable.complete()
+        }
+    }
+
+    override fun getRecipes(): Flowable<List<RecipeEntity>> {
+        return appDatabase.cachedRecipesDao().getRecipes()
+            .map {
+                it.map { cachedRecipe -> mapper.mapFromCached(cachedRecipe) }
+            }
     }
 
     override fun getBookmarkedRecipes(): Flowable<List<RecipeEntity>> {
-        return recipesCache.getBookmarkedRecipes()
+        return appDatabase.cachedRecipesDao().getBookmarkedRecipes()
+            .map {
+                it.map { cachedRecipe -> mapper.mapFromCached(cachedRecipe) }
+            }
     }
 
     override fun setRecipeAsBookmarked(recipeId: Long): Completable {
-        return recipesCache.setRecipeAsBookmarked(recipeId)
+        return Completable.defer {
+            appDatabase.cachedRecipesDao().setBookmarkStatus(true, recipeId)
+            Completable.complete()
+        }
     }
 
     override fun setRecipeAsNotBookmarked(recipeId: Long): Completable {
-        return recipesCache.setRecipeAsNotBookmarked(recipeId)
+        return Completable.defer {
+            appDatabase.cachedRecipesDao().setBookmarkStatus(false, recipeId)
+            Completable.complete()
+        }
     }
 
     override fun areRecipesCached(): Single<Boolean> {
-        return recipesCache.areRecipesCached()
+        return appDatabase.cachedRecipesDao().getRecipes().isEmpty
+            .map {
+                !it
+            }
     }
 
     override fun setLastCacheTime(lastCache: Long): Completable {
-        return recipesCache.setLastCacheTime(lastCache)
+        return Completable.defer {
+            appDatabase.configDao().insertConfig(
+                Config(
+                    lastCacheTime = lastCache
+                )
+            )
+            Completable.complete()
+        }
     }
 
     override fun isRecipesCacheExpired(): Single<Boolean> {
-        return recipesCache.isRecipesCacheExpired()
+        val currentTime = System.currentTimeMillis()
+        val expirationTime = (60 * 10 * 1000).toLong()
+        return appDatabase.configDao().getConfig()
+            .onErrorReturn { Config(lastCacheTime = 0) }
+            .map { currentTime - it.lastCacheTime > expirationTime }
     }
 
 }
