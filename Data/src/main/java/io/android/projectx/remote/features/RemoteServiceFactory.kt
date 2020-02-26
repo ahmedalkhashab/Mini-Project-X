@@ -24,12 +24,19 @@ class RemoteServiceFactory @Inject constructor(baseUrl: String, isDebug: Boolean
 
     init {
         loggingInterceptor = RemoteFactory.makeLoggingInterceptor((isDebug))
-        okHttpClient = RemoteFactory.makeOkHttpClient(loggingInterceptor)
+        okHttpClient = RemoteFactory.makeOkHttpClient(
+            loggingInterceptor
+        )
         gson = RemoteFactory.makeGson()
-        retrofit = RemoteFactory.makeRetrofit(baseUrl, okHttpClient, gson)
+        retrofit = RemoteFactory.makeRetrofit(baseUrl,
+            okHttpClient,
+            gson
+        )
         // Services
-        recipesService = retrofit.create(RecipesService::class.java)
-        restaurantsService = retrofit.create(RestaurantsService::class.java)
+        recipesService = retrofit.create(
+            RecipesService::class.java)
+        restaurantsService = retrofit.create(
+            RestaurantsService::class.java)
     }
 
 }

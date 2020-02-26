@@ -4,12 +4,12 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import io.android.projectx.data.features.recipes.repository.RecipesRemote
+import io.android.projectx.data.features.recipes.store.RecipesRemoteDataStore
 import io.android.projectx.data.features.restaurants.repository.RestaurantsRemote
+import io.android.projectx.data.features.restaurants.store.RestaurantsRemoteDataStore
 import io.android.projectx.presentation.BuildConfig
-import io.android.projectx.remote.features.recipes.RecipesRemoteImpl
 import io.android.projectx.remote.features.RemoteServiceFactory
 import io.android.projectx.remote.features.recipes.service.RecipesService
-import io.android.projectx.remote.features.restaurants.RestaurantsRemoteImpl
 import io.android.projectx.remote.features.restaurants.service.RestaurantsService
 
 @Module
@@ -21,7 +21,10 @@ abstract class RemoteModule {
         @Provides
         @JvmStatic
         fun provideRemoteServiceFactory(): RemoteServiceFactory {
-            return RemoteServiceFactory(BuildConfig.API_BASE_URL, BuildConfig.DEBUG)
+            return RemoteServiceFactory(
+                BuildConfig.API_BASE_URL,
+                BuildConfig.DEBUG
+            )
         }
 
         @Provides
@@ -38,8 +41,8 @@ abstract class RemoteModule {
     }
 
     @Binds
-    abstract fun bindRecipesRemote(recipesRemote: RecipesRemoteImpl): RecipesRemote
+    abstract fun bindRecipesRemote(recipesRemoteImpl: RecipesRemoteDataStore): RecipesRemote
 
     @Binds
-    abstract fun bindRestaurantsRemote(restaurantsRemote: RestaurantsRemoteImpl): RestaurantsRemote
+    abstract fun bindRestaurantsRemote(restaurantsRemoteImpl: RestaurantsRemoteDataStore): RestaurantsRemote
 }

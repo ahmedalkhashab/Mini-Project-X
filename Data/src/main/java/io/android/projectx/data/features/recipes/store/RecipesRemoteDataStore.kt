@@ -1,18 +1,23 @@
 package io.android.projectx.data.features.recipes.store
 
 import io.android.projectx.data.features.recipes.model.RecipeEntity
-import io.android.projectx.data.features.recipes.repository.RecipesDataStore
 import io.android.projectx.data.features.recipes.repository.RecipesRemote
-import io.reactivex.Completable
+import io.android.projectx.remote.features.recipes.mapper.RecipesResponseModelMapper
+import io.android.projectx.remote.features.recipes.service.RecipesService
 import io.reactivex.Flowable
 import javax.inject.Inject
 
 open class RecipesRemoteDataStore @Inject constructor(
-    private val recipesRemote: RecipesRemote
+    private val service: RecipesService,
+    private val mapper: RecipesResponseModelMapper
 ) : RecipesRemote {
 
     override fun getRecipes(): Flowable<List<RecipeEntity>> {
-        return recipesRemote.getRecipes()
+        //todo - move parameters
+        return service.searchRecipes(1)
+            .map {
+                it.items.map { model -> mapper.mapFromModel(model) }
+            }
     }
 
 }

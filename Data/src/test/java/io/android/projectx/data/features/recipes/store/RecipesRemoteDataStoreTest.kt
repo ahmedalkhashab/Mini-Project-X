@@ -1,66 +1,85 @@
 package io.android.projectx.data.features.recipes.store
 
+import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import io.android.projectx.data.features.recipes.model.RecipeEntity
-import io.android.projectx.data.features.recipes.repository.RecipesRemote
-import io.android.projectx.data.test.factory.DataFactory
-import io.android.projectx.data.test.factory.RecipeFactory
+import io.android.projectx.remote.features.recipes.mapper.RecipesResponseModelMapper
+import io.android.projectx.remote.features.recipes.model.RecipeModel
+import io.android.projectx.remote.features.recipes.model.response.RecipesResponseModel
+import io.android.projectx.remote.features.recipes.service.RecipesService
+import io.android.projectx.remote.test.factory.RecipeDataFactory
 import io.reactivex.Flowable
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-class RecipesRemoteDataStoreTest{
+class RecipesRemoteDataStoreTest {
 
-    private val remote = mock<RecipesRemote>()
-    private val store =
-        RecipesRemoteDataStore(remote)
+    private val mapper = mock<RecipesResponseModelMapper>()
+    private val service = mock<RecipesService>()
+    private val remote =
+        RecipesRemoteDataStore(
+            service,
+            mapper
+        )
 
     @Test
     fun getRecipesCompletes() {
-        stubRemoteGetRecipes(Flowable.just(listOf(RecipeFactory.makeRecipeEntity())))
-        val testObserver = store.getRecipes().test()
+        stubRecipesServiceSearch(Flowable.just(RecipeDataFactory.makeRecipesResponse()))
+        stubRecipesResponseModelMapperMapFromModel(any(), RecipeDataFactory.makeRecipeEntity())
+
+        val testObserver = remote.getRecipes().test()
         testObserver.assertComplete()
     }
 
     @Test
+    fun getRecipesCallServer() {
+        stubRecipesServiceSearch(Flowable.just(RecipeDataFactory.makeRecipesResponse()))
+        stubRecipesResponseModelMapperMapFromModel(any(), RecipeDataFactory.makeRecipeEntity())
+
+        remote.getRecipes().test()
+        verify(service).searchRecipes(any())
+    }
+
+    @Test
     fun getRecipesReturnsData() {
-        val response = listOf(RecipeFactory.makeRecipeEntity())
-        stubRemoteGetRecipes(Flowable.just(response))
-        val testObserver = store.getRecipes().test()
-        testObserver.assertValue(response)
+        val response = RecipeDataFactory.makeRecipesResponse()
+        stubRecipesServiceSearch(Flowable.just(response))
+        val entities = mutableListOf<RecipeEntity>()
+        response.items.forEach {
+            val entity = RecipeDataFactory.makeRecipeEntity()
+            entities.add(entity)
+            stubRecipesResponseModelMapperMapFromModel(it, entity)
+        }
+        val testObserver = remote.getRecipes().test()
+        testObserver.assertValue(entities)
     }
 
-    @Test(expected = UnsupportedOperationException::class)
-    fun saveRecipesThrowsException() {
-        store.saveRecipes(listOf()).test()
+    @Test
+    fun getRecipesCallServerWithCorrectParameters() {
+        stubRecipesServiceSearch(Flowable.just(RecipeDataFactory.makeRecipesResponse()))
+        stubRecipesResponseModelMapperMapFromModel(any(), RecipeDataFactory.makeRecipeEntity())
+
+        remote.getRecipes().test()
+        //todo - retest this case after moving parameters
+        //verify(service).searchRepositories(1)
+        verify(service).searchRecipes(1)
     }
 
-    @Test(expected = UnsupportedOperationException::class)
-    fun clearRecipesThrowsException() {
-        store.clearRecipes().test()
-    }
-
-    @Test(expected = UnsupportedOperationException::class)
-    fun getBookmarkedRecipesThrowsException() {
-        store.getBookmarkedRecipes().test()
-    }
-
-    @Test(expected = UnsupportedOperationException::class)
-    fun setRecipeAsBookmarkedThrowsException() {
-        store.setRecipeAsBookmarked(DataFactory.uniqueId()).test()
-    }
-
-    @Test(expected = UnsupportedOperationException::class)
-    fun setRecipeAsNotBookmarkedThrowsException() {
-        store.setRecipeAsNotBookmarked(DataFactory.uniqueId()).test()
-    }
-
-    private fun stubRemoteGetRecipes(flowable: Flowable<List<RecipeEntity>>) {
-        whenever(remote.getRecipes())
+    private fun stubRecipesServiceSearch(flowable: Flowable<RecipesResponseModel>) {
+        whenever(service.searchRecipes(any()))
             .thenReturn(flowable)
+    }
+
+    private fun stubRecipesResponseModelMapperMapFromModel(
+        model: RecipeModel,
+        entity: RecipeEntity
+    ) {
+        whenever(mapper.mapFromModel(model))
+            .thenReturn(entity)
     }
 
 }
