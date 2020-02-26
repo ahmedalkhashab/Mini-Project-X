@@ -81,10 +81,6 @@ ext {
     ]
 
     remoteDependencies = [
-            javaxAnnotation  : "javax.annotation:javax.annotation-api:${javaxAnnotationVersion}",
-            javaxInject      : "javax.inject:javax.inject:${javaxInjectVersion}",
-            rxKotlin         : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
-            kotlin           : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}",
             okHttp           : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
             okHttpLogger     : "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
             retrofit         : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
@@ -93,18 +89,9 @@ ext {
             gson             : "com.google.code.gson:gson:${gsonVersion}"
     ]
 
-    remoteTestDependencies = [
-            junit      : "junit:junit:${jUnitVersion}",
-            kotlinJUnit: "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}",
-            mockito    : "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockitoVersion}",
-            assertj    : "org.assertj:assertj-core:${assertJVersion}",
-    ]
+    remoteTestDependencies = []
 
     cacheDependencies = [
-            javaxAnnotation: "javax.annotation:javax.annotation-api:${javaxAnnotationVersion}",
-            javaxInject    : "javax.inject:javax.inject:${javaxInjectVersion}",
-            rxKotlin       : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
-            kotlin         : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin_version}",
             androidxCoreKtx: "androidx.core:core-ktx:${ktxVersion}",
             roomRuntime    : "androidx.room:room-runtime:${roomVersion}",
             roomCompiler   : "androidx.room:room-compiler:${roomVersion}",
@@ -113,10 +100,6 @@ ext {
     ]
 
     cacheTestDependencies = [
-            junit           : "junit:junit:${jUnitVersion}",
-            kotlinJUnit     : "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}",
-            mockito         : "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockitoVersion}",
-            assertj         : "org.assertj:assertj-core:${assertJVersion}",
             robolectric     : "org.robolectric:robolectric:${robolectricVersion}",
             roomTesting     : "androidx.room:room-testing:${roomVersion}",
             archTesting     : "androidx.arch.core:core-testing:${archVersion}",
