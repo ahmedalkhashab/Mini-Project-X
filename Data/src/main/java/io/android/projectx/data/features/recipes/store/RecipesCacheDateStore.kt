@@ -2,7 +2,7 @@ package io.android.projectx.data.features.recipes.store
 
 import io.android.projectx.cache.AppDatabase
 import io.android.projectx.cache.features.recipes.mapper.CachedRecipeMapper
-import io.android.projectx.cache.features.recipes.model.Config
+import io.android.projectx.cache.features.config.model.Config
 import io.android.projectx.data.features.recipes.model.RecipeEntity
 import io.android.projectx.data.features.recipes.repository.RecipesCache
 import io.reactivex.Completable
@@ -14,6 +14,11 @@ open class RecipesCacheDateStore @Inject constructor(
     private val appDatabase: AppDatabase,
     private val mapper: CachedRecipeMapper
 ) : RecipesCache {
+
+    companion object{
+        const val KEY_GET_RECIPES = "key_get_recipes"
+        const val expirationTime = (60 * 10 * 1000).toLong()
+    }
 
     override fun clearRecipes(): Completable {
         return Completable.defer {
@@ -67,20 +72,15 @@ open class RecipesCacheDateStore @Inject constructor(
 
     override fun setLastCacheTime(lastCache: Long): Completable {
         return Completable.defer {
-            appDatabase.configDao().insertConfig(
-                Config(
-                    lastCacheTime = lastCache
-                )
-            )
+            appDatabase.configDao().insertConfig(Config(KEY_GET_RECIPES, "", lastCacheTime = lastCache))
             Completable.complete()
         }
     }
 
     override fun isRecipesCacheExpired(): Single<Boolean> {
         val currentTime = System.currentTimeMillis()
-        val expirationTime = (60 * 10 * 1000).toLong()
-        return appDatabase.configDao().getConfig()
-            .onErrorReturn { Config(lastCacheTime = 0) }
+        return appDatabase.configDao().getConfig(KEY_GET_RECIPES)
+            .onErrorReturn { Config("", "", 0) }
             .map { currentTime - it.lastCacheTime > expirationTime }
     }
 

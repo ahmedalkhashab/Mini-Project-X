@@ -1,6 +1,8 @@
 package io.android.projectx.remote.base
 
 import com.google.gson.*
+import io.android.projectx.cache.extentions.getDate
+import io.android.projectx.cache.extentions.getOffsetDate
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -55,20 +57,6 @@ object RemoteFactory {
                 JsonSerializer<Date> { date, _, _ -> JsonPrimitive(date.getOffsetDate()) })
             .serializeNulls()
             .create()
-    }
-
-    private const val DATE_ISO_8601_FORMAT = "yyyy-MM-dd'T'hh:mm:ss"
-
-    private fun String.getDate(): Date? {
-        val format = SimpleDateFormat(DATE_ISO_8601_FORMAT, Locale.getDefault())
-        format.timeZone = TimeZone.getTimeZone("GMT")
-        return format.parse(this)
-    }
-
-    private fun Date.getOffsetDate(): String {
-        val format = SimpleDateFormat(DATE_ISO_8601_FORMAT, Locale.getDefault())
-        format.timeZone = TimeZone.getTimeZone("GMT")
-        return format.format(this)
     }
 
 }

@@ -5,6 +5,7 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import io.android.projectx.cache.AppDatabase
 import io.android.projectx.cache.test.factory.ConfigDataFactory
+import io.android.projectx.cache.test.factory.DataFactory
 import org.junit.After
 import org.junit.Rule
 import org.junit.Test
@@ -32,8 +33,8 @@ class ConfigDaoTest {
     fun saveConfigurationSavesData() {
         val config = ConfigDataFactory.makeCachedConfig()
         database.configDao().insertConfig(config)
-
-        val testObserver = database.configDao().getConfig().test()
+        val key = DataFactory.randomString()
+        val testObserver = database.configDao().getConfig(key).test()
         testObserver.assertValue(config)
     }
 

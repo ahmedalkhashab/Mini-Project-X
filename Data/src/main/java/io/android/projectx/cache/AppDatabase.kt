@@ -5,9 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import io.android.projectx.cache.features.recipes.dao.CachedRecipesDao
-import io.android.projectx.cache.features.recipes.dao.ConfigDao
+import io.android.projectx.cache.features.config.dao.ConfigDao
 import io.android.projectx.cache.features.recipes.model.CachedRecipe
-import io.android.projectx.cache.features.recipes.model.Config
+import io.android.projectx.cache.features.config.model.Config
 import io.android.projectx.cache.features.restaurants.dao.CachedRestaurantDao
 import io.android.projectx.cache.features.restaurants.model.CachedRestaurant
 import javax.inject.Inject

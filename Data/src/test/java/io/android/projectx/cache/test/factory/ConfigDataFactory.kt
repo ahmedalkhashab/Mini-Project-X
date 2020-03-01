@@ -1,13 +1,13 @@
 package io.android.projectx.cache.test.factory
 
-import io.android.projectx.cache.features.recipes.model.Config
-import io.android.projectx.cache.test.factory.DataFactory
+import io.android.projectx.cache.features.config.model.Config
 
 object ConfigDataFactory {
 
     fun makeCachedConfig(): Config {
         return Config(
-            DataFactory.randomInt(),
+            DataFactory.randomString(),
+            DataFactory.randomString(),
             DataFactory.randomLong()
         )
     }
