@@ -8,11 +8,13 @@ interface UserManagementRepository {
 
     fun login(email: String, password: String): Observable<User>
 
-    fun forgetPassword(email: String): Completable
+    // we can use otp instead of password
+    fun verifyByMobile(mobile: String, pinCode: String): Observable<User>
 
+    // we can use otp instead of password
     fun verifyByEmail(email: String, pinCode: String): Observable<User>
 
-    fun verifyByMobile(mobile: String, pinCode: String): Observable<User>
+    fun forgetPassword(email: String): Completable
 
     fun resetPassword(email: String, pinCode: String, password: String): Observable<User>
 
