@@ -15,7 +15,7 @@ open class RecipesCacheDateStore @Inject constructor(
     private val mapper: CachedRecipeMapper
 ) : RecipesCache {
 
-    companion object{
+    companion object {
         const val KEY_GET_RECIPES = "key_get_recipes"
         const val expirationTime = (60 * 10 * 1000).toLong()
     }
@@ -71,10 +71,10 @@ open class RecipesCacheDateStore @Inject constructor(
     }
 
     override fun setLastCacheTime(lastCache: Long): Completable {
-        return Completable.defer {
-            appDatabase.configDao().insertConfig(Config(KEY_GET_RECIPES, "", lastCacheTime = lastCache))
-            Completable.complete()
-        }
+        return appDatabase.configDao()
+            .insertConfig(
+                Config(KEY_GET_RECIPES, "", lastCacheTime = lastCache)
+            )
     }
 
     override fun isRecipesCacheExpired(): Single<Boolean> {

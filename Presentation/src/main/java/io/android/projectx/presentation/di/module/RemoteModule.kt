@@ -7,10 +7,13 @@ import io.android.projectx.data.features.recipes.repository.RecipesRemote
 import io.android.projectx.data.features.recipes.store.RecipesRemoteDataStore
 import io.android.projectx.data.features.restaurants.repository.RestaurantsRemote
 import io.android.projectx.data.features.restaurants.store.RestaurantsRemoteDataStore
+import io.android.projectx.data.features.usermanagement.repository.UserManagementRemote
+import io.android.projectx.data.features.usermanagement.store.UserManagementRemoteDataStore
 import io.android.projectx.presentation.BuildConfig
 import io.android.projectx.remote.features.RemoteServiceFactory
 import io.android.projectx.remote.features.recipes.service.RecipesService
 import io.android.projectx.remote.features.restaurants.service.RestaurantsService
+import io.android.projectx.remote.features.usermanagement.service.UserManagementService
 
 @Module
 abstract class RemoteModule {
@@ -29,6 +32,13 @@ abstract class RemoteModule {
 
         @Provides
         @JvmStatic
+        fun provideUserManagementService(remoteServiceFactory: RemoteServiceFactory): UserManagementService {
+            return remoteServiceFactory.userManagementService
+        }
+
+
+        @Provides
+        @JvmStatic
         fun provideRecipesService(remoteServiceFactory: RemoteServiceFactory): RecipesService {
             return remoteServiceFactory.recipesService
         }
@@ -39,6 +49,9 @@ abstract class RemoteModule {
             return remoteServiceFactory.restaurantsService
         }
     }
+
+    @Binds
+    abstract fun bindUserManagementRemote(userManagementRemoteImpl: UserManagementRemoteDataStore): UserManagementRemote
 
     @Binds
     abstract fun bindRecipesRemote(recipesRemoteImpl: RecipesRemoteDataStore): RecipesRemote

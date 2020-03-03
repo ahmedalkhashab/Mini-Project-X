@@ -7,32 +7,28 @@ import io.android.projectx.domain.features.usermanagement.repository.UserManagem
 import io.reactivex.Observable
 import javax.inject.Inject
 
-open class VerifyByMobile @Inject constructor(
+open class LoginMobile @Inject constructor(
     private val userManagementRepository: UserManagementRepository,
     postExecutionThread: PostExecutionThread
-) : ObservableUseCase<User, VerifyByMobile.Params?>(postExecutionThread) {
+) : ObservableUseCase<User, LoginMobile.Params?>(postExecutionThread) {
 
     public override fun buildUseCaseObservable(params: Params?): Observable<User> {
         if (params == null) throw IllegalArgumentException("Params can't be null!")
-        return userManagementRepository.verifyByMobile(
+        return userManagementRepository.login(
             params.countryCode,
             params.mobileNumber,
-            params.pinCode
+            params.password
         )
     }
 
     data class Params constructor(
         val countryCode: String,
         val mobileNumber: String,
-        val pinCode: String
+        val password: String
     ) {
         companion object {
-            fun forVerifyByMobile(
-                countryCode: String,
-                mobileNumber: String,
-                pinCode: String
-            ): Params {
-                return Params(countryCode, mobileNumber, pinCode)
+            fun forLogin(countryCode: String, mobileNumber: String, password: String): Params {
+                return Params(countryCode, mobileNumber, password)
             }
         }
     }
