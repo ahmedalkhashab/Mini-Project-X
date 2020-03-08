@@ -1,4 +1,4 @@
-package io.android.projectx.presentation.di.module
+package io.android.projectx.presentation.di.module.ui
 
 import androidx.lifecycle.ViewModelProvider
 import dagger.Binds

@@ -1,4 +1,4 @@
-package io.android.projectx.presentation.di.module
+package io.android.projectx.presentation.di.module.ui
 
 import android.app.Application
 import android.content.Context
@@ -10,7 +10,7 @@ import dagger.Module
 import dagger.Provides
 import io.android.projectx.presentation.R
 
-@Module(includes = [GlideModule::class])
+@Module(includes = [FlavorModule::class, GlideModule::class])
 abstract class ApplicationModule {
 
     @Binds

@@ -1,4 +1,4 @@
-package io.android.projectx.presentation.di.module
+package io.android.projectx.data.di.module.data
 
 import android.app.Application
 import dagger.Binds

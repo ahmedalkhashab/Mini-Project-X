@@ -139,7 +139,9 @@ ext {
             daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:${daggerVersion}",
             timber                : "com.jakewharton.timber:timber:${timberVersion}",
             glide                 : "com.github.bumptech.glide:glide:${glideVersion}",
-            okHttp                : "com.squareup.okhttp3:okhttp:${okHttpVersion}"
+            okHttp                : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+            okHttpLogger          : "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
+            gson                  : "com.google.code.gson:gson:${gsonVersion}"
     ]
 
     presentationTestDependencies = [

@@ -115,6 +115,8 @@ dependencies {
     implementation presentationDependencies.timber
     implementation presentationDependencies.glide
     implementation presentationDependencies.okHttp
+    implementation presentationDependencies.okHttpLogger
+    implementation presentationDependencies.gson
     kapt presentationDependencies.lifecycleCompiler
     kapt presentationDependencies.roomCompiler
 

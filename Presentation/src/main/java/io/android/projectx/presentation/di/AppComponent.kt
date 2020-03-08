@@ -5,8 +5,13 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
+import io.android.projectx.data.di.module.data.CacheModule
+import io.android.projectx.data.di.module.data.DataModule
+import io.android.projectx.data.di.module.data.RemoteModule
 import io.android.projectx.presentation.base.BaseApplication
-import io.android.projectx.presentation.di.module.*
+import io.android.projectx.presentation.di.module.ui.ApplicationModule
+import io.android.projectx.presentation.di.module.ui.PresentationModule
+import io.android.projectx.presentation.di.module.ui.UiModule
 import javax.inject.Singleton
 
 @Singleton
