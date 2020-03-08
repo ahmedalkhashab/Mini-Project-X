@@ -1,38 +1,45 @@
 package io.android.projectx.remote.features
 
-import com.google.gson.Gson
 import io.android.projectx.remote.base.RemoteFactory
+import io.android.projectx.remote.base.interceptor.Authenticator
+import io.android.projectx.remote.base.interceptor.AuthorizationInterceptor
 import io.android.projectx.remote.features.recipes.service.RecipesService
-import io.android.projectx.remote.features.restaurants.service.RestaurantsService
 import io.android.projectx.remote.features.usermanagement.service.UserManagementService
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import javax.inject.Inject
+import io.android.projectx.remote.features.restaurants.service.RestaurantsService
 
-class RemoteServiceFactory @Inject constructor(baseUrl: String, isDebug: Boolean) {
+object RemoteServiceFactory {
 
-    // Services
-    var userManagementService: UserManagementService
-    var recipesService: RecipesService
-    var restaurantsService: RestaurantsService
-
-    companion object {
-        private lateinit var loggingInterceptor: HttpLoggingInterceptor
-        private lateinit var okHttpClient: OkHttpClient
-        private lateinit var gson: Gson
-        private lateinit var retrofit: Retrofit
+    fun provideUserManagementService(
+        baseUrl: String,
+        isDebug: Boolean,
+        authorizationInterceptor: AuthorizationInterceptor,
+        authenticator: Authenticator
+    ): UserManagementService {
+        val okHttpClient = RemoteFactory.provideOkHttpClient(isDebug, authorizationInterceptor, authenticator)
+        val retrofit = RemoteFactory.provideRetrofit(baseUrl, okHttpClient, RemoteFactory.provideGson())
+        return retrofit.create(UserManagementService::class.java)
     }
 
-    init {
-        loggingInterceptor = RemoteFactory.makeLoggingInterceptor((isDebug))
-        okHttpClient = RemoteFactory.makeOkHttpClient(loggingInterceptor)
-        gson = RemoteFactory.makeGson()
-        retrofit = RemoteFactory.makeRetrofit(baseUrl, okHttpClient, gson)
-        // Services
-        userManagementService = retrofit.create(UserManagementService::class.java)
-        recipesService = retrofit.create(RecipesService::class.java)
-        restaurantsService = retrofit.create(RestaurantsService::class.java)
+    fun provideRecipesService(
+        baseUrl: String,
+        isDebug: Boolean,
+        authorizationInterceptor: AuthorizationInterceptor,
+        authenticator: Authenticator
+    ): RecipesService {
+        val okHttpClient = RemoteFactory.provideOkHttpClient(isDebug, authorizationInterceptor, authenticator)
+        val retrofit = RemoteFactory.provideRetrofit(baseUrl, okHttpClient, RemoteFactory.provideGson())
+        return retrofit.create(RecipesService::class.java)
+    }
+
+    fun provideRestaurantsService(
+        baseUrl: String,
+        isDebug: Boolean,
+        authorizationInterceptor: AuthorizationInterceptor,
+        authenticator: Authenticator
+    ): RestaurantsService {
+        val okHttpClient = RemoteFactory.provideOkHttpClient(isDebug, authorizationInterceptor, authenticator)
+        val retrofit = RemoteFactory.provideRetrofit(baseUrl, okHttpClient, RemoteFactory.provideGson())
+        return retrofit.create(RestaurantsService::class.java)
     }
 
 }

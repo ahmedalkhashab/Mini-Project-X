@@ -6,23 +6,30 @@ import io.android.projectx.remote.features.usermanagement.model.request.MobileCr
 import io.android.projectx.remote.features.usermanagement.model.request.ResetPasswordCredentialRequest
 import io.reactivex.Completable
 import io.reactivex.Single
+import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.QueryMap
 
+object AuthenticatorURL {
+    const val login: String = "profile/login"
+    const val verifyByMobile: String = "profile/otp/mobile/verify"
+    const val verifyByEmail: String = "profile/otp/email/verify"
+}
+
 interface UserManagementService {
 
-    @POST("profile/login")
+    @POST(AuthenticatorURL.login)
     fun login(@Body request: EmailCredentialRequest): Single<UserModel>
 
-    @POST("profile/login")
+    @POST(AuthenticatorURL.login)
     fun login(@Body request: MobileCredentialRequest): Single<UserModel>
 
-    @GET("profile/otp/mobile/verify")
+    @GET(AuthenticatorURL.verifyByMobile)
     fun verifyByMobile(@QueryMap params: Map<String, String>): Single<UserModel>
 
-    @GET("profile/otp/email/verify")
+    @GET(AuthenticatorURL.verifyByEmail)
     fun verifyByEmail(@QueryMap params: Map<String, String>): Single<UserModel>
 
     @GET("profile/password/forget")
@@ -41,6 +48,8 @@ interface UserManagementService {
     fun logout(@QueryMap params: Map<String, String>): Completable
 
     @GET("profile")
-    fun getUser(): Single<UserModel>
+    fun fetchUser(): Single<UserModel>
 
+    @POST("profile/token/short-term")
+    fun refreshShortToken(@Body tokenLongTerm: String): Call<String>
 }

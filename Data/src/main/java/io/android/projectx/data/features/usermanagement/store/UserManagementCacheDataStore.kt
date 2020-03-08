@@ -38,6 +38,27 @@ open class UserManagementCacheDataStore @Inject constructor(
             .map { it.value.isNotBlank() }
     }
 
+    override fun persistToken(key: String, value: String): Completable {
+        return appDatabase.configDao()
+            .insertConfig(Config(key, value = value, lastCacheTime = System.currentTimeMillis()))
+    }
+
+    override fun clearToken(key: String): Completable {
+        return appDatabase.configDao().deleteConfigItem(key)
+    }
+
+    override fun getToken(key: String): Single<String> {
+        return appDatabase.configDao().getConfig(key)
+            .onErrorReturn {
+                Config(key, "", lastCacheTime = 0)
+            }
+            .map { it.value }
+    }
+
+    override fun forceLogout(): Completable {
+        return clearUser()
+    }
+
     override fun logout(email: String): Completable {
         return clearUser()
     }

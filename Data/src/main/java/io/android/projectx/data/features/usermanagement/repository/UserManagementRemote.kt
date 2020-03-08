@@ -3,6 +3,7 @@ package io.android.projectx.data.features.usermanagement.repository
 import io.android.projectx.data.features.usermanagement.model.UserEntity
 import io.reactivex.Completable
 import io.reactivex.Observable
+import retrofit2.Call
 
 interface UserManagementRemote : UserManagementDataStore {
 
@@ -23,5 +24,13 @@ interface UserManagementRemote : UserManagementDataStore {
     fun signUp(email: String, password: String): Observable<UserEntity>
 
     fun signUp(countryCode: String, mobileNumber: String, password: String): Observable<UserEntity>
+
+    fun fetchUser(): Observable<UserEntity>
+
+    // related to the Authenticator
+    fun refreshShortToken(tokenLongTerm: String): Call<String>
+
+    // related to the Authenticator
+    fun isAuthenticatorURL(responseWebServiceURL: String): Boolean
 
 }

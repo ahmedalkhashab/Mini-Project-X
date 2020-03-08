@@ -114,6 +114,7 @@ dependencies {
     implementation presentationDependencies.material
     implementation presentationDependencies.timber
     implementation presentationDependencies.glide
+    implementation presentationDependencies.okHttp
     kapt presentationDependencies.lifecycleCompiler
     kapt presentationDependencies.roomCompiler
 

@@ -45,10 +45,19 @@ dependencies {
     implementation dataDependencies.javaxInject
     implementation dataDependencies.rxKotlin
     implementation dataDependencies.kotlin
+    //dagger
+    implementation dataDependencies.dagger
+    kapt dataDependencies.daggerCompiler
+    implementation dataDependencies.daggerAndroid
+    implementation dataDependencies.daggerAndroidSupport
+    kapt dataDependencies.daggerAndroidProcessor
+
     testImplementation dataTestDependencies.junit
     testImplementation dataTestDependencies.kotlinJUnit
     testImplementation dataTestDependencies.mockito
     testImplementation dataTestDependencies.assertj
+    //dagger
+    kaptTest dataDependencies.daggerCompiler
 
     //remote
     def remoteDependencies = rootProject.ext.remoteDependencies

@@ -1,7 +1,7 @@
 package io.android.projectx.domain.test.factory
 
 import io.android.projectx.domain.features.usermanagement.model.User
-import io.android.projectx.domain.test.factory.DataFactory
+import io.android.projectx.domain.features.usermanagement.model.UserStatus
 
 object UserDataFactory {
 
@@ -11,7 +11,7 @@ object UserDataFactory {
             DataFactory.randomString(),
             DataFactory.randomString(),
             DataFactory.randomString(),
-            DataFactory.randomBoolean()
+            UserStatus.Anonymous
         )
     }
 

@@ -4,21 +4,22 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import io.android.projectx.cache.features.recipes.dao.CachedRecipesDao
 import io.android.projectx.cache.features.config.dao.ConfigDao
-import io.android.projectx.cache.features.recipes.model.CachedRecipe
 import io.android.projectx.cache.features.config.model.Config
+import io.android.projectx.cache.features.recipes.dao.CachedRecipesDao
+import io.android.projectx.cache.features.recipes.model.CachedRecipe
 import io.android.projectx.cache.features.restaurants.dao.CachedRestaurantDao
 import io.android.projectx.cache.features.restaurants.model.CachedRestaurant
-import javax.inject.Inject
+import javax.inject.Singleton
 
 @Database(
-    entities = [CachedRecipe::class,
-        Config::class,
+    entities = [Config::class,
+        CachedRecipe::class,
         CachedRestaurant::class],
     version = 1
 )
-abstract class AppDatabase @Inject constructor() : RoomDatabase() {
+@Singleton
+abstract class AppDatabase : RoomDatabase() {
 
     abstract fun cachedRecipesDao(): CachedRecipesDao
     abstract fun configDao(): ConfigDao

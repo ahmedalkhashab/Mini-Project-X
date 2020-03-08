@@ -5,14 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import javax.inject.Inject
 import javax.inject.Provider
 
-open class ViewModelProviderFactory : ViewModelProvider.Factory {
-
-    private val creators: Map<Class<out ViewModel>, Provider<ViewModel>>
-
-    @Inject
-    constructor(creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>) {
-        this.creators = creators
-    }
+open class ViewModelProviderFactory @Inject constructor(private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         var creator: Provider<out ViewModel>? = creators[modelClass]

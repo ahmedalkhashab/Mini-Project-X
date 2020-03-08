@@ -7,9 +7,14 @@ import io.android.projectx.data.features.recipes.repository.RecipesRemote
 import io.android.projectx.data.features.recipes.store.RecipesRemoteDataStore
 import io.android.projectx.data.features.restaurants.repository.RestaurantsRemote
 import io.android.projectx.data.features.restaurants.store.RestaurantsRemoteDataStore
+import io.android.projectx.data.features.usermanagement.UserManagementDataRepository
 import io.android.projectx.data.features.usermanagement.repository.UserManagementRemote
+import io.android.projectx.data.features.usermanagement.store.UserManagementCacheDataStore
 import io.android.projectx.data.features.usermanagement.store.UserManagementRemoteDataStore
 import io.android.projectx.presentation.BuildConfig
+import io.android.projectx.remote.base.interceptor.Authenticator
+import io.android.projectx.remote.base.interceptor.AuthorizationInterceptor
+import io.android.projectx.remote.base.interceptor.RequestHeaders
 import io.android.projectx.remote.features.RemoteServiceFactory
 import io.android.projectx.remote.features.recipes.service.RecipesService
 import io.android.projectx.remote.features.restaurants.service.RestaurantsService
@@ -23,31 +28,63 @@ abstract class RemoteModule {
 
         @Provides
         @JvmStatic
-        fun provideRemoteServiceFactory(): RemoteServiceFactory {
-            return RemoteServiceFactory(
+        fun provideRequestHeaders(userManagementCache: UserManagementCacheDataStore): RequestHeaders {
+            return RequestHeaders(userManagementCache)
+        }
+
+        @Provides
+        @JvmStatic
+        fun provideAuthenticator(
+            requestHeaders: RequestHeaders,
+            userManagementRepository: dagger.Lazy<UserManagementDataRepository>,
+            userManagementRemote: dagger.Lazy<UserManagementRemoteDataStore>
+        ): Authenticator {
+            return Authenticator(requestHeaders, userManagementRepository, userManagementRemote)
+        }
+
+        @Provides
+        @JvmStatic
+        fun provideAuthorizationInterceptor(requestHeaders: RequestHeaders): AuthorizationInterceptor {
+            return AuthorizationInterceptor(requestHeaders)
+        }
+
+        @Provides
+        @JvmStatic
+        fun provideUserManagementService(
+            authorizationInterceptor: AuthorizationInterceptor,
+            authenticator: Authenticator
+        ): UserManagementService {
+            return RemoteServiceFactory.provideUserManagementService(
                 BuildConfig.API_BASE_URL,
-                BuildConfig.DEBUG
+                BuildConfig.DEBUG, authorizationInterceptor, authenticator
+            )
+        }
+
+
+        @Provides
+        @JvmStatic
+        fun provideRecipesService(
+            authorizationInterceptor: AuthorizationInterceptor,
+            authenticator: Authenticator
+        ): RecipesService {
+            return RemoteServiceFactory.provideRecipesService(
+                BuildConfig.API_BASE_URL,
+                BuildConfig.DEBUG, authorizationInterceptor, authenticator
             )
         }
 
         @Provides
         @JvmStatic
-        fun provideUserManagementService(remoteServiceFactory: RemoteServiceFactory): UserManagementService {
-            return remoteServiceFactory.userManagementService
+        fun provideRestaurantsService(
+            authorizationInterceptor: AuthorizationInterceptor,
+            authenticator: Authenticator
+        ): RestaurantsService {
+            return RemoteServiceFactory.provideRestaurantsService(
+                BuildConfig.API_BASE_URL,
+                BuildConfig.DEBUG, authorizationInterceptor, authenticator
+            )
         }
 
-
-        @Provides
-        @JvmStatic
-        fun provideRecipesService(remoteServiceFactory: RemoteServiceFactory): RecipesService {
-            return remoteServiceFactory.recipesService
-        }
-
-        @Provides
-        @JvmStatic
-        fun provideRestaurantsService(remoteServiceFactory: RemoteServiceFactory): RestaurantsService {
-            return remoteServiceFactory.restaurantsService
-        }
     }
 
     @Binds

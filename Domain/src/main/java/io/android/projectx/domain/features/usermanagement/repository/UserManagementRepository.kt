@@ -24,9 +24,13 @@ interface UserManagementRepository {
 
     fun signUp(countryCode: String, mobileNumber: String, password: String): Observable<User>
 
+    fun forceLogout(): Completable
+
     fun logout(email: String): Completable
 
     fun logout(countryCode: String, mobileNumber: String): Completable
 
     fun getUser(): Observable<User>
+
+    fun fetchUser(): Observable<User>
 }

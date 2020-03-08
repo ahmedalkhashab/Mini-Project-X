@@ -4,7 +4,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-private const val DATE_ISO_8601_FORMAT = "yyyy-MM-dd'T'hh:mm:ss'Z'"
+private const val DATE_ISO_8601_FORMAT = "yyyy-MM-dd'T'hh:mm:ss"
 
 fun String.getDate(): Date? {
     return if (this.isDateInISO8601()) {

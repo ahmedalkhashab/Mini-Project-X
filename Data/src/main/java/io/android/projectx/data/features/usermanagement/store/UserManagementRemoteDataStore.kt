@@ -7,10 +7,12 @@ import io.android.projectx.remote.features.usermanagement.model.request.EmailCre
 import io.android.projectx.remote.features.usermanagement.model.request.MobileCredentialRequest
 import io.android.projectx.remote.features.usermanagement.model.request.MobileNumber
 import io.android.projectx.remote.features.usermanagement.model.request.ResetPasswordCredentialRequest
+import io.android.projectx.remote.features.usermanagement.service.AuthenticatorURL
 import io.android.projectx.remote.features.usermanagement.service.UserManagementService
 import io.reactivex.Completable
 import io.reactivex.Observable
-import java.util.HashMap
+import retrofit2.Call
+import java.util.*
 import javax.inject.Inject
 
 open class UserManagementRemoteDataStore @Inject constructor(
@@ -98,6 +100,10 @@ open class UserManagementRemoteDataStore @Inject constructor(
             .map { mapper.mapFromModel(it) }
     }
 
+    override fun forceLogout(): Completable {
+        throw UnsupportedOperationException("force Logout isn't supported here, because the user has no session at server")
+    }
+
     override fun logout(email: String): Completable {
         val params = HashMap<String, String>()
         params[EMAIL] = email
@@ -111,8 +117,18 @@ open class UserManagementRemoteDataStore @Inject constructor(
         return service.logout(params)
     }
 
-    override fun getUser(): Observable<UserEntity> {
-        return service.getUser()
+    override fun refreshShortToken(tokenLongTerm: String): Call<String> {
+        return service.refreshShortToken(tokenLongTerm)
+    }
+
+    override fun isAuthenticatorURL(responseWebServiceURL: String): Boolean {
+        return responseWebServiceURL.contains(AuthenticatorURL.login)
+                || responseWebServiceURL.contains(AuthenticatorURL.verifyByMobile)
+                || responseWebServiceURL.contains(AuthenticatorURL.verifyByEmail)
+    }
+
+    override fun fetchUser(): Observable<UserEntity> {
+        return service.fetchUser()
             .toObservable()
             .map { mapper.mapFromModel(it) }
     }
