@@ -4,24 +4,30 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import dagger.android.AndroidInjection
+import dagger.android.support.DaggerAppCompatActivity
 import io.android.projectx.presentation.R
-import io.android.projectx.presentation.di.ViewModelProviderFactory
-import io.android.projectx.presentation.features.bookmarked.BookmarkedActivity
+import io.android.projectx.presentation.base.SessionManager
 import io.android.projectx.presentation.base.model.RecipeView
 import io.android.projectx.presentation.base.state.Resource
 import io.android.projectx.presentation.base.state.ResourceState
+import io.android.projectx.presentation.di.ViewModelProviderFactory
+import io.android.projectx.presentation.features.bookmarked.BookmarkedActivity
 import kotlinx.android.synthetic.main.browse_activity.*
+import timber.log.Timber
 import javax.inject.Inject
 
-class BrowseActivity : AppCompatActivity() {
+class BrowseActivity : DaggerAppCompatActivity() {
+
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     @Inject
     lateinit var browseAdapter: BrowseAdapter
+
     @Inject
     lateinit var viewModelProviderFactory: ViewModelProviderFactory
     private lateinit var browseViewModel: BrowseRecipesViewModel
@@ -29,9 +35,9 @@ class BrowseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.browse_activity)
-        AndroidInjection.inject(this)
         browseViewModel = ViewModelProvider(this, viewModelProviderFactory)
             .get(BrowseRecipesViewModel::class.java)
+        subscribeObservers();
         setupBrowseRecycler()
     }
 
@@ -55,6 +61,30 @@ class BrowseActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun subscribeObservers() {
+        sessionManager.authUser.observe(this,
+            Observer { userResource ->
+                when (userResource.status) {
+                    ResourceState.LOADING -> {
+                        //showProgressBar(true)
+                    }
+                    ResourceState.SUCCESS -> {
+                        //showProgressBar(false)
+                        Timber.d("onChanged: LOGIN SUCCESS: %s", userResource.data?.email)
+                    }
+                    ResourceState.ERROR -> {
+                        //showProgressBar(false)
+                        Toast.makeText(
+                                this@BrowseActivity,
+                                userResource.message,
+                                Toast.LENGTH_SHORT
+                            )
+                            .show()
+                    }
+                }
+            })
     }
 
     private fun setupBrowseRecycler() {

@@ -9,6 +9,7 @@ import io.android.projectx.data.di.module.data.CacheModule
 import io.android.projectx.data.di.module.data.DataModule
 import io.android.projectx.data.di.module.data.RemoteModule
 import io.android.projectx.presentation.base.BaseApplication
+import io.android.projectx.presentation.base.SessionManager
 import io.android.projectx.presentation.di.module.ui.ApplicationModule
 import io.android.projectx.presentation.di.module.ui.PresentationModule
 import io.android.projectx.presentation.di.module.ui.UiModule
@@ -25,6 +26,8 @@ import javax.inject.Singleton
         RemoteModule::class]
 )
 interface AppComponent : AndroidInjector<BaseApplication> {
+
+    fun sessionManager(): SessionManager?
 
     @Component.Builder
     interface Builder {
