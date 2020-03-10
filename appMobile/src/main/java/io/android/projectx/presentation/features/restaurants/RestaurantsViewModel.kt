@@ -8,7 +8,7 @@ import io.android.projectx.domain.features.restaurants.model.Restaurant
 import io.android.projectx.presentation.base.mapper.RestaurantViewMapper
 import io.android.projectx.presentation.base.model.RestaurantView
 import io.android.projectx.presentation.base.state.Resource
-import io.android.projectx.presentation.base.state.ResourceState
+import io.android.projectx.presentation.base.state.Resource.ResourceState
 import io.reactivex.observers.DisposableObserver
 import javax.inject.Inject
 

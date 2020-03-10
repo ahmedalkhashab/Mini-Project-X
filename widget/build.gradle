@@ -1,0 +1,94 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
+    buildToolsVersion globalConfiguration["androidBuildToolsVersion"]
+
+    defaultConfig {
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    implementation project(':extensions')
+    implementation project(':androidextensions')
+
+    def presentationDependencies = rootProject.ext.presentationDependencies
+    def presentationTestDependencies = rootProject.ext.presentationTestDependencies
+
+    implementation presentationDependencies.javaxAnnotation
+    implementation presentationDependencies.javaxInject
+    implementation presentationDependencies.rxKotlin
+    implementation presentationDependencies.kotlin
+    implementation presentationDependencies.rxAndroid
+    implementation presentationDependencies.androidxCoreKtx
+    implementation presentationDependencies.androidxAnnotations
+    implementation presentationDependencies.lifecycleRuntime
+    implementation presentationDependencies.lifecycleExtensions
+    implementation presentationDependencies.roomRuntime
+    implementation presentationDependencies.roomRxJava
+    implementation presentationDependencies.legacyV4
+    implementation presentationDependencies.legacyV13
+    implementation presentationDependencies.appCompat
+    implementation presentationDependencies.recyclerView
+    implementation presentationDependencies.constraintlayout
+    implementation presentationDependencies.material
+    implementation presentationDependencies.timber
+    implementation presentationDependencies.glide
+    implementation presentationDependencies.okHttp
+    implementation presentationDependencies.okHttpLogger
+    implementation presentationDependencies.gson
+    implementation presentationDependencies.navigationFragmentKtx
+    implementation presentationDependencies.navigationUiKtx
+    implementation presentationDependencies.navigationDynamic
+    kapt presentationDependencies.lifecycleCompiler
+    kapt presentationDependencies.roomCompiler
+
+    //dagger
+    implementation presentationDependencies.dagger
+    kapt presentationDependencies.daggerCompiler
+
+    implementation presentationDependencies.daggerAndroid
+    implementation presentationDependencies.daggerAndroidSupport
+    kapt presentationDependencies.daggerAndroidProcessor
+
+    testImplementation presentationTestDependencies.junit
+    testImplementation presentationTestDependencies.kotlinJUnit
+    testImplementation presentationTestDependencies.assertj
+    testImplementation presentationTestDependencies.mockito
+    testImplementation presentationTestDependencies.mockitoAndroid
+    testImplementation presentationTestDependencies.robolectric
+    testImplementation presentationTestDependencies.archTesting
+    kaptTest presentationDependencies.daggerCompiler
+
+    // Instrumentation test dependencies
+    androidTestImplementation presentationTestDependencies.junit
+    androidTestImplementation presentationTestDependencies.mockito
+    androidTestImplementation presentationTestDependencies.mockitoAndroid
+    androidTestImplementation presentationTestDependencies.espressoCore
+    androidTestImplementation presentationTestDependencies.androidxRunner
+    androidTestImplementation presentationTestDependencies.androidxRules
+    androidTestImplementation presentationTestDependencies.espressoIntents
+    androidTestImplementation presentationTestDependencies.espressoContrib
+    // Testing Navigation
+    androidTestImplementation presentationTestDependencies.navigationtesting
+}

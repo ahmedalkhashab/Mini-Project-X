@@ -27,7 +27,7 @@ class NetworkInterceptor @Inject constructor(
         if (requestHeaders.hasShortTermToken()) {
             val name = requestHeaders.getShortTermTokenName()
             val value = requestHeaders.getShortTermTokenValue()
-            if (value.isNotBlank()) newRequestBuilder.header(name, value)
+            if (value.isNotBlank()) newRequestBuilder.header(name, "Bearer $value")
         }
         val response: Response = chain.proceed(newRequestBuilder.build())
         // Http Cache

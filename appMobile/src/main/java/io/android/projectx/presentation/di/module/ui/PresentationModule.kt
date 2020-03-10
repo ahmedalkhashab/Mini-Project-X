@@ -1,12 +1,14 @@
 package io.android.projectx.presentation.di.module.ui
 
 import androidx.lifecycle.ViewModelProvider
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import io.android.projectx.presentation.di.ViewModelProviderFactory
 
 @Module
-abstract class PresentationModule {
-    @Binds
-    abstract fun bindViewModelFactory(factory: ViewModelProviderFactory): ViewModelProvider.Factory
+class PresentationModule {
+
+    @Provides
+    fun provideViewModelFactory(factory: ViewModelProviderFactory): ViewModelProvider.Factory = factory
+
 }

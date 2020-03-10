@@ -13,7 +13,7 @@ import io.android.projectx.presentation.R
 import io.android.projectx.presentation.di.ViewModelProviderFactory
 import io.android.projectx.presentation.base.model.RecipeView
 import io.android.projectx.presentation.base.state.Resource
-import io.android.projectx.presentation.base.state.ResourceState
+import io.android.projectx.presentation.base.state.Resource.ResourceState
 import kotlinx.android.synthetic.main.bookmarked_activity.*
 import javax.inject.Inject
 

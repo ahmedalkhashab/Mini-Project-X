@@ -13,14 +13,15 @@ import io.android.projectx.presentation.base.SessionManager
 import io.android.projectx.presentation.di.module.ui.ApplicationModule
 import io.android.projectx.presentation.di.module.ui.PresentationModule
 import io.android.projectx.presentation.di.module.ui.UiModule
+import io.android.projectx.presentation.features.cloudmessaging.StatusManager
 import javax.inject.Singleton
 
 @Singleton
 @Component(
     modules = [AndroidSupportInjectionModule::class,
         ApplicationModule::class,
-        UiModule::class,
         PresentationModule::class,
+        UiModule::class,
         DataModule::class,
         CacheModule::class,
         RemoteModule::class]
@@ -28,6 +29,7 @@ import javax.inject.Singleton
 interface AppComponent : AndroidInjector<BaseApplication> {
 
     fun sessionManager(): SessionManager?
+    fun statusManager(): StatusManager?
 
     @Component.Builder
     interface Builder {

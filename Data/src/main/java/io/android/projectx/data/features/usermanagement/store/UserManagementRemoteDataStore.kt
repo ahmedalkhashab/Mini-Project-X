@@ -7,6 +7,7 @@ import io.android.projectx.remote.features.usermanagement.model.request.EmailCre
 import io.android.projectx.remote.features.usermanagement.model.request.MobileCredentialRequest
 import io.android.projectx.remote.features.usermanagement.model.request.MobileNumber
 import io.android.projectx.remote.features.usermanagement.model.request.ResetPasswordCredentialRequest
+import io.android.projectx.remote.features.usermanagement.model.response.LoginResponse
 import io.android.projectx.remote.features.usermanagement.service.AuthenticatorURL
 import io.android.projectx.remote.features.usermanagement.service.UserManagementService
 import io.reactivex.Completable
@@ -37,11 +38,10 @@ open class UserManagementRemoteDataStore @Inject constructor(
         countryCode: String,
         mobileNumber: String,
         password: String
-    ): Observable<UserEntity> {
+    ): Observable<LoginResponse> {
         val mobile = MobileNumber(countryCode, mobileNumber)
         return service.login(MobileCredentialRequest(mobile, password))
             .toObservable()
-            .map { mapper.mapFromModel(it) }
     }
 
     override fun verifyByMobile(

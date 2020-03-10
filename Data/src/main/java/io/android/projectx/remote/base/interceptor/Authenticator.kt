@@ -43,7 +43,7 @@ class Authenticator @Inject constructor(
                             .build()
                     }
                 } else forceLogout(response.request)
-            } else forceLogout(response.request)
+            }
         }
         return null
     }

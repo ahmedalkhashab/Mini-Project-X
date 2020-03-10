@@ -71,10 +71,11 @@ open class RecipesCacheDateStore @Inject constructor(
     }
 
     override fun setLastCacheTime(lastCache: Long): Completable {
-        return appDatabase.configDao()
+        appDatabase.configDao()
             .insertConfig(
                 Config(KEY_GET_RECIPES, "", lastCacheTime = lastCache)
             )
+        return Completable.complete()
     }
 
     override fun isRecipesCacheExpired(): Single<Boolean> {

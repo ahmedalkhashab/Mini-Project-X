@@ -1,8 +1,9 @@
 package io.android.projectx.remote.base.interceptor
 
+import android.app.Application
+import io.android.projectx.androidextensions.isNetworkConnected
 import okhttp3.CacheControl
 import okhttp3.Interceptor
-import okhttp3.Request
 import okhttp3.Response
 import java.io.IOException
 import java.util.concurrent.TimeUnit
@@ -11,7 +12,8 @@ import javax.inject.Inject
 /**
  * This interceptor will be called both if the network is available and if the network is not available
  */
-class OfflineCacheInterceptor @Inject constructor() : Interceptor {
+class OfflineCacheInterceptor @Inject constructor(private val application: Application) :
+    Interceptor {
 
     companion object {
         private const val HEADER_PRAGMA = "Pragma"
@@ -20,20 +22,19 @@ class OfflineCacheInterceptor @Inject constructor() : Interceptor {
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
+        var request = chain.request()
         // prevent caching when network is on. For that we use the "networkInterceptor"
-        val request = chain.request()
-        return try {
-            chain.proceed(request)
-        } catch (e: Exception) {
+        if (!isNetworkConnected(application)) {
             val cacheControl = CacheControl.Builder()
-                .onlyIfCached()
                 .maxAge(10, TimeUnit.MINUTES).build()
-            val offlineRequest: Request = request.newBuilder()
+            // offlineRequest
+            request = request.newBuilder()
                 .removeHeader(HEADER_PRAGMA)
+                .removeHeader(HEADER_CACHE_CONTROL)
                 .cacheControl(cacheControl)
                 .build()
-            chain.proceed(offlineRequest)
         }
+        return chain.proceed(request)
     }
 
 }

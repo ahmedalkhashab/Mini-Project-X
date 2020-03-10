@@ -1,20 +1,91 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme.NoActionBar" parent="Theme.MaterialComponents.DayNight">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@color/colorStatusBar</item>
+        <item name="android:windowLightStatusBar">true</item>
+
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+        <item name="primaryButtonStyle">@style/Widget.ProjectX.Button.Primary</item>
+        <item name="primaryTextInputLayoutStyle">@style/Widget.ProjectX.TextInputLayout</item>
+        <item name="primaryTextInputEditTextStyle">@style/Widget.ProjectX.TextInputEditText</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!--Button related styles-->
+    <style name="Widget.ProjectX.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:textAllCaps">false</item>
+        <!--        <item name="android:fontFamily">@font/font</item>-->
+        <!--        <item name="fontFamily">@font/font</item>-->
+    </style>
+
+    <style name="Widget.ProjectX.Button.Primary" parent="Widget.ProjectX.Button">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="backgroundTint">@color/colorPersianGreen</item>
+        <item name="strokeColor">@android:color/white</item>
+        <item name="strokeWidth">0dp</item>
+        <item name="shapeAppearance">?attr/shapeAppearanceSmallComponent</item>
+        <item name="elevation">2dp</item>
+        <item name="rippleColor">?attr/colorOnPrimary</item>
+        <item name="android:lineSpacingExtra">10sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:minHeight">@dimen/primary_button_height</item>
+    </style>
+
+    <style name="Widget.ProjectX.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+        <item name="boxBackgroundColor">@android:color/white</item>
+        <item name="boxBackgroundMode">filled</item>
+        <item name="boxStrokeColor">@android:color/white</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+
+        <item name="hintTextAppearance">@style/Widget.ProjectX.Hint.TextAppearance</item>
+
+        <item name="errorEnabled">true</item>
+        <item name="android:textColorHint">@color/colorTextPrimary</item>
+        <item name="hintEnabled">true</item>
+        <item name="hintAnimationEnabled">true</item>
+        <item name="boxCornerRadiusBottomEnd">8dp</item>
+        <item name="boxCornerRadiusTopEnd">8dp</item>
+        <item name="boxCornerRadiusBottomStart">8dp</item>
+        <item name="boxCornerRadiusTopStart">8dp</item>
+        <!--//////-->
+        <!--inner EditText style-->
+        <!--//////-->
+        <!--<item name="android:textColor">@color/colorTextPrimary</item>-->
+        <!--<item name="android:textSize">10sp</item>-->
+        <!--<item name="android:textCursorDrawable">@drawable/cursor_colored</item>-->
+        <!--<item name="android:fontFamily">@font/font</item>-->
+        <!--<item name="android:maxLines">1</item>-->
+        <!--<item name="android:lines">1</item>-->
+        <!--<item name="android:selectAllOnFocus">true</item>-->
+    </style>
+
+    <style name="Widget.ProjectX.Hint.TextAppearance" parent="TextAppearance.MaterialComponents.Overline">
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <!--        <item name="android:fontFamily">@font/font</item>-->
+    </style>
+
+    <style name="Widget.ProjectX.TextInputEditText" parent="@style/Widget.MaterialComponents.TextInputEditText.FilledBox.Dense">
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textCursorDrawable">@drawable/cursor_colored</item>
+        <!--        <item name="android:fontFamily">@font/font</item>-->
+        <item name="android:maxLines">1</item>
+        <item name="android:lines">1</item>
+        <item name="android:selectAllOnFocus">true</item>
+    </style>
 
 </resources>

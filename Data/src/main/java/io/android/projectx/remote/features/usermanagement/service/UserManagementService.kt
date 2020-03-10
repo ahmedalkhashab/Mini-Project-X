@@ -4,6 +4,7 @@ import io.android.projectx.remote.features.usermanagement.model.UserModel
 import io.android.projectx.remote.features.usermanagement.model.request.EmailCredentialRequest
 import io.android.projectx.remote.features.usermanagement.model.request.MobileCredentialRequest
 import io.android.projectx.remote.features.usermanagement.model.request.ResetPasswordCredentialRequest
+import io.android.projectx.remote.features.usermanagement.model.response.LoginResponse
 import io.reactivex.Completable
 import io.reactivex.Single
 import retrofit2.Call
@@ -24,7 +25,7 @@ interface UserManagementService {
     fun login(@Body request: EmailCredentialRequest): Single<UserModel>
 
     @POST(AuthenticatorURL.login)
-    fun login(@Body request: MobileCredentialRequest): Single<UserModel>
+    fun login(@Body request: MobileCredentialRequest): Single<LoginResponse>
 
     @GET(AuthenticatorURL.verifyByMobile)
     fun verifyByMobile(@QueryMap params: Map<String, String>): Single<UserModel>

@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs"
+//apply plugin: 'com.google.gms.google-services'
 
 //load app.properties
 def appPropertiesFile = rootProject.file("app.properties")
@@ -25,7 +27,7 @@ android {
         versionCode rootProject.ext.app_version_code
         versionName "1.0.0"
         setProperty("archivesBaseName",
-                "ProjectX_" + new Date().format("hhmm-dd-MM-yy")
+                "ProjectX_" + new Date().format("HHmm-dd-MM-yy")
                         + "_vn" + versionName + "_vc" + versionCode)
     }
 
@@ -57,7 +59,6 @@ android {
         staging {
             applicationId "io.android.projectx"
             dimension "default"
-            applicationIdSuffix ".staging"
             versionNameSuffix "-staging"
             // ConfigFields
             buildConfigField("String", "API_BASE_URL", "\"${staging_api_base_url}\"")
@@ -74,7 +75,9 @@ android {
 
     buildTypes {
         debug {
-            if (applicationIdSuffix == "") {applicationIdSuffix ".dev"}
+            if (applicationIdSuffix == "") {
+                applicationIdSuffix ".dev"
+            }
             //to speed up build disable Crashlytics plugin for debug builds
             ext.enableCrashlytics = false
         }
@@ -94,6 +97,7 @@ dependencies {
 
     implementation project(':extensions')
     implementation project(':androidextensions')
+    implementation project(':widget')
 
     def presentationDependencies = rootProject.ext.presentationDependencies
     def presentationTestDependencies = rootProject.ext.presentationTestDependencies
@@ -104,9 +108,12 @@ dependencies {
     implementation presentationDependencies.kotlin
     implementation presentationDependencies.rxAndroid
     implementation presentationDependencies.androidxCoreKtx
+    implementation presentationDependencies.fragmentKtx
     implementation presentationDependencies.androidxAnnotations
     implementation presentationDependencies.lifecycleRuntime
     implementation presentationDependencies.lifecycleExtensions
+    implementation presentationDependencies.lifecycleViewmodel
+    implementation presentationDependencies.lifecycleLivedata
     implementation presentationDependencies.roomRuntime
     implementation presentationDependencies.roomRxJava
     implementation presentationDependencies.legacyV4
@@ -120,6 +127,11 @@ dependencies {
     implementation presentationDependencies.okHttp
     implementation presentationDependencies.okHttpLogger
     implementation presentationDependencies.gson
+    implementation presentationDependencies.navigationFragmentKtx
+    implementation presentationDependencies.navigationUiKtx
+    implementation presentationDependencies.navigationDynamic
+    implementation presentationDependencies.firebaseAnalytics
+    implementation presentationDependencies.firebaseMessaging
     kapt presentationDependencies.lifecycleCompiler
     kapt presentationDependencies.roomCompiler
 
@@ -149,4 +161,6 @@ dependencies {
     androidTestImplementation presentationTestDependencies.androidxRules
     androidTestImplementation presentationTestDependencies.espressoIntents
     androidTestImplementation presentationTestDependencies.espressoContrib
+    // Testing Navigation
+    androidTestImplementation presentationTestDependencies.navigationtesting
 }

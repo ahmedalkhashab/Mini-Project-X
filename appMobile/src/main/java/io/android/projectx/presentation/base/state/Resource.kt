@@ -1,21 +1,20 @@
 package io.android.projectx.presentation.base.state
 
-class Resource<out T> constructor(
-    val status: ResourceState,
-    val data: T?,
-    val message: String?
-) {
+class Resource<out T>(val status: ResourceState, val data: T?, val message: String?) {
 
-    fun <T> success(data: T): Resource<T> {
-        return Resource(ResourceState.SUCCESS, data, null)
+    enum class ResourceState {
+        LOADING, SUCCESS, ERROR
     }
 
-    fun <T> error(message: String?): Resource<T> {
-        return Resource(ResourceState.ERROR, null, message)
-    }
+    companion object {
+        fun <T> success(data: T): Resource<T?> =
+            Resource(ResourceState.SUCCESS, data, null)
 
-    fun <T> loading(): Resource<T> {
-        return Resource(ResourceState.LOADING, null, null)
+        fun <T> error(message: String, data: T? = null): Resource<T?> =
+            Resource(ResourceState.ERROR, data, message)
+
+        fun <T> loading(data: T? = null): Resource<T?> =
+            Resource(ResourceState.LOADING, data, null)
     }
 
 }

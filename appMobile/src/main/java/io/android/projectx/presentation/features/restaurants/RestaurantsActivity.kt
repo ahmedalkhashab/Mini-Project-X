@@ -14,7 +14,7 @@ import io.android.projectx.presentation.base.model.RestaurantView
 import io.android.projectx.presentation.di.ViewModelProviderFactory
 import io.android.projectx.presentation.features.bookmarked.BookmarkedActivity
 import io.android.projectx.presentation.base.state.Resource
-import io.android.projectx.presentation.base.state.ResourceState
+import io.android.projectx.presentation.base.state.Resource.ResourceState
 import kotlinx.android.synthetic.main.restaurants_activity.*
 import javax.inject.Inject
 

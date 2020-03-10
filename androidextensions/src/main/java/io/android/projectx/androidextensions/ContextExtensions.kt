@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.TypedValue
 import androidx.annotation.*
@@ -15,6 +16,10 @@ import android.widget.Toast
 @ColorInt
 fun Context.getSupportColor(@ColorRes colorRes: Int): Int {
     return ContextCompat.getColor(this, colorRes)
+}
+
+fun Context.getSupportDrawable(@DrawableRes resId: Int): Drawable? {
+    return ContextCompat.getDrawable(this, resId)
 }
 
 fun Context.getInteger(@IntegerRes integerRes: Int): Int {

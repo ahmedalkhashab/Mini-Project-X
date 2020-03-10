@@ -17,7 +17,7 @@ object LocalizationHandler {
 
     fun getCurrentLocale(context: Context) =
         PreferenceManager.getDefaultSharedPreferences(context)
-            .getString(PREF_LOCALE, LOCALE_ARABIC) ?: LOCALE_ARABIC
+            .getString(PREF_LOCALE, LOCALE_ENGLISH) ?: LOCALE_ENGLISH
 
     fun setNewLocale(context: Context, langCode: String): Context {
         persistLocale(context, langCode)

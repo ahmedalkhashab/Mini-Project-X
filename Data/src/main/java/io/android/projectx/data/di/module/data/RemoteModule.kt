@@ -1,5 +1,6 @@
 package io.android.projectx.data.di.module.data
 
+import android.app.Application
 import com.google.gson.*
 import dagger.Binds
 import dagger.Module
@@ -109,7 +110,8 @@ abstract class RemoteModule {
 
         @Provides
         @JvmStatic
-        fun provideOfflineCacheInterceptor(): OfflineCacheInterceptor = OfflineCacheInterceptor()
+        fun provideOfflineCacheInterceptor(application: Application): OfflineCacheInterceptor =
+            OfflineCacheInterceptor(application)
 
         @Provides
         @JvmStatic

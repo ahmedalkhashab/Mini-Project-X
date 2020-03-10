@@ -4,24 +4,32 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import io.android.projectx.cache.features.config.db.ConfigConstants
+import io.android.projectx.cache.features.config.db.ConfigConstants.DELETE_CONFIG
+import io.android.projectx.cache.features.config.db.ConfigConstants.DELETE_CONFIG_ITEM
+import io.android.projectx.cache.features.config.db.ConfigConstants.QUERY_ALL_CONFIG
+import io.android.projectx.cache.features.config.db.ConfigConstants.QUERY_CONFIG_ITEM
 import io.android.projectx.cache.features.config.model.Config
-import io.reactivex.Completable
+import io.reactivex.Flowable
 import io.reactivex.Single
 
 @Dao
 abstract class ConfigDao {
 
-    @Query(ConfigConstants.QUERY_CONFIG_ITEM)
+    @Query(QUERY_CONFIG_ITEM)
     abstract fun getConfig(key: String): Single<Config>
 
+    @Query(QUERY_ALL_CONFIG)
+    @JvmSuppressWildcards
+    abstract fun getAllConfig(): Flowable<List<Config>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insertConfig(config: Config): Completable
+    @JvmSuppressWildcards
+    abstract fun insertConfig(config: Config)
 
-    @Query(ConfigConstants.DELETE_CONFIG_ITEM)
-    abstract fun deleteConfigItem(key: String): Completable
+    @Query(DELETE_CONFIG_ITEM)
+    abstract fun deleteConfigItem(key: String)
 
-    @Query(ConfigConstants.DELETE_CONFIG)
-    abstract fun deleteAllConfig(): Completable
+    @Query(DELETE_CONFIG)
+    abstract fun deleteAllConfig()
 
 }

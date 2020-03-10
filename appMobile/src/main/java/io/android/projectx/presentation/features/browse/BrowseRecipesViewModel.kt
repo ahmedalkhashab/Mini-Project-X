@@ -10,7 +10,7 @@ import io.android.projectx.domain.features.recipes.model.Recipe
 import io.android.projectx.presentation.base.mapper.RecipeViewMapper
 import io.android.projectx.presentation.base.model.RecipeView
 import io.android.projectx.presentation.base.state.Resource
-import io.android.projectx.presentation.base.state.ResourceState
+import io.android.projectx.presentation.base.state.Resource.ResourceState
 import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.observers.DisposableObserver
 import javax.inject.Inject

@@ -50,6 +50,7 @@ dependencies {
     implementation presentationDependencies.constraintlayout
     implementation presentationDependencies.material
     implementation presentationDependencies.timber
+    implementation presentationDependencies.securityCrypto
     kapt presentationDependencies.lifecycleCompiler
 
     testImplementation presentationTestDependencies.junit
