@@ -15,10 +15,13 @@ import io.android.projectx.data.features.usermanagement.repository.UserManagemen
 import io.android.projectx.data.features.usermanagement.store.UserManagementCacheDataStore
 import io.android.projectx.data.features.usermanagement.store.UserManagementRemoteDataStore
 import io.android.projectx.remote.base.interceptor.Authenticator
-import io.android.projectx.remote.base.interceptor.AuthorizationInterceptor
+import io.android.projectx.remote.base.interceptor.NetworkInterceptor
+import io.android.projectx.remote.base.interceptor.OfflineCacheInterceptor
 import io.android.projectx.remote.base.interceptor.RequestHeaders
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import java.io.File
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
@@ -28,6 +31,62 @@ abstract class RemoteModule {
 
     @Module
     companion object {
+
+        /**
+         * The order of the interceptors in the OkHttpClient Builder is important.
+         */
+        @Provides
+        @JvmStatic
+        fun provideOkHttpClient(
+            cache: Cache,
+            httpLoggingInterceptor: HttpLoggingInterceptor,
+            networkInterceptor: NetworkInterceptor,
+            offlineCacheInterceptor: OfflineCacheInterceptor,
+            authenticator: Authenticator
+        ): OkHttpClient = OkHttpClient.Builder()
+            .cache(cache)
+            .addInterceptor(httpLoggingInterceptor) // used if network off OR on
+            .addNetworkInterceptor(networkInterceptor) // only used when network is on
+            .addInterceptor(offlineCacheInterceptor)
+            .authenticator(authenticator)
+            .connectTimeout(120, TimeUnit.SECONDS)
+            .readTimeout(120, TimeUnit.SECONDS)
+            .build()
+
+        /**
+         * //Ref. https://gist.github.com/cmelchior/1a97377df0c49cd4fca9
+         */
+        @Provides
+        @JvmStatic
+        fun provideGson(): Gson {
+            return GsonBuilder().setExclusionStrategies(object : ExclusionStrategy {
+                    override fun shouldSkipField(f: FieldAttributes): Boolean {
+                        return false// f.getDeclaringClass().equals(RealmObject.class);
+                    }
+
+                    override fun shouldSkipClass(clazz: Class<*>): Boolean {
+                        return false
+                    }
+                })
+                .registerTypeAdapter(
+                    Date::class.java,
+                    JsonDeserializer<Date> { json, _, _ -> json?.asString?.getDate() })
+                .registerTypeAdapter(
+                    Date::class.java,
+                    JsonSerializer<Date> { date, _, _ -> JsonPrimitive(date.getOffsetDate()) })
+                .serializeNulls()
+                .create()
+        }
+
+        @Provides
+        @JvmStatic
+        fun provideHttpCache(
+            @Named("http.cache.parent.directory") cacheDir: File,
+            @Named("http.cache.size") httpCacheSize: Long
+        ): Cache {
+            val httpCacheDirectory = File(cacheDir, "offlineCache")
+            return Cache(httpCacheDirectory, httpCacheSize)
+        }
 
         @Provides
         @JvmStatic
@@ -45,47 +104,12 @@ abstract class RemoteModule {
 
         @Provides
         @JvmStatic
-        fun provideAuthorizationInterceptor(requestHeaders: RequestHeaders): AuthorizationInterceptor =
-            AuthorizationInterceptor(requestHeaders)
+        fun provideNetworkInterceptor(requestHeaders: RequestHeaders): NetworkInterceptor =
+            NetworkInterceptor(requestHeaders)
 
         @Provides
         @JvmStatic
-        fun provideOkHttpClient(
-            httpLoggingInterceptor: HttpLoggingInterceptor,
-            authorizationInterceptor: AuthorizationInterceptor,
-            authenticator: Authenticator
-        ): OkHttpClient = OkHttpClient.Builder()
-            .addInterceptor(httpLoggingInterceptor)
-            .addInterceptor(authorizationInterceptor)
-            .authenticator(authenticator)
-            .connectTimeout(120, TimeUnit.SECONDS)
-            .readTimeout(120, TimeUnit.SECONDS)
-            .build()
-
-        /**
-         * //Ref. https://gist.github.com/cmelchior/1a97377df0c49cd4fca9
-         */
-        @Provides
-        @JvmStatic
-        fun provideGson(): Gson {
-            return GsonBuilder().setExclusionStrategies(object : ExclusionStrategy {
-                override fun shouldSkipField(f: FieldAttributes): Boolean {
-                    return false// f.getDeclaringClass().equals(RealmObject.class);
-                }
-
-                override fun shouldSkipClass(clazz: Class<*>): Boolean {
-                    return false
-                }
-            })
-                .registerTypeAdapter(
-                    Date::class.java,
-                    JsonDeserializer<Date> { json, _, _ -> json?.asString?.getDate() })
-                .registerTypeAdapter(
-                    Date::class.java,
-                    JsonSerializer<Date> { date, _, _ -> JsonPrimitive(date.getOffsetDate()) })
-                .serializeNulls()
-                .create()
-        }
+        fun provideOfflineCacheInterceptor(): OfflineCacheInterceptor = OfflineCacheInterceptor()
 
         @Provides
         @JvmStatic

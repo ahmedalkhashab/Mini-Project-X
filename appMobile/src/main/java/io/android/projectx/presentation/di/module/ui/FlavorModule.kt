@@ -1,8 +1,10 @@
 package io.android.projectx.presentation.di.module.ui
 
+import android.app.Application
 import dagger.Module
 import dagger.Provides
 import io.android.projectx.presentation.BuildConfig
+import java.io.File
 import javax.inject.Named
 
 @Module
@@ -13,6 +15,20 @@ object FlavorModule {
     @Named("signing.configs.debug")
     fun provideDebugState(): Boolean {
         return BuildConfig.DEBUG
+    }
+
+    @Provides
+    @JvmStatic
+    @Named("http.cache.parent.directory")
+    fun provideHttpCacheDir(application: Application): File {
+        return application.cacheDir
+    }
+
+    @Provides
+    @JvmStatic
+    @Named("http.cache.size")
+    fun provideHttpCacheSize(): Long {
+        return 10 * 1024 * 1024 // 10 MB
     }
 
     @Provides
