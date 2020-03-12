@@ -39,6 +39,7 @@ dependencies {
     implementation presentationDependencies.kotlin
     implementation presentationDependencies.rxAndroid
     implementation presentationDependencies.androidxCoreKtx
+    implementation presentationDependencies.preferenceKtx
     implementation presentationDependencies.androidxAnnotations
     implementation presentationDependencies.lifecycleRuntime
     implementation presentationDependencies.lifecycleExtensions

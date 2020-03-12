@@ -22,6 +22,7 @@ ext {
     retrofitVersion = '2.7.1'
     androidxAnnotationsVersion = '1.1.0'
     ktxVersion = '1.2.0'
+    preferenceKtxVersion = '1.1.0'
     lifecycleVersion = '2.2.0'
     roomVersion = '2.2.3'
     daggerVersion = '2.22' // todo - look again
@@ -133,6 +134,7 @@ ext {
             appCompat             : "androidx.appcompat:appcompat:${appcompatVersion}",
             recyclerView          : "androidx.recyclerview:recyclerview:${recyclerviewVersion}",
             constraintlayout      : "androidx.constraintlayout:constraintlayout:${constraintlayoutVersion}",
+            preferenceKtx         : "androidx.preference:preference-ktx:${preferenceKtxVersion}",
             material              : "com.google.android.material:material:${materialVersion}",
             dagger                : "com.google.dagger:dagger:${daggerVersion}",
             daggerCompiler        : "com.google.dagger:dagger-compiler:${daggerVersion}",
