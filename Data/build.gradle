@@ -37,6 +37,8 @@ android {
 }
 
 dependencies {
+    implementation project(':extensions')
+
     //data
     def dataDependencies = rootProject.ext.dataDependencies
     def dataTestDependencies = rootProject.ext.dataTestDependencies

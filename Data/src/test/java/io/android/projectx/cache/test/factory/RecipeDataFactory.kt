@@ -1,6 +1,6 @@
 package io.android.projectx.cache.test.factory
 
-import io.android.projectx.cache.extentions.getOffsetDate
+import io.android.projectx.extensions.getOffsetDate
 import io.android.projectx.cache.features.recipes.model.CachedRecipe
 import io.android.projectx.data.features.recipes.model.RecipeEntity
 

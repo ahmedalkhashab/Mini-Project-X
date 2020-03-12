@@ -1,2 +1,3 @@
 include ':Domain', ':Data', ':appMobile'
 rootProject.name='ProjectX'
+include ':extensions'

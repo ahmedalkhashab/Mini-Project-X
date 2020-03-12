@@ -1,8 +1,6 @@
 apply plugin: 'kotlin'
 
 dependencies {
-    implementation project(':extensions')
-
     def domainDependencies = rootProject.ext.domainDependencies
     def domainTestDependencies = rootProject.ext.domainTestDependencies
     implementation domainDependencies.javaxAnnotation
@@ -13,6 +11,9 @@ dependencies {
     testImplementation domainTestDependencies.junit
     testImplementation domainTestDependencies.mockito
     testImplementation domainTestDependencies.assertj
+
+    // extensions
+    implementation domainDependencies.gson
 }
 
 sourceCompatibility = "8"

@@ -4,8 +4,8 @@ import com.google.gson.*
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import io.android.projectx.cache.extentions.getDate
-import io.android.projectx.cache.extentions.getOffsetDate
+import io.android.projectx.extensions.getDate
+import io.android.projectx.extensions.getOffsetDate
 import io.android.projectx.data.features.recipes.repository.RecipesRemote
 import io.android.projectx.data.features.recipes.store.RecipesRemoteDataStore
 import io.android.projectx.data.features.restaurants.repository.RestaurantsRemote

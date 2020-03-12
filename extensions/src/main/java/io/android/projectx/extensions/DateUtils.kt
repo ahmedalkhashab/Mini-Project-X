@@ -1,4 +1,4 @@
-package io.android.projectx.cache.extentions
+package io.android.projectx.extensions
 
 import java.text.ParseException
 import java.text.SimpleDateFormat

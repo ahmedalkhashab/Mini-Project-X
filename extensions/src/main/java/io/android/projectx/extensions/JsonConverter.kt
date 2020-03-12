@@ -1,4 +1,4 @@
-package io.android.projectx.cache.extentions
+package io.android.projectx.extensions
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

@@ -57,7 +57,9 @@ ext {
             javaxAnnotation: "javax.annotation:javax.annotation-api:${javaxAnnotationVersion}",
             javaxInject    : "javax.inject:javax.inject:${javaxInjectVersion}",
             rxKotlin       : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
-            kotlin         : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin_version}"
+            kotlin         : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin_version}",
+            //extensions
+            gson           : "com.google.code.gson:gson:${gsonVersion}"
     ]
 
     domainTestDependencies = [

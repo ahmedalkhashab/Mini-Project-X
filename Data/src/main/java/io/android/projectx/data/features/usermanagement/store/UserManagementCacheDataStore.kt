@@ -1,8 +1,8 @@
 package io.android.projectx.data.features.usermanagement.store
 
 import io.android.projectx.cache.AppDatabase
-import io.android.projectx.cache.extentions.fromJson
-import io.android.projectx.cache.extentions.toJson
+import io.android.projectx.extensions.fromJson
+import io.android.projectx.extensions.toJson
 import io.android.projectx.cache.features.config.model.Config
 import io.android.projectx.data.features.usermanagement.model.UserEntity
 import io.android.projectx.data.features.usermanagement.repository.UserManagementCache

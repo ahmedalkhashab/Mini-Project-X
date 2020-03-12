@@ -95,6 +95,8 @@ dependencies {
     implementation project(':Domain')
     implementation project(':Data')
 
+    implementation project(':extensions')
+
     implementation presentationDependencies.javaxAnnotation
     implementation presentationDependencies.javaxInject
     implementation presentationDependencies.rxKotlin

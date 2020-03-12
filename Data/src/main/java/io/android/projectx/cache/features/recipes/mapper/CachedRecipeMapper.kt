@@ -1,8 +1,8 @@
 package io.android.projectx.cache.features.recipes.mapper
 
 import io.android.projectx.cache.base.mapper.CacheMapper
-import io.android.projectx.cache.extentions.getDate
-import io.android.projectx.cache.extentions.getOffsetDate
+import io.android.projectx.extensions.getDate
+import io.android.projectx.extensions.getOffsetDate
 import io.android.projectx.cache.features.recipes.model.CachedRecipe
 import io.android.projectx.data.features.recipes.model.RecipeEntity
 import java.util.*
