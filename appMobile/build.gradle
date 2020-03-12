@@ -89,13 +89,14 @@ android {
 }
 
 dependencies {
-    def presentationDependencies = rootProject.ext.presentationDependencies
-    def presentationTestDependencies = rootProject.ext.presentationTestDependencies
-
     implementation project(':Domain')
     implementation project(':Data')
 
     implementation project(':extensions')
+    implementation project(':androidextensions')
+
+    def presentationDependencies = rootProject.ext.presentationDependencies
+    def presentationTestDependencies = rootProject.ext.presentationTestDependencies
 
     implementation presentationDependencies.javaxAnnotation
     implementation presentationDependencies.javaxInject
