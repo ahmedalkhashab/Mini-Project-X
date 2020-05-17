@@ -8,9 +8,12 @@
 
     <color name="colorDisabled">@android:color/darker_gray</color>
     <color name="colorTextPrimary">@color/colorEclipse</color>
+    <color name="colorTextSecond">@color/colorGrayishBlue</color>
+    <color name="colorTextThird">@color/colorPersianGreen</color>
 
     <color name="colorPersianGreen">#00a9a5</color>
     <color name="colorEclipse">#463e3e</color>
+    <color name="colorGrayishBlue">#adb9ce</color>
     <color name="colorWhiteSmoke">#f8f8f8</color>
 
 </resources>

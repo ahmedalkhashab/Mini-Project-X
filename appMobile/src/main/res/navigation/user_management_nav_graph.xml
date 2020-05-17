@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/user_management_nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="io.android.projectx.presentation.features.usermanagement.login.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/login_fragment">
+        <deepLink
+            android:id="@+id/deepLink_to_loginScreen"
+            app:uri="app://navigation/login" />
+        <action
+            android:id="@+id/action_loginFragment_to_otpFragment"
+            app:destination="@id/otpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/otpFragment"
+        android:name="io.android.projectx.presentation.features.usermanagement.otp.OtpFragment"
+        android:label="OtpFragment">
+        <argument
+            android:name="mobile"
+            app:argType="string"
+            app:nullable="true" />
+        <deepLink
+            android:id="@+id/deepLink_to_otpScreen"
+            app:uri="app://navigation/otp/{mobile}" />
+    </fragment>
+</navigation>

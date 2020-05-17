@@ -13,6 +13,7 @@ import io.android.projectx.presentation.base.SessionManager
 import io.android.projectx.presentation.di.module.ui.ApplicationModule
 import io.android.projectx.presentation.di.module.ui.PresentationModule
 import io.android.projectx.presentation.di.module.ui.UiModule
+import io.android.projectx.presentation.features.Navigator
 import io.android.projectx.presentation.features.cloudmessaging.StatusManager
 import javax.inject.Singleton
 
@@ -30,6 +31,7 @@ interface AppComponent : AndroidInjector<BaseApplication> {
 
     fun sessionManager(): SessionManager?
     fun statusManager(): StatusManager?
+    fun navigator(): Navigator?
 
     @Component.Builder
     interface Builder {

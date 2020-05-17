@@ -11,7 +11,6 @@ import io.android.projectx.data.features.recipes.repository.RecipesRemote
 import io.android.projectx.data.features.recipes.store.RecipesRemoteDataStore
 import io.android.projectx.data.features.restaurants.repository.RestaurantsRemote
 import io.android.projectx.data.features.restaurants.store.RestaurantsRemoteDataStore
-import io.android.projectx.data.features.usermanagement.UserManagementDataRepository
 import io.android.projectx.data.features.usermanagement.repository.UserManagementRemote
 import io.android.projectx.data.features.usermanagement.store.UserManagementCacheDataStore
 import io.android.projectx.data.features.usermanagement.store.UserManagementRemoteDataStore
@@ -91,17 +90,15 @@ abstract class RemoteModule {
 
         @Provides
         @JvmStatic
-        fun provideRequestHeaders(userManagementCache: UserManagementCacheDataStore): RequestHeaders =
-            RequestHeaders(userManagementCache)
+        fun provideRequestHeaders(userManagementCache: UserManagementCacheDataStore, application: Application): RequestHeaders =
+            RequestHeaders(userManagementCache, application)
 
         @Provides
         @JvmStatic
         fun provideAuthenticator(
             requestHeaders: RequestHeaders,
-            userManagementRepository: dagger.Lazy<UserManagementDataRepository>,
             userManagementRemote: dagger.Lazy<UserManagementRemoteDataStore>
-        ): Authenticator =
-            Authenticator(requestHeaders, userManagementRepository, userManagementRemote)
+        ): Authenticator = Authenticator(requestHeaders, userManagementRemote)
 
         @Provides
         @JvmStatic

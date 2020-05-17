@@ -132,8 +132,14 @@ dependencies {
     implementation presentationDependencies.navigationDynamic
     implementation presentationDependencies.firebaseAnalytics
     implementation presentationDependencies.firebaseMessaging
+    implementation presentationDependencies.firebaseConfig
     kapt presentationDependencies.lifecycleCompiler
     kapt presentationDependencies.roomCompiler
+    // Firebase ML Kit dependencies
+    implementation presentationDependencies.firebaseMlVision
+    // CameraX
+    implementation presentationDependencies.cameraCore
+    implementation presentationDependencies.cameraCamera2
 
     //dagger
     implementation presentationDependencies.dagger

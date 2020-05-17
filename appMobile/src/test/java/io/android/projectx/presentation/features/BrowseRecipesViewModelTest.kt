@@ -6,10 +6,10 @@ import io.android.projectx.domain.features.recipes.interactor.bookmarked.Bookmar
 import io.android.projectx.domain.features.recipes.interactor.bookmarked.UnBookmarkRecipe
 import io.android.projectx.domain.features.recipes.interactor.browse.GetRecipes
 import io.android.projectx.domain.features.recipes.model.Recipe
-import io.android.projectx.presentation.features.browse.BrowseRecipesViewModel
+import io.android.projectx.presentation.features.recipes.browse.BrowseRecipesViewModel
 import io.android.projectx.presentation.base.mapper.RecipeViewMapper
 import io.android.projectx.presentation.base.model.RecipeView
-import io.android.projectx.presentation.base.state.Resource.ResourceState
+import io.android.projectx.presentation.base.state.Resource.Status
 import io.android.projectx.presentation.test.factory.DataFactory
 import io.android.projectx.presentation.test.factory.RecipeFactory
 import io.reactivex.observers.DisposableObserver
@@ -57,7 +57,7 @@ class BrowseRecipesViewModelTest {
         captor.firstValue.onNext(recipes)
 
         assertEquals(
-            ResourceState.SUCCESS,
+            Status.SUCCESS,
             recipeViewModel.getRecipes().value?.status
         )
     }
@@ -88,7 +88,7 @@ class BrowseRecipesViewModelTest {
         captor.firstValue.onError(RuntimeException())
 
         assertEquals(
-            ResourceState.ERROR,
+            Status.ERROR,
             recipeViewModel.getRecipes().value?.status
         )
     }

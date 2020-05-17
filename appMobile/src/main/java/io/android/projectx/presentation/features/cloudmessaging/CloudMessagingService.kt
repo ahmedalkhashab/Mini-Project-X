@@ -10,12 +10,15 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.iid.InstanceIdResult
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import dagger.android.AndroidInjection
+import io.android.projectx.domain.features.usermanagement.interactor.UpdateTokenCM
 import io.android.projectx.presentation.R
 import io.android.projectx.presentation.base.state.Resource
-import io.android.projectx.presentation.features.host.MainHostActivity
+import io.android.projectx.presentation.features.splash.SplashHostActivity
+import io.reactivex.observers.DisposableSingleObserver
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -23,6 +26,30 @@ class CloudMessagingService : FirebaseMessagingService() {
 
     @Inject
     lateinit var statusManager: StatusManager
+
+    @Inject
+    lateinit var updateTokenCM: UpdateTokenCM
+
+    companion object {
+        fun getToken() {
+            FirebaseInstanceId.getInstance().instanceId
+                .addOnCompleteListener(OnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        Timber.w(task.exception, "getInstanceId failed")
+                        return@OnCompleteListener
+                    }
+                    // Get new Instance ID token
+                    val token = task.result?.token
+                    Timber.i("Current token: $token")
+                })
+        }
+
+        fun getToken(onCompleteListener: OnCompleteListener<InstanceIdResult>) {
+            FirebaseInstanceId.getInstance()
+                .instanceId
+                .addOnCompleteListener(onCompleteListener)
+        }
+    }
 
     override fun onCreate() {
         AndroidInjection.inject(this)
@@ -51,19 +78,6 @@ class CloudMessagingService : FirebaseMessagingService() {
         sendRegistrationToServer(token)
     }
 
-    fun getToken() {
-        FirebaseInstanceId.getInstance().instanceId
-            .addOnCompleteListener(OnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    Timber.w(task.exception, "getInstanceId failed")
-                    return@OnCompleteListener
-                }
-                // Get new Instance ID token
-                val token = task.result?.token
-                Timber.i("Current token: $token")
-            })
-    }
-
     /**
      * Persist token on third-party servers using your Retrofit APIs client.
      * Modify this method to associate the user's FCM InstanceID token with any server-side account
@@ -72,22 +86,19 @@ class CloudMessagingService : FirebaseMessagingService() {
      */
     private fun sendRegistrationToServer(token: String) {
         // make a own server request here using your http client
+        updateTokenCM.execute(
+            UpdateTokenCMSubscriber(),
+            UpdateTokenCM.Params.forUpdateTokenCM(token)
+        )
     }
 
     private fun handleNow(data: Map<String, String>) {
-        if (data.containsKey("title") && data.containsKey("message")) {
+        if (data.containsKey("title") && data.containsKey("message"))
             sendNotification(data["title"], data["message"])
-        }
-
-        if (data.containsKey("status")) {
-            val status = when (data["status"]) {
-                "Status1" -> CaseStatus.Status1
-                "Status2" -> CaseStatus.Status2
-                "Status3" -> CaseStatus.Status3
-                "Status4" -> CaseStatus.Status4
-                else -> throw IllegalArgumentException("wrong status")
-            }
-            statusManager.updateStatus(Resource.success(status))
+        if (data.containsKey("app_status")) {
+            Timber.i("app_status payload: ${data["app_status"]}")
+            val status = CaseStatus.readStatus(data["app_status"])
+            statusManager.updateStatus(Resource.success(status), true)
         }
     }
 
@@ -97,7 +108,7 @@ class CloudMessagingService : FirebaseMessagingService() {
      * @param messageBody FCM message body received.
      */
     private fun sendNotification(title: String?, messageBody: String?) {
-        val intent = Intent(this, MainHostActivity::class.java)
+        val intent = Intent(this, SplashHostActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(
             this,
@@ -129,6 +140,13 @@ class CloudMessagingService : FirebaseMessagingService() {
             manager.createNotificationChannel(channel)
         }
         manager.notify(0 /* ID of notification */, notificationBuilder.build())
+    }
+
+    inner class UpdateTokenCMSubscriber : DisposableSingleObserver<Boolean>() {
+
+        override fun onSuccess(t: Boolean) {}
+
+        override fun onError(e: Throwable) {}
     }
 
 }

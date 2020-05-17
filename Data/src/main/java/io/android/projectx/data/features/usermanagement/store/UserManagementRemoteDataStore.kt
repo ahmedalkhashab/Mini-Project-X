@@ -7,11 +7,13 @@ import io.android.projectx.remote.features.usermanagement.model.request.EmailCre
 import io.android.projectx.remote.features.usermanagement.model.request.MobileCredentialRequest
 import io.android.projectx.remote.features.usermanagement.model.request.MobileNumber
 import io.android.projectx.remote.features.usermanagement.model.request.ResetPasswordCredentialRequest
-import io.android.projectx.remote.features.usermanagement.model.response.LoginResponse
+import io.android.projectx.remote.features.usermanagement.model.request.cloudmessaging.TokenCmRequestModel
+import io.android.projectx.remote.features.usermanagement.model.response.LoginWrapper
 import io.android.projectx.remote.features.usermanagement.service.AuthenticatorURL
 import io.android.projectx.remote.features.usermanagement.service.UserManagementService
 import io.reactivex.Completable
 import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.Call
 import java.util.*
 import javax.inject.Inject
@@ -38,7 +40,7 @@ open class UserManagementRemoteDataStore @Inject constructor(
         countryCode: String,
         mobileNumber: String,
         password: String
-    ): Observable<LoginResponse> {
+    ): Observable<LoginWrapper> {
         val mobile = MobileNumber(countryCode, mobileNumber)
         return service.login(MobileCredentialRequest(mobile, password))
             .toObservable()
@@ -110,6 +112,10 @@ open class UserManagementRemoteDataStore @Inject constructor(
         return service.logout(params)
     }
 
+    override fun logout(): Completable {
+        return service.logout()
+    }
+
     override fun logout(countryCode: String, mobileNumber: String): Completable {
         val params = HashMap<String, String>()
         params[COUNTRY_CODE] = countryCode
@@ -127,10 +133,15 @@ open class UserManagementRemoteDataStore @Inject constructor(
                 || responseWebServiceURL.contains(AuthenticatorURL.verifyByEmail)
     }
 
-    override fun fetchUser(): Observable<UserEntity> {
+    override fun fetchUser(userId: Long): Observable<UserEntity> {
         return service.fetchUser()
             .toObservable()
             .map { mapper.mapFromModel(it) }
+    }
+
+    override fun updateDeviceToken(deviceTokenCloudMessaging: String): Single<Boolean> {
+        return service.updateDeviceToken(TokenCmRequestModel(deviceTokenCloudMessaging))
+            .map { true }
     }
 
 }

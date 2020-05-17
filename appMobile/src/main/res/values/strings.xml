@@ -1,25 +1,55 @@
 <resources>
     <string name="app_name">ProjectX</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="bookmarked_recipes">Bookmarked recipes</string>
-    <string name="title_bookmarked">Bookmarked</string>
+    <string name="bookmarked_recipes">Bookmarked</string>
 
+    <!--notification_channel_id-->
+    <string name="default_notification_channel_id" translatable="false">projectx-channel</string>
     <!--Splash-->
     <string name="title_screen_splash">ProjectX</string>
     <string name="action_sign_in">Log in</string>
-    <string name="welcome">"Welcome !"</string>
+    <string name="action_skip">Skip</string>
+    <string name="welcome">Welcome !</string>
     <string name="splash_description">description</string>
-
     <!--Login-->
     <string name="title_activity_login">Login</string>
     <string name="prompt_mobile">Mobile</string>
     <string name="prompt_password">Password</string>
     <string name="invalid_username">Not a valid mobile</string>
     <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
+    <string name="login_failed">Login failed</string>
     <string name="login_remember_me">Remember me</string>
     <string name="login_password_helper_text">Password is 6 characters at least</string>
-
-    <string name="default_notification_channel_id">projectX default_notification_channel_id</string>
+    <!--OTP-->
+    <string name="title_activity_otp">verification</string>
+    <!--menu-->
+    <string name="title_screen_menu">Menu</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_language">Language</string>
+    <string name="menu_logout">Logout</string>
+    <!--Profile-->
+    <string name="title_screen_profile">Profile</string>
+    <string name="title_full_name">Name</string>
+    <string name="title_mobile">Mobile</string>
+    <string name="title_role">Role</string>
+    <string name="title_company">Company</string>
+    <!--Language-->
+    <string name="title_screen_language">Language</string>
+    <string name="arabic" translatable="false">العربية</string>
+    <string name="english" translatable="false">English</string>
+    <!--Dialog-->
+    <string name="yes">Yes</string>
+    <string name="no">No, Thanks</string>
+    <!--Error-->
+    <string name="error_network">No Internet connection</string>
+    <string name="error_timeout">No Response, please try again!</string>
+    <string name="error_other_network_failure">Unknown network error, please reset your network connection.</string>
+    <string name="error_unexpected">Oops! An error has occurred, Please try again.</string>
+    <string name="error">Error</string>
+    <!--app_update-->
+    <string name="app_update_title">New version %s is available</string>
+    <string name="app_update_description">Please update app for seamless experience.</string>
+    <string name="app_update_positive">Update</string>
+    <string name="app_update_exit">Exit!</string>
+    <string name="app_update_cancel">Cancel</string>
 
 </resources>

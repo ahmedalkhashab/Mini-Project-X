@@ -12,9 +12,45 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
+<!--        &lt;!&ndash; enable window content transitions &ndash;&gt;-->
+<!--        <item name="android:windowActivityTransitions">true</item>-->
+
+<!--        &lt;!&ndash; specify enter and exit transitions &ndash;&gt;-->
+<!--        <item name="android:windowEnterTransition">@android:transition/slide_right</item>-->
+<!--        <item name="android:windowExitTransition">@android:transition/slide_left</item>-->
+
         <item name="primaryButtonStyle">@style/Widget.ProjectX.Button.Primary</item>
+        <item name="outlinedButtonStyle">@style/Widget.ProjectX.Button.Outlined</item>
         <item name="primaryTextInputLayoutStyle">@style/Widget.ProjectX.TextInputLayout</item>
         <item name="primaryTextInputEditTextStyle">@style/Widget.ProjectX.TextInputEditText</item>
+    </style>
+
+    <!-- Set parent theme as app theme. -->
+    <style name="AppTheme.WithActionBar" parent="Theme.MaterialComponents.DayNight">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!--        &lt;!&ndash; enable window content transitions &ndash;&gt;-->
+        <!--        <item name="android:windowActivityTransitions">true</item>-->
+
+        <!--        &lt;!&ndash; specify enter and exit transitions &ndash;&gt;-->
+        <!--        <item name="android:windowEnterTransition">@android:transition/slide_right</item>-->
+        <!--        <item name="android:windowExitTransition">@android:transition/slide_left</item>-->
+
+        <item name="primaryButtonStyle">@style/Widget.ProjectX.Button.Primary</item>
+        <item name="outlinedButtonStyle">@style/Widget.ProjectX.Button.Outlined</item>
+        <item name="primaryTextInputLayoutStyle">@style/Widget.ProjectX.TextInputLayout</item>
+        <item name="primaryTextInputEditTextStyle">@style/Widget.ProjectX.TextInputEditText</item>
+    </style>
+
+    <!-- Set parent theme as app theme. -->
+    <style name="DialogTheme" parent="AppTheme.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -23,17 +59,35 @@
 
     <!--Button related styles-->
     <style name="Widget.ProjectX.Button" parent="Widget.MaterialComponents.Button">
-        <item name="android:textAllCaps">false</item>
-        <!--        <item name="android:fontFamily">@font/font</item>-->
-        <!--        <item name="fontFamily">@font/font</item>-->
     </style>
 
-    <style name="Widget.ProjectX.Button.Primary" parent="Widget.ProjectX.Button">
+    <style name="Widget.ProjectX.Button.Primary" parent="Widget.MaterialComponents.Button">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="fontFamily">@font/poppins_bold</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="backgroundTint">@color/colorPersianGreen</item>
         <item name="strokeColor">@android:color/white</item>
         <item name="strokeWidth">0dp</item>
+        <item name="shapeAppearance">?attr/shapeAppearanceSmallComponent</item>
+        <item name="elevation">2dp</item>
+        <item name="rippleColor">?attr/colorOnPrimary</item>
+        <item name="android:lineSpacingExtra">10sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:minHeight">@dimen/primary_button_height</item>
+    </style>
+
+    <style name="Widget.ProjectX.Button.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorTextThird</item>
+        <item name="strokeColor">@color/colorAccent</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="iconTint">@color/colorAccent</item>
+        <item name="iconPadding">8dp</item>
         <item name="shapeAppearance">?attr/shapeAppearanceSmallComponent</item>
         <item name="elevation">2dp</item>
         <item name="rippleColor">?attr/colorOnPrimary</item>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context="io.android.projectx.presentation.features.menu.MenuFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/view_bg_constraint_layout" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="97dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/title_screen_menu"
+            android:textColor="@color/colorTextThird"
+            android:textSize="39sp"
+            android:textAlignment="viewStart"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/profile"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="47dp"
+            android:drawablePadding="32dp"
+            android:fontFamily="@font/poppins"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            android:text="@string/menu_profile"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:textAlignment="viewStart"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
+
+        <TextView
+            android:id="@+id/language"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="32dp"
+            android:drawablePadding="32dp"
+            android:fontFamily="@font/poppins"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            android:text="@string/menu_language"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:textAlignment="viewStart"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile" />
+
+        <TextView
+            android:id="@+id/logout"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="32dp"
+            android:drawablePadding="32dp"
+            android:fontFamily="@font/poppins"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            android:text="@string/menu_logout"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:textAlignment="viewStart"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/language" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

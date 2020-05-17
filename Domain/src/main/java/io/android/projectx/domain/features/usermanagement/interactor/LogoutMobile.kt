@@ -9,19 +9,10 @@ import javax.inject.Inject
 open class LogoutMobile @Inject constructor(
     private val userManagementRepository: UserManagementRepository,
     postExecutionThread: PostExecutionThread
-) : CompletableUseCase<LogoutMobile.Params?>(postExecutionThread) {
+) : CompletableUseCase<Nothing?>(postExecutionThread) {
 
-    override fun buildUseCaseCompletable(params: Params?): Completable {
-        if (params == null) throw IllegalArgumentException("Params can't be null!")
-        return userManagementRepository.logout(params.countryCode, params.mobileNumber)
-    }
-
-    data class Params constructor(val countryCode: String, val mobileNumber: String) {
-        companion object {
-            fun forLogoutMobile(countryCode: String, mobileNumber: String): Params {
-                return Params(countryCode, mobileNumber)
-            }
-        }
+    override fun buildUseCaseCompletable(params: Nothing?): Completable {
+        return userManagementRepository.logout()
     }
 
 }

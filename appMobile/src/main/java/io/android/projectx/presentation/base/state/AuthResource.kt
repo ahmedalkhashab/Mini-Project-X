@@ -1,23 +1,26 @@
 package io.android.projectx.presentation.base.state
 
-class AuthResource<out T>(val status: AuthStatus, val data: T?, val message: String?) {
+import io.android.projectx.presentation.base.state.Resource.Status.AuthStatus
 
-    enum class AuthStatus {
-        AUTHENTICATED, ERROR, LOADING, NOT_AUTHENTICATED
-    }
+class AuthResource<out T>(
+    val status: Resource.Status,
+    val data: T?,
+    val throwable: Throwable?,
+    val message: String?
+) {
 
     companion object {
         fun <T> authenticated(data: T): AuthResource<T> =
-            AuthResource(AuthStatus.AUTHENTICATED, data, null)
+            AuthResource(AuthStatus.AUTHENTICATED, data, null, null)
 
-        fun <T> error(message: String, data: T? = null): AuthResource<T?> =
-            AuthResource(AuthStatus.ERROR, data, message)
+        fun <T> error(data: T? = null, ex: Throwable?): AuthResource<T?> =
+            AuthResource(Resource.Status.ERROR, data, ex, null)
 
         fun <T> loading(data: T? = null): AuthResource<T?> =
-            AuthResource(AuthStatus.LOADING, data, null)
+            AuthResource(Resource.Status.LOADING, data, null, null)
 
-        fun <T> anonymous(data: T): AuthResource<T> =
-            AuthResource(AuthStatus.NOT_AUTHENTICATED, data, null)
+        fun <T> anonymous(data: T? = null, ex: Throwable?): AuthResource<T> =
+            AuthResource(AuthStatus.ANONYMOUS, data, ex, null)
     }
 
 }

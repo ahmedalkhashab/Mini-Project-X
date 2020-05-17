@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">ProjectX</string>
+    <string name="bookmarked_recipes">Bookmarked</string>
+
+    <!--Splash-->
+    <string name="title_screen_splash">ProjectX</string>
+    <string name="action_sign_in">تسجيل الدخول</string>
+    <string name="action_skip">تخطي</string>
+    <string name="welcome">"مرحبا !"</string>
+    <string name="splash_description">description</string>
+    <!--Login-->
+    <string name="title_activity_login">تسجيل الدخول</string>
+    <string name="prompt_mobile">جوال</string>
+    <string name="prompt_password">كلمه السر</string>
+    <string name="invalid_username">رقما غير صالح</string>
+    <string name="invalid_password">يجب أن تكون كلمة المرور أكبر 5 أحرف</string>
+    <string name="login_failed">"فشل تسجيل الدخول"</string>
+    <string name="login_remember_me">تذكرنى</string>
+    <string name="login_password_helper_text">كلمة المرور مكونة من 6 أحرف على الأقل</string>
+    <!--OTP-->
+    <string name="title_activity_otp">verification</string>
+    <!--menu-->
+    <string name="title_screen_menu">القائمة</string>
+    <string name="menu_profile">الملف الشخصي</string>
+    <string name="menu_language">اللغة</string>
+    <string name="menu_logout">تسجيل خروج</string>
+    <!--Profile-->
+    <string name="title_screen_profile">الملف الشخصي</string>
+    <string name="title_full_name">الاسم</string>
+    <string name="title_mobile">الجوال</string>
+    <string name="title_role">الوظيفة</string>
+    <string name="title_company">الشركة</string>
+    <!--Language-->
+    <string name="title_screen_language">اللغة</string>
+    <!--Dialog-->
+    <string name="yes">نعم</string>
+    <string name="no">لا، شكرا</string>
+    <!--Error-->
+    <string name="error_network">لا يوجد اتصال بالإنترنت</string>
+    <string name="error_timeout">لا يوجد استجابة، حاول مجدداً</string>
+    <string name="error_other_network_failure">خطأ غير معروف في الإتصال، فضلاً التأكد من إعدادات الاتصال</string>
+    <string name="error_unexpected">خطأ غير متوقع، نرجو إعادة المحاولة</string>
+    <string name="error">خطأ</string>
+    <!--app_update-->
+    <string name="app_update_title">يرجى تحديث التطبيق لتجربة سلسة</string>
+    <string name="app_update_description">يرجى تحديث التطبيق لتجربة سلسة</string>
+    <string name="app_update_positive">تحديث</string>
+    <string name="app_update_exit">خروج!</string>
+    <string name="app_update_cancel">إلغاء</string>
+
+</resources>

@@ -1,6 +1,5 @@
 package io.android.projectx.androidextensions
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -46,20 +45,9 @@ fun Context?.startSupportActionMode(actionModeCallback: ActionMode.Callback): Ac
     return null
 }
 
-fun Context.openMaps(mapsUri: Uri) {
-    val mapsIntent = Intent(Intent.ACTION_VIEW, mapsUri)
-    mapsIntent.setPackage("com.google.android.apps.maps")
-    if (mapsIntent.resolveActivity(packageManager) != null) startActivity(mapsIntent)
-}
-
 fun Context?.startActivitySafe(intent: Intent) {
     this ?: return
     if (intent.resolveActivity(packageManager) != null) startActivity(intent)
-}
-
-fun Context.startLauncherActivity() {
-    // todo
-    //startActivity(Intent(this, SplashActivity::class.java))
 }
 
 fun Context?.dialNumber(number: String) {
@@ -102,14 +90,6 @@ fun Context.checkSelfPermissionCompat(permission: String): Int {
 
 fun Context.isPermissionGranted(permission: String): Boolean {
     return checkSelfPermissionCompat(permission) == PackageManager.PERMISSION_GRANTED
-}
-
-fun Context.relaunchApp() {
-    if (this is Activity) {
-        finish()
-    }
-    // todo
-    // startSplashScreen()
 }
 
 /**

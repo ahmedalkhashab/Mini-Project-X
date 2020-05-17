@@ -8,7 +8,7 @@
     android:focusable="true">
 
     <ImageView
-        android:id="@+id/image_recipe"
+        android:id="@+id/recipeImage"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginBottom="8dp"
@@ -21,32 +21,32 @@
         app:layout_constraintVertical_bias="0.498" />
 
     <TextView
-        android:id="@+id/text_owner_name"
+        android:id="@+id/tvOwnerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/image_bookmarked"
+        app:layout_constraintEnd_toStartOf="@+id/bookmarkedImage"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/image_recipe"
-        app:layout_constraintTop_toTopOf="@+id/image_recipe"
+        app:layout_constraintStart_toEndOf="@+id/recipeImage"
+        app:layout_constraintTop_toTopOf="@+id/recipeImage"
         tools:text="Mohamed Ahmed" />
 
     <TextView
-        android:id="@+id/text_recipe_name"
+        android:id="@+id/tvRecipeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/image_bookmarked"
+        app:layout_constraintEnd_toStartOf="@+id/bookmarkedImage"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/image_recipe"
-        app:layout_constraintTop_toBottomOf="@+id/text_owner_name"
+        app:layout_constraintStart_toEndOf="@+id/recipeImage"
+        app:layout_constraintTop_toBottomOf="@+id/tvOwnerName"
         tools:text="Some recipe" />
 
     <ImageView
-        android:id="@+id/image_bookmarked"
+        android:id="@+id/bookmarkedImage"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"

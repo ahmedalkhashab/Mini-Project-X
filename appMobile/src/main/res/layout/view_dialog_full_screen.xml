@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/view_dialog_bg_constraint_layout_menu" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="289dp"
+        android:layout_height="374dp"
+        android:background="@android:color/white"
+        app:cardCornerRadius="22dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="32dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvMessage"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center"
+                android:lineSpacingExtra="15sp"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="16sp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/icon"
+
+                tools:text="Are you sure you want to select this recipe?" />
+
+            <Button
+                android:id="@+id/btnOk"
+                style="?attr/primaryButtonStyle"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:lineSpacingExtra="9sp"
+                android:text="@string/yes"
+                android:textSize="16sp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvMessage" />
+
+            <Button
+                android:id="@+id/btnNo"
+                style="?attr/outlinedButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/poppins_light"
+                android:gravity="center"
+                android:lineSpacingExtra="17sp"
+                android:text="@string/no"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="16sp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnOk"
+
+                app:strokeColor="@android:color/transparent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

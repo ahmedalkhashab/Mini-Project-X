@@ -48,6 +48,7 @@ dependencies {
     implementation dataDependencies.javaxInject
     implementation dataDependencies.rxKotlin
     implementation dataDependencies.kotlin
+    implementation dataDependencies.timber
     //dagger
     implementation dataDependencies.dagger
     kapt dataDependencies.daggerCompiler

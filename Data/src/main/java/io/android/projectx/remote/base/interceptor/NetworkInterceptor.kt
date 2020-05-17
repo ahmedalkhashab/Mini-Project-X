@@ -1,5 +1,6 @@
 package io.android.projectx.remote.base.interceptor
 
+import android.util.Log
 import okhttp3.CacheControl
 import okhttp3.Interceptor
 import okhttp3.Request
@@ -27,7 +28,14 @@ class NetworkInterceptor @Inject constructor(
         if (requestHeaders.hasShortTermToken()) {
             val name = requestHeaders.getShortTermTokenName()
             val value = requestHeaders.getShortTermTokenValue()
-            if (value.isNotBlank()) newRequestBuilder.header(name, "Bearer $value")
+            if (value.isNotBlank()) {
+                Log.i("Authenticator", value)
+                newRequestBuilder.addHeader(name, "Bearer $value")
+            }
+            newRequestBuilder.addHeader(
+                requestHeaders.getAcceptLanguageKey(),
+                requestHeaders.getLanguageValue()
+            )
         }
         val response: Response = chain.proceed(newRequestBuilder.build())
         // Http Cache

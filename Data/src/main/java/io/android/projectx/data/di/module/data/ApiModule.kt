@@ -3,7 +3,7 @@ package io.android.projectx.data.di.module.data
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
-import io.android.projectx.remote.base.RemoteFactory.provideRetrofit
+import io.android.projectx.remote.base.factory.RemoteFactory.provideRetrofit
 import io.android.projectx.remote.features.recipes.service.RecipesService
 import io.android.projectx.remote.features.restaurants.service.RestaurantsService
 import io.android.projectx.remote.features.usermanagement.service.UserManagementService

@@ -3,7 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_bookmarked"
-        android:icon="@drawable/ic_collections_bookmark_black_24dp"
         android:title="@string/bookmarked_recipes"
-        app:showAsAction="always" />
+        android:icon="@android:drawable/ic_menu_gallery"
+        app:showAsAction="withText|ifRoom" />
+    <item
+        android:id="@+id/action_menu"
+        android:title="@string/title_screen_menu"
+        android:icon="@android:drawable/ic_menu_info_details"
+        app:showAsAction="withText|ifRoom" />
 </menu>

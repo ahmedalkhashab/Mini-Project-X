@@ -10,6 +10,7 @@ import io.android.projectx.remote.base.interceptor.RequestHeaders
 import io.android.projectx.remote.features.usermanagement.mapper.UserModelMapper
 import io.reactivex.Completable
 import io.reactivex.Observable
+import io.reactivex.Single
 import javax.inject.Inject
 
 class UserManagementDataRepository @Inject constructor(
@@ -20,21 +21,18 @@ class UserManagementDataRepository @Inject constructor(
 ) : UserManagementRepository {
 
     private val userObservable: Observable<User> = Observable.create { emitter ->
-        factory.getCacheDataStore().areUserCached().toObservable()
-            .map { isCached ->
-                if (isCached) {
-                    factory.getCacheDataStore().getUser()
-                        .map { entity ->
-                            val user = mapper.mapFromEntity(entity)
-                            emitter.onNext(user)
-                        }
-                } else {
-                    val anonymousUser = User(-1, "Anonymous User", "", "", UserStatus.Anonymous)
-                    factory.getCacheDataStore()
-                        .saveUser(mapper.mapToEntity(anonymousUser), System.currentTimeMillis())
-                    emitter.onNext(anonymousUser)
-                }
-            }.share()
+        val isCached = factory.getCacheDataStore().areUserCached()
+        if (isCached) {
+            val entity = factory.getCacheDataStore().getUser()
+            val user = mapper.mapFromEntity(entity)
+            emitter.onNext(user)
+        } else {
+            val anonymousUser = User(-1, "Anonymous User", "", "", UserStatus.Anonymous)
+            /*factory.getCacheDataStore()
+                .saveUser(mapper.mapToEntity(anonymousUser), System.currentTimeMillis())*/
+            emitter.onNext(anonymousUser)
+        }
+
     }
 
     override fun login(email: String, password: String): Observable<User> {
@@ -123,21 +121,31 @@ class UserManagementDataRepository @Inject constructor(
             .doOnComplete { factory.getCacheDataStore().logout(email) }
     }
 
+    override fun logout(): Completable {
+        return factory.getRemoteDataStore().logout()
+            .doOnComplete { factory.getCacheDataStore().logout() }
+    }
+
     override fun logout(countryCode: String, mobileNumber: String): Completable {
         return factory.getRemoteDataStore().logout(countryCode, mobileNumber)
             .doOnComplete { factory.getCacheDataStore().logout(countryCode, mobileNumber) }
     }
 
     override fun getUser(): Observable<User> {
-        return userObservable
+        return userObservable.share()
     }
 
     override fun fetchUser(): Observable<User> {
-        return factory.getRemoteDataStore().fetchUser()
+        val userId = factory.getCacheDataStore().getUser().id
+        return factory.getRemoteDataStore().fetchUser(userId)
             .map { entity ->
                 factory.getCacheDataStore().saveUser(entity, System.currentTimeMillis())
                 mapper.mapFromEntity(entity)
             }
+    }
+
+    override fun updateDeviceToken(deviceTokenCloudMessaging: String): Single<Boolean> {
+        return factory.getRemoteDataStore().updateDeviceToken(deviceTokenCloudMessaging)
     }
 
 }

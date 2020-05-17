@@ -6,6 +6,8 @@ interface UserManagementDataStore {
 
     fun forceLogout(): Completable
 
+    fun logout(): Completable
+
     fun logout(email: String): Completable
 
     fun logout(countryCode: String, mobileNumber: String): Completable

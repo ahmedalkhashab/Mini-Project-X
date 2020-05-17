@@ -3,6 +3,7 @@
 
     <!--Button styles-->
     <attr name="primaryButtonStyle" format="reference"/>
+    <attr name="outlinedButtonStyle" format="reference"/>
 
 
     <!--TextInputLayout styles-->

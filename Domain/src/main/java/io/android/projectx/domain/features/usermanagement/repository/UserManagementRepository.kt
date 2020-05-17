@@ -3,6 +3,7 @@ package io.android.projectx.domain.features.usermanagement.repository
 import io.android.projectx.domain.features.usermanagement.model.User
 import io.reactivex.Completable
 import io.reactivex.Observable
+import io.reactivex.Single
 
 interface UserManagementRepository {
 
@@ -26,6 +27,8 @@ interface UserManagementRepository {
 
     fun forceLogout(): Completable
 
+    fun logout(): Completable
+
     fun logout(email: String): Completable
 
     fun logout(countryCode: String, mobileNumber: String): Completable
@@ -33,4 +36,6 @@ interface UserManagementRepository {
     fun getUser(): Observable<User>
 
     fun fetchUser(): Observable<User>
+
+    fun updateDeviceToken(deviceTokenCloudMessaging: String): Single<Boolean>
 }

@@ -5,9 +5,9 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import io.android.projectx.presentation.di.ViewModelKey
-import io.android.projectx.presentation.features.bookmarked.BookmarkedRecipesViewModel
-import io.android.projectx.presentation.features.browse.BrowseRecipesViewModel
-import io.android.projectx.presentation.features.host.HostViewModel
+import io.android.projectx.presentation.features.recipes.bookmarked.BookmarkedRecipesViewModel
+import io.android.projectx.presentation.features.recipes.browse.BrowseRecipesViewModel
+import io.android.projectx.presentation.features.HostViewModel
 import io.android.projectx.presentation.features.restaurants.RestaurantsViewModel
 
 @Module

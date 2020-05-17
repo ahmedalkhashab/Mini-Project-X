@@ -1,16 +1,17 @@
 package io.android.projectx.data.features.usermanagement.repository
 
 import io.android.projectx.data.features.usermanagement.model.UserEntity
-import io.android.projectx.remote.features.usermanagement.model.response.LoginResponse
+import io.android.projectx.remote.features.usermanagement.model.response.LoginWrapper
 import io.reactivex.Completable
 import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.Call
 
 interface UserManagementRemote : UserManagementDataStore {
 
     fun login(email: String, password: String): Observable<UserEntity>
 
-    fun login(countryCode: String, mobileNumber: String, password: String): Observable<LoginResponse>
+    fun login(countryCode: String, mobileNumber: String, password: String): Observable<LoginWrapper>
 
     // we can use otp instead of password
     fun verifyByMobile(countryCode: String, mobileNumber: String, pinCode: String): Observable<UserEntity>
@@ -26,12 +27,14 @@ interface UserManagementRemote : UserManagementDataStore {
 
     fun signUp(countryCode: String, mobileNumber: String, password: String): Observable<UserEntity>
 
-    fun fetchUser(): Observable<UserEntity>
+    fun fetchUser(userId: Long): Observable<UserEntity>
 
     // related to the Authenticator
     fun refreshShortToken(tokenLongTerm: String): Call<String>
 
     // related to the Authenticator
     fun isAuthenticatorURL(responseWebServiceURL: String): Boolean
+
+    fun updateDeviceToken(deviceTokenCloudMessaging: String): Single<Boolean>
 
 }

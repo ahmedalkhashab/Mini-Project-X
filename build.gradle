@@ -2,9 +2,9 @@
 apply from: 'buildsystem/dependencies.gradle'
 
 buildscript {
-    ext.kotlin_version = '1.3.71'
+    ext.kotlin_version = '1.3.72'
 
-    def gradle_stable_version = '3.6.1'
+    def gradle_stable_version = '3.6.3'
     def gradle_version = gradle_stable_version
     if (project.rootProject.file('local.properties').canRead()) {
         //load app.properties

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/browseFragment">
+    <fragment
+        android:id="@+id/browseFragment"
+        android:name="io.android.projectx.presentation.features.recipes.browse.BrowseFragment"
+        android:label="BrowseFragment" >
+        <deepLink
+            android:id="@+id/deepLink_to_browse_recipes"
+            app:uri="app://navigation/browse_recipes" />
+        <action
+            android:id="@+id/action_browseFragment_to_bookmarkedFragment"
+            app:destination="@id/bookmarkedFragment" />
+        <action
+            android:id="@+id/action_browseFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookmarkedFragment"
+        android:name="io.android.projectx.presentation.features.recipes.bookmarked.BookmarkedFragment"
+        android:label="BookmarkedFragment" >
+        <deepLink
+            android:id="@+id/deepLink_to_bookmarked_recipes"
+            app:uri="app://navigation/bookmarked_recipes" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="io.android.projectx.presentation.features.menu.MenuFragment"
+        android:label="menu_fragment"
+        tools:layout="@layout/menu_fragment">
+        <deepLink
+            android:id="@+id/deepLink_to_menuScreen"
+            app:uri="app://navigation/menu" />
+        <action
+            android:id="@+id/action_menuFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_languageFragment"
+            app:destination="@id/languageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="io.android.projectx.presentation.features.profile.ProfileFragment"
+        android:label="ProfileFragment">
+        <deepLink
+            android:id="@+id/deepLink_to_profileScreen"
+            app:uri="app://navigation/profile" />
+    </fragment>
+    <fragment
+        android:id="@+id/languageFragment"
+        android:name="io.android.projectx.presentation.features.language.LanguageFragment"
+        android:label="LanguageFragment">
+        <deepLink
+            android:id="@+id/deepLink_to_languageScreen"
+            app:uri="app://navigation/language" />
+    </fragment>
+</navigation>
