@@ -48,6 +48,14 @@ fun Activity?.enableUserInteraction() {
     this?.window.enableUserInteraction()
 }
 
+fun Activity?.changeStatusBarColor(color: Int) {
+    this?.let {
+        val window: Window? = this.window
+        window?.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window?.statusBarColor = this.getSupportColor(color)
+    }
+}
+
 fun Window?.disableUserInteraction() {
     this?.setFlags(
         WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
