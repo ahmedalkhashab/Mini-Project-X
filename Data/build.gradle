@@ -66,12 +66,15 @@ dependencies {
     //remote
     def remoteDependencies = rootProject.ext.remoteDependencies
     def remoteTestDependencies = rootProject.ext.remoteTestDependencies
-    implementation remoteDependencies.gson
     implementation remoteDependencies.okHttp
     implementation remoteDependencies.okHttpLogger
     implementation remoteDependencies.retrofit
     implementation remoteDependencies.retrofitConverter
     implementation remoteDependencies.retrofitAdapter
+    implementation remoteDependencies.moshi
+    implementation remoteDependencies.moshiAdapters
+    implementation remoteDependencies.moshiKotlin
+    kapt remoteDependencies.moshiCodegen
 
     //cache
     def cacheDependencies = rootProject.ext.cacheDependencies

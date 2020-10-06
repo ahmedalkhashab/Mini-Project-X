@@ -13,7 +13,7 @@ dependencies {
     testImplementation domainTestDependencies.assertj
 
     // extensions
-    implementation domainDependencies.gson
+    implementation domainDependencies.moshi
 }
 
 sourceCompatibility = "8"

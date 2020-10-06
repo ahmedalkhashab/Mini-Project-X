@@ -1,6 +1,6 @@
 package io.android.projectx.data.di.module.data
 
-import com.google.gson.Gson
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import io.android.projectx.remote.base.factory.RemoteFactory.provideRetrofit
@@ -18,8 +18,8 @@ object ApiModule {
     fun provideUserManagementService(
         @Named("base.url.user.management") baseUrl: String,
         okHttpClient: OkHttpClient,
-        gson: Gson
-    ): UserManagementService = provideRetrofit(baseUrl, okHttpClient, gson)
+        moshi: Moshi
+    ): UserManagementService = provideRetrofit(baseUrl, okHttpClient, moshi)
         .create(UserManagementService::class.java)
 
     @Provides
@@ -27,8 +27,8 @@ object ApiModule {
     fun provideRecipesService(
         @Named("base.url.recipes") baseUrl: String,
         okHttpClient: OkHttpClient,
-        gson: Gson
-    ): RecipesService = provideRetrofit(baseUrl, okHttpClient, gson)
+        moshi: Moshi
+    ): RecipesService = provideRetrofit(baseUrl, okHttpClient, moshi)
         .create(RecipesService::class.java)
 
     @Provides
@@ -36,8 +36,8 @@ object ApiModule {
     fun provideRestaurantsService(
         @Named("base.url.restaurants") baseUrl: String,
         okHttpClient: OkHttpClient,
-        gson: Gson
-    ): RestaurantsService = provideRetrofit(baseUrl, okHttpClient, gson)
+        moshi: Moshi
+    ): RestaurantsService = provideRetrofit(baseUrl, okHttpClient, moshi)
         .create(RestaurantsService::class.java)
 
 }

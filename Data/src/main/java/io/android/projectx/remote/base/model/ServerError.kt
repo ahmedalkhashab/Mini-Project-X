@@ -1,8 +1,10 @@
 package io.android.projectx.remote.base.model
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class ServerError(
-    @SerializedName("code") val code: Int,
-    @SerializedName("message") val message: String
+    @Json(name = "code") val code: Int,
+    @Json(name = "message") val message: String
 )

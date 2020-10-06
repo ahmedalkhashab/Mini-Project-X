@@ -1,9 +1,18 @@
 package io.android.projectx.extensions
 
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import com.squareup.moshi.FromJson
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
 
-inline fun <reified T> fromJson(json: String): T =
-    Gson().fromJson<T>(json, object : TypeToken<T>() {}.type)
+@FromJson
+inline fun <reified T> fromJson(json:String) : T{
+    val moshi: Moshi = Moshi.Builder().build()
+    val adapter: JsonAdapter<T> = moshi.adapter(T::class.java)
+    return adapter.fromJson(json)!!
+}
 
-fun <T> T.toJson(): String = Gson().toJson(this)
+inline fun <reified T> T.toJson(): String {
+    val moshi = Moshi.Builder().build()
+    val adapter : JsonAdapter<T> = moshi.adapter(T::class.java)
+    return adapter.toJson(this)
+}

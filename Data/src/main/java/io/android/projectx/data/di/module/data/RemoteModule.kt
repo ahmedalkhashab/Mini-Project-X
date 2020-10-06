@@ -1,7 +1,10 @@
 package io.android.projectx.data.di.module.data
 
 import android.app.Application
-import com.google.gson.*
+import com.squareup.moshi.FromJson
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.ToJson
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -54,29 +57,15 @@ abstract class RemoteModule {
             .build()
 
         /**
-         * //Ref. https://gist.github.com/cmelchior/1a97377df0c49cd4fca9
+         * //Ref. https://stackoverflow.com/a/44478162
          */
         @Provides
         @JvmStatic
-        fun provideGson(): Gson {
-            return GsonBuilder().setExclusionStrategies(object : ExclusionStrategy {
-                    override fun shouldSkipField(f: FieldAttributes): Boolean {
-                        return false// f.getDeclaringClass().equals(RealmObject.class);
-                    }
-
-                    override fun shouldSkipClass(clazz: Class<*>): Boolean {
-                        return false
-                    }
-                })
-                .registerTypeAdapter(
-                    Date::class.java,
-                    JsonDeserializer<Date> { json, _, _ -> json?.asString?.getDate() })
-                .registerTypeAdapter(
-                    Date::class.java,
-                    JsonSerializer<Date> { date, _, _ -> JsonPrimitive(date.getOffsetDate()) })
-                .serializeNulls()
-                .create()
-        }
+        fun provideMoshi(): Moshi = Moshi.Builder()
+            .add(DateAdapter())
+            //if you have more adapters, add them before this line:
+            .add(KotlinJsonAdapterFactory())
+            .build()
 
         @Provides
         @JvmStatic
@@ -129,4 +118,12 @@ abstract class RemoteModule {
 
     @Binds
     abstract fun bindRestaurantsRemote(restaurantsRemoteImpl: RestaurantsRemoteDataStore): RestaurantsRemote
+}
+
+class DateAdapter {
+    @FromJson
+    fun fromJson(json: String): Date? = json.getDate()
+
+    @ToJson
+    fun toJson(date: Date) = date.getOffsetDate()
 }

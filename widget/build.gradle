@@ -56,7 +56,7 @@ dependencies {
     implementation presentationDependencies.glide
     implementation presentationDependencies.okHttp
     implementation presentationDependencies.okHttpLogger
-    implementation presentationDependencies.gson
+    implementation presentationDependencies.moshi
     implementation presentationDependencies.navigationFragmentKtx
     implementation presentationDependencies.navigationUiKtx
     implementation presentationDependencies.navigationDynamic

@@ -18,9 +18,10 @@ ext {
     fragmentKtxVersion = '1.2.3'
     javaxAnnotationVersion = '1.3.2'
     javaxInjectVersion = '1'
-    gsonVersion = '2.8.6'
+    moshiVersion = '1.9.3'
     okHttpVersion = '4.3.1'
     retrofitVersion = '2.7.1'
+    retrofitMoshiConverterVersion = '2.4.0'
 
     androidxAnnotationsVersion = '1.1.0'
     ktxVersion = '1.2.0'
@@ -71,7 +72,7 @@ ext {
             rxKotlin       : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
             kotlin         : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin_version}",
             //extensions
-            gson           : "com.google.code.gson:gson:${gsonVersion}"
+            moshi          : "com.squareup.moshi:moshi:${moshiVersion}"
     ]
 
     domainTestDependencies = [
@@ -106,9 +107,12 @@ ext {
             okHttp           : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
             okHttpLogger     : "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
             retrofit         : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-            retrofitConverter: "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            retrofitConverter: "com.squareup.retrofit2:converter-moshi:${retrofitMoshiConverterVersion}",
             retrofitAdapter  : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
-            gson             : "com.google.code.gson:gson:${gsonVersion}"
+            moshi            : "com.squareup.moshi:moshi:${moshiVersion}",
+            moshiAdapters    : "com.squareup.moshi:moshi-adapters:${moshiVersion}",
+            moshiKotlin      : "com.squareup.moshi:moshi-kotlin:${moshiVersion}",
+            moshiCodegen     : "com.squareup.moshi:moshi-kotlin-codegen:${moshiVersion}"
     ]
 
     remoteTestDependencies = []
@@ -117,8 +121,7 @@ ext {
             androidxCoreKtx: "androidx.core:core-ktx:${ktxVersion}",
             roomRuntime    : "androidx.room:room-runtime:${roomVersion}",
             roomCompiler   : "androidx.room:room-compiler:${roomVersion}",
-            roomRxJava     : "androidx.room:room-rxjava2:${roomVersion}",
-            gson           : "com.google.code.gson:gson:${gsonVersion}"
+            roomRxJava     : "androidx.room:room-rxjava2:${roomVersion}"
     ]
 
     cacheTestDependencies = [
@@ -173,7 +176,7 @@ ext {
 
             okHttp                : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
             okHttpLogger          : "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
-            gson                  : "com.google.code.gson:gson:${gsonVersion}",
+            moshi                 : "com.squareup.moshi:moshi:${moshiVersion}",
 
             // Firebase ML Kit dependencies
             firebaseMlVision      : "com.google.firebase:firebase-ml-vision:${mlFirebaseVersion}",
