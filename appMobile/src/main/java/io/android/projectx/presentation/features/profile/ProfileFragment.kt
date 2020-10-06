@@ -27,10 +27,7 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
         viewModel.profile.observe(viewLifecycleOwner, Observer {
             progressbar.updateVisibility(it.status)
             when (it.status) {
-                Resource.Status.LOADING -> {
-                }
-                Resource.Status.ERROR ->
-                    handleError(it.throwable, view?.findNavController())
+                Resource.Status.ERROR -> handleError(it.throwable)
                 AuthStatus.AUTHENTICATED -> handleData(it)
                 AuthStatus.ANONYMOUS -> {
                 }

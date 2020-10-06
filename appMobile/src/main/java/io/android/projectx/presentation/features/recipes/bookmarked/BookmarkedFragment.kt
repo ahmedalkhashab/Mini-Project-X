@@ -2,9 +2,10 @@ package io.android.projectx.presentation.features.recipes.bookmarked
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.Observer
+import android.widget.Filter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import io.android.projectx.androidextensions.inflate
 import io.android.projectx.androidextensions.initVerticalRecycler
 import io.android.projectx.presentation.R
 import io.android.projectx.presentation.base.Adapter
@@ -25,15 +26,37 @@ class BookmarkedFragment : BaseFragment(R.layout.bookmarked_fragment) {
         super.onActivityCreated(savedInstanceState)
         setupBrowseRecycler()
         viewModel.getBookmarkedRecipes()
-            .observe(viewLifecycleOwner, Observer { it?.let { handleDataState(it) } })
+            .observe(viewLifecycleOwner, { it?.let { handleDataState(it) } })
         viewModel.fetchBookmarkedRecipes()
     }
 
     private fun setupBrowseRecycler() {
         adapter = Adapter(
-            R.layout.bookmarked_adapter_item_bookmarked_recipe,
+            onCreate = { parent, _ -> Adapter.ViewHolder(parent.inflate(R.layout.bookmarked_adapter_item_bookmarked_recipe)) },
             onClick = { _, item -> onClick(item) },
-            onBind = { _, item, view -> onBind(item, view) }
+            onBind = { _, item, view, _ -> onBind(item, view) },
+            filter = object : Filter() {
+                override fun performFiltering(constraint: CharSequence): FilterResults {
+                    val sequence = constraint.toString()
+                    if (sequence.isEmpty()) adapter.filteredList = adapter.items
+                    else {
+                        val fList: MutableList<RecipeView> = ArrayList()
+                        for (name in adapter.items) {
+                            if (name.title.toLowerCase().contains(sequence.toLowerCase()))
+                                fList.add(name)
+                            adapter.filteredList = fList
+                        }
+                    }
+                    val results = FilterResults()
+                    results.values = adapter.filteredList
+                    return results
+                }
+
+                override fun publishResults(constraint: CharSequence, results: FilterResults) {
+                    adapter.filteredList = results.values as MutableList<RecipeView>
+                    adapter.notifyDataSetChanged()
+                }
+            }
         )
         recyclerRecipes.initVerticalRecycler(adapter)
     }
@@ -56,7 +79,7 @@ class BookmarkedFragment : BaseFragment(R.layout.bookmarked_fragment) {
     private fun handleDataState(resource: Resource<List<RecipeView>?>) {
         progressbar.updateVisibility(resource.status)
         when (resource.status) {
-            Status.SUCCESS -> resource.data?.let { adapter.items = it }
+            Status.SUCCESS -> resource.data?.let { adapter.items = it.toMutableList() }
             Status.LOADING -> {
             }
             Status.ERROR -> {

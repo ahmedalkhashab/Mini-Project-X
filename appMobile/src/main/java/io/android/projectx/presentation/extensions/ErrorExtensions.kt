@@ -3,7 +3,6 @@ package io.android.projectx.presentation.extensions
 import android.app.Activity
 import android.content.Context
 import android.text.TextUtils
-import androidx.navigation.NavController
 import io.android.projectx.androidextensions.showErrorAlerter
 import io.android.projectx.presentation.R
 import io.android.projectx.presentation.features.Navigator
@@ -12,12 +11,10 @@ import io.android.projectx.remote.base.model.RemoteException.Kind
 
 fun Activity.handleError(
     throwable: Throwable?,
-    navController: NavController? = null,
     navigator: Navigator
 ) {
-    if (navController != null && throwable.shouldLogout())
-        navigator.toLoginScreen(this)
-    showErrorAlerter(throwable.getError(this))
+    if (throwable.shouldLogout()) navigator.toLoginScreen(this)
+    else showErrorAlerter(throwable.getError(this))
 }
 
 fun Throwable?.shouldLogout(): Boolean {

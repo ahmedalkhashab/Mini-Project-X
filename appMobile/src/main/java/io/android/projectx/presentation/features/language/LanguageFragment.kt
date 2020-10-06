@@ -2,9 +2,11 @@ package io.android.projectx.presentation.features.language
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Filter
 import io.android.projectx.androidextensions.LocalizationHandler
 import io.android.projectx.androidextensions.LocalizationHandler.LOCALE_ARABIC
 import io.android.projectx.androidextensions.LocalizationHandler.LOCALE_ENGLISH
+import io.android.projectx.androidextensions.inflate
 import io.android.projectx.androidextensions.initVerticalRecycler
 import io.android.projectx.presentation.R
 import io.android.projectx.presentation.base.BaseFragment
@@ -28,11 +30,33 @@ class LanguageFragment : BaseFragment(R.layout.language_fragment) {
     private fun initUi() {
         val data: List<LanguageView> = getAvailableLanguages()
         adapter = Adapter(
-            R.layout.language_adapter_item,
+            onCreate = { parent, _ -> Adapter.ViewHolder(parent.inflate(R.layout.language_adapter_item)) },
             onClick = { _, item -> onClick(item) },
-            onBind = { _, item, view -> onBind(item, view) }
+            onBind = { _, item, view, _ -> onBind(item, view) },
+            filter = object : Filter() {
+                override fun performFiltering(constraint: CharSequence): FilterResults {
+                    val sequence = constraint.toString()
+                    if (sequence.isEmpty()) adapter.filteredList = adapter.items
+                    else {
+                        val fList: MutableList<LanguageView> = ArrayList()
+                        for (name in adapter.items) {
+                            if (name.key.toLowerCase().contains(sequence.toLowerCase()))
+                                fList.add(name)
+                            adapter.filteredList = fList
+                        }
+                    }
+                    val results = FilterResults()
+                    results.values = adapter.filteredList
+                    return results
+                }
+
+                override fun publishResults(constraint: CharSequence, results: FilterResults) {
+                    adapter.filteredList = results.values as MutableList<LanguageView>
+                    adapter.notifyDataSetChanged()
+                }
+            }
         )
-        adapter.items = data
+        adapter.items = data.toMutableList()
         recyclerView.initVerticalRecycler(adapter)
     }
 

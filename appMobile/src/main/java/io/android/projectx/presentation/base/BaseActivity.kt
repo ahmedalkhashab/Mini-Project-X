@@ -8,9 +8,10 @@ import androidx.annotation.LayoutRes
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
 import dagger.android.support.DaggerAppCompatActivity
 import io.android.projectx.androidextensions.LocalizationHandler
+import io.android.projectx.androidextensions.isRTL
+import io.android.projectx.presentation.R
 import io.android.projectx.presentation.extensions.handleError
 import io.android.projectx.presentation.features.Navigator
 import io.android.projectx.presentation.features.cloudmessaging.StatusManager
@@ -39,9 +40,15 @@ abstract class BaseActivity(@LayoutRes private val layoutRes: Int = 0) : DaggerA
         LocalizationHandler.onAttach(this)
     }
 
-    fun handleError(throwable: Throwable?, navController: NavController? = null) {
-        handleError(throwable, navController, navigator)
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val isRTL = isRTL(R.bool.is_rtl)
+        val enterAnim = if (isRTL) R.anim.slide_in_screen_end else R.anim.slide_in_screen_start
+        val exitAnim = if (isRTL) R.anim.slide_out_screen_start else R.anim.slide_out_screen_end
+        overridePendingTransition(enterAnim, exitAnim)
     }
+
+    fun handleError(throwable: Throwable?) = handleError(throwable, navigator)
 
     inline fun <reified VM : ViewModel> appViewModels() = viewModels<VM> { baseViewModelFactory }
 

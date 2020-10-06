@@ -7,7 +7,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
 import dagger.android.support.DaggerFragment
 import io.android.projectx.androidextensions.LocalizationHandler
 import io.android.projectx.presentation.extensions.handleError
@@ -30,9 +29,8 @@ abstract class BaseFragment(@LayoutRes private val layoutRest: Int = 0) : Dagger
         requireActivity().let { LocalizationHandler.onAttach(it) }
     }
 
-    fun handleError(throwable: Throwable?, navController: NavController? = null) {
-        requireActivity().handleError(throwable, navController, navigator)
-    }
+    fun handleError(throwable: Throwable?)
+            = requireActivity().handleError(throwable, navigator)
 
     inline fun <reified VM : ViewModel> appViewModels() = viewModels<VM> { baseViewModelFactory }
     inline fun <reified VM : ViewModel> appActivityViewModels() = activityViewModels<VM> { baseViewModelFactory }

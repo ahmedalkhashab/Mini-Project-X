@@ -41,7 +41,7 @@ open class BaseDialogFragment(
         savedInstanceState: Bundle?
     ): View? {
         isCancelable = false
-        return inflater.inflate(R.layout.view_dialog_full_screen, container, false)
+        return inflater.inflate(layoutRes, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

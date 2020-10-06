@@ -8,11 +8,11 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ProcessLifecycleOwner
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
@@ -37,6 +37,7 @@ class AppUpdateManager(application: Application) : LifecycleObserver {
             override fun onActivityCreated(activity: Activity, bundle: Bundle?) {}
             override fun onActivityStarted(activity: Activity) {
                 activityWeakReference = WeakReference(activity)
+                checkForceUpdateNeeded()
             }
 
             override fun onActivityResumed(activity: Activity) {}
@@ -49,7 +50,7 @@ class AppUpdateManager(application: Application) : LifecycleObserver {
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    fun appStarted() = checkForceUpdateNeeded()
+    fun appStarted() {}
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     fun appStopped() = activityWeakReference?.clear()
@@ -89,10 +90,12 @@ class AppUpdateManager(application: Application) : LifecycleObserver {
 
     @Suppress("DEPRECATION")
     private fun getAppVersion(): Long {
-        val context = currentActivity!!
-        val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
-        return if (Build.VERSION.SDK_INT >= 28) packageInfo.longVersionCode
-        else packageInfo.versionCode.toLong()
+        return if (currentActivity != null) {
+            val packageInfo =
+                currentActivity!!.packageManager.getPackageInfo(currentActivity!!.packageName, 0)
+            return if (Build.VERSION.SDK_INT >= 28) packageInfo.longVersionCode
+            else packageInfo.versionCode.toLong()
+        } else 1L
     }
 
     private fun onUpdateNeeded(isForceUpdate: Boolean, versionName: String, url: String) {
@@ -107,7 +110,7 @@ class AppUpdateManager(application: Application) : LifecycleObserver {
             else activity.getString(R.string.app_update_cancel)
             // build dialog
             val dialog =
-                AlertDialog.Builder(activity)
+                MaterialAlertDialogBuilder(activity)
                     .setTitle(textTitle)
                     .setMessage(textDescription)
                     .setPositiveButton(textPositive) { _, _ -> redirectStore(activity, url) }

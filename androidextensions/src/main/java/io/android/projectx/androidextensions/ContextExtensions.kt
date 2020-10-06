@@ -82,7 +82,7 @@ fun Context.getAttributeColorInt(@AttrRes attrRes: Int): Int {
     return this.getSupportColor(this.getAttrValueResId(attrRes))
 }
 
-//fun Context.isRtl() = resources.getBoolean(R.bool.is_rtl)
+fun Context.isRTL(resId: Int) = resources.getBoolean(resId)
 
 fun Context.checkSelfPermissionCompat(permission: String): Int {
     return ContextCompat.checkSelfPermission(this, permission)
