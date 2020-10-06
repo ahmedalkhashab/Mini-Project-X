@@ -14,7 +14,7 @@ fun Activity?.showErrorAlerter(message: String?) {
         Alerter.create(this).setTitle("")
             .setText(it)
             .setBackgroundColorRes(android.R.color.darker_gray)
-            .setDuration(5000)
+            .setDuration(3000)
             .show()
     }
 }
@@ -22,6 +22,22 @@ fun Activity?.showErrorAlerter(message: String?) {
 fun Activity?.showErrorAlerter(@StringRes message: Int) {
     this ?: return
     showErrorAlerter(getString(message))
+}
+
+fun Activity?.showAlerter(message: String?) {
+    this ?: return
+    message?.let {
+        Alerter.create(this).setTitle("")
+            .setText(it)
+            .setBackgroundColorRes(android.R.color.holo_green_dark)
+            .setDuration(3000)
+            .show()
+    }
+}
+
+fun Activity?.showAlerter(@StringRes message: Int) {
+    this ?: return
+    showAlerter(getString(message))
 }
 
 fun Activity?.disableUserInteraction() {
