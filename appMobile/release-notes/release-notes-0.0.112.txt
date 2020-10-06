@@ -1,0 +1,9 @@
+Release: "The app name" 0.0.112
+
+Release date: 14. September 2020
+Release time: 02:00 AM Arabia Standard Time
+
+####### Improvements #######
++ The app
+
+####### Bug Fixes #######

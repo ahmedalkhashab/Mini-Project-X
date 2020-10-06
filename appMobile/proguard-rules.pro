@@ -66,4 +66,21 @@
 }
 
 -dontwarn java.lang.reflect.**
+-keep class io.android.projectx.remote.features.usermanagement.model.response.LoginWrapper { *; }
+-keep class io.android.projectx.remote.features.usermanagement.model.response.CloudRegistrationWrapper { *; }
+-keep class io.android.projectx.remote.features.usermanagement.model.request.EmailCredentialRequest { *; }
+-keep class io.android.projectx.remote.features.usermanagement.model.request.MobileCredentialRequest { *; }
+-keep class io.android.projectx.remote.features.usermanagement.model.request.MobileNumber { *; }
+-keep class io.android.projectx.remote.features.usermanagement.model.request.ResetPasswordCredentialRequest { *; }
+-keep class io.android.projectx.remote.features.usermanagement.model.request.UserNameCredentialRequest { *; }
+-keep class io.android.projectx.remote.features.usermanagement.model.request.cloudmessaging.TokenCmRequestModel { *; }
+-keep class io.android.projectx.remote.features.usermanagement.model.UserModel { *; }
+-keep class io.android.projectx.remote.features.usermanagement.model.UserStatusModel { *; }
+-keep class io.android.projectx.remote.features.recipes.model.AuthorModel { *; }
+-keep class io.android.projectx.remote.features.recipes.model.RecipeModel { *; }
+-keep class io.android.projectx.remote.features.recipes.model.response.RecipesResponseModel { *; }
+-keep class io.android.projectx.remote.features.restaurants.model.response.RestaurantsResponseModel { *; }
+-keep class io.android.projectx.remote.features.restaurants.model.RestaurantModel { *; }
+-keep class io.android.projectx.remote.base.model.ServerError { *; }
+-keep class io.android.projectx.remote.base.model.RemoteException { *; }
 ##---------------End: proguard configuration for Moshi  ----------

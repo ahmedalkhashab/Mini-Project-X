@@ -3,7 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs"
-//apply plugin: 'com.google.gms.google-services'
+/*apply plugin: 'com.google.gms.google-services'
+// the Crashlytics Gradle plugin
+apply plugin: 'com.google.firebase.crashlytics'
+// the App Distribution Gradle plugin
+apply plugin: 'com.google.firebase.appdistribution'*/
 
 //load app.properties
 def appPropertiesFile = rootProject.file("app.properties")
@@ -25,7 +29,7 @@ android {
         testInstrumentationRunner "io.android.projectx.presentation.test.TestRunner"
 
         versionCode rootProject.ext.app_version_code
-        versionName "1.0.0"
+        versionName rootProject.ext.app_version_name
         setProperty("archivesBaseName",
                 "ProjectX_" + new Date().format("HHmm-dd-MM-yy")
                         + "_vn" + versionName + "_vc" + versionCode)
@@ -78,6 +82,7 @@ android {
             if (applicationIdSuffix == "") {
                 applicationIdSuffix ".dev"
             }
+            /*signingConfig signingConfigs.release*/
             //to speed up build disable Crashlytics plugin for debug builds
             ext.enableCrashlytics = false
         }
@@ -86,6 +91,16 @@ android {
             shrinkResources true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            /*firebaseAppDistribution {
+                def ciBuildNumber = rootProject.ext.ciBuildNumber
+                def versionName = rootProject.ext.app_version_name
+                if (ciBuildNumber != null) {
+                    serviceCredentialsFile = "./appMobile/app-customer-650g6483d2e2.json"
+                    releaseNotesFile = "./appMobile/release-notes/release-notes-" + versionName + ".txt"
+                    groups = "devtesters"
+                }
+            }*/
         }
     }
 
@@ -131,6 +146,7 @@ dependencies {
     implementation presentationDependencies.navigationUiKtx
     implementation presentationDependencies.navigationDynamic
     implementation presentationDependencies.firebaseAnalytics
+    /*implementation presentationDependencies.firebaseCrashlytics*/
     implementation presentationDependencies.firebaseMessaging
     implementation presentationDependencies.firebaseConfig
     kapt presentationDependencies.lifecycleCompiler
