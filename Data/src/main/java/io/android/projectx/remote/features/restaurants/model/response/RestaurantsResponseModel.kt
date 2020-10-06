@@ -1,6 +1,8 @@
 package io.android.projectx.remote.features.restaurants.model.response
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import io.android.projectx.remote.features.restaurants.model.RestaurantModel
 
-class RestaurantsResponseModel(@SerializedName("content") val items: List<RestaurantModel>)
+@JsonClass(generateAdapter = true)
+class RestaurantsResponseModel(@Json(name = "content") val items: List<RestaurantModel>? = null)

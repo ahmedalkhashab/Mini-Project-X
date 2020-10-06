@@ -10,8 +10,11 @@ open class RestaurantsResponseModelMapper @Inject constructor() :
 
     override fun mapFromModel(model: RestaurantModel): RestaurantEntity {
         return RestaurantEntity(
-            model.id, model.title, model.description, model.url,
-            model.urlToImage
+            model.id,
+            model.title,
+            model.description ?: "",
+            model.url ?: "",
+            model.urlToImage ?: ""
         )
     }
 

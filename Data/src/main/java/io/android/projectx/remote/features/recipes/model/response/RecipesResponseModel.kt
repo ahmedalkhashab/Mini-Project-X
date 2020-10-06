@@ -1,6 +1,8 @@
 package io.android.projectx.remote.features.recipes.model.response
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import io.android.projectx.remote.features.recipes.model.RecipeModel
 
-class RecipesResponseModel(@SerializedName("content") val items: List<RecipeModel>)
+@JsonClass(generateAdapter = true)
+class RecipesResponseModel(@Json(name = "content") val items: List<RecipeModel>? = null)

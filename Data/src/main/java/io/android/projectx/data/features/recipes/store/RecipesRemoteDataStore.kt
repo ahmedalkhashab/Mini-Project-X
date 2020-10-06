@@ -16,7 +16,7 @@ open class RecipesRemoteDataStore @Inject constructor(
         //todo - move parameters
         return service.searchRecipes(1)
             .map {
-                it.items.map { model -> mapper.mapFromModel(model) }
+                it.items?.map { model -> mapper.mapFromModel(model) }
             }
     }
 

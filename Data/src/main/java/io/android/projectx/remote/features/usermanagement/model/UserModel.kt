@@ -1,15 +1,17 @@
 package io.android.projectx.remote.features.usermanagement.model
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 class UserModel(
-    @SerializedName("id")
+    @Json(name = "id")
     val id: Long,
-    @SerializedName("name")
+    @Json(name = "name")
     val name: String,
-    @SerializedName("email")
+    @Json(name = "email")
     val email: String,
-    @SerializedName("mobile")
+    @Json(name = "mobile")
     val mobile: String,
     val userStatus: UserStatusModel = UserStatusModel.Registered
 )

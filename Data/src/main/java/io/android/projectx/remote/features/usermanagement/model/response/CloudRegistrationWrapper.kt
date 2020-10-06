@@ -1,14 +1,16 @@
 package io.android.projectx.remote.features.usermanagement.model.response
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class CloudRegistrationWrapper(
-    @SerializedName("id")
+    @Json(name = "id")
     val id: Int,
-    @SerializedName("user_id")
+    @Json(name = "user_id")
     val userId: String,
-    @SerializedName("device_token")
+    @Json(name = "device_token")
     val deviceToken: String,
-    @SerializedName("token_type")
+    @Json(name = "token_type")
     val tokenType: String
 )

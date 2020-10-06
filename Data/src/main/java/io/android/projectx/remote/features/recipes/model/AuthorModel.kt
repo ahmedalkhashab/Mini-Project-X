@@ -1,9 +1,11 @@
 package io.android.projectx.remote.features.recipes.model
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 class AuthorModel(
-    @SerializedName("id") val authorId: Long,
-    @SerializedName("author_name") val authorName: String,
-    @SerializedName("author_avatar") val authorAvatar: String
+    @Json(name = "id") val authorId: Long,
+    @Json(name = "author_name") val authorName: String,
+    @Json(name = "author_avatar") val authorAvatar: String? = null
 )

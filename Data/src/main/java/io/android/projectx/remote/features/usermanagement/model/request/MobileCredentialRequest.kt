@@ -1,13 +1,12 @@
 package io.android.projectx.remote.features.usermanagement.model.request
 
-import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
-@Parcelize
+@JsonClass(generateAdapter = true)
 data class MobileCredentialRequest(
-    @SerializedName("mobile")
+    @Json(name = "mobile")
     var mobile: MobileNumber? = null,
-    @SerializedName("password")
+    @Json(name = "password")
     var password: String? = null
-) : Parcelable
+)

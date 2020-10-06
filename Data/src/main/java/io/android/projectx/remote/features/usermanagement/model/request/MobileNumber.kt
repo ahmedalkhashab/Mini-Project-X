@@ -1,15 +1,12 @@
 package io.android.projectx.remote.features.usermanagement.model.request
 
-import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
-@Parcelize
+@JsonClass(generateAdapter = true)
 data class MobileNumber(
-    @SerializedName("countryCode")
+    @Json(name = "countryCode")
     var countryCode: String,
-    @SerializedName("number")
+    @Json(name = "number")
     var number: String
-) : Parcelable {
-    fun format(): String = countryCode.plus(number)
-}
+)

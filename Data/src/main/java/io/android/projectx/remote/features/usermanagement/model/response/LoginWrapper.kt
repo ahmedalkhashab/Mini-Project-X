@@ -1,11 +1,13 @@
 package io.android.projectx.remote.features.usermanagement.model.response
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import io.android.projectx.remote.features.usermanagement.model.UserModel
 
+@JsonClass(generateAdapter = true)
 data class LoginWrapper(
-    @SerializedName("user")
+    @Json(name = "user")
     val user: UserModel,
-    @SerializedName("access_token")
+    @Json(name = "access_token")
     val accessToken: String
 )

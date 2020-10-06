@@ -1,12 +1,13 @@
 package io.android.projectx.remote.features.restaurants.model
 
-import com.google.gson.annotations.SerializedName
-import java.util.*
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 class RestaurantModel(
-    @SerializedName("id") val id: Long,
-    @SerializedName("title") val title: String,
-    @SerializedName("method_description") val description: String,
-    @SerializedName("url") val url: String,
-    @SerializedName("url_to_image") val urlToImage: String
+    @Json(name = "id") val id: Long,
+    @Json(name = "title") val title: String,
+    @Json(name = "method_description") val description: String? = null,
+    @Json(name = "url") val url: String? = null,
+    @Json(name = "url_to_image") val urlToImage: String? = null
 )
