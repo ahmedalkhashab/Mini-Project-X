@@ -15,3 +15,11 @@ FILE_NAME_PRODUCTION=$(basename $LATEST_APK_PRODUCTION .apk)".apk"
 FILE_TITLE_PRODUCTION=$(basename $LATEST_APK_PRODUCTION .apk) #optional -- For changelog title.
 
 BUILD_DATE=`date +%Y-%m-%d` #optional -- For changelog title.
+
+##########  SLACK #CHANNEL ##########
+# Setup the following environment variables
+# SLACK_TOKEN - Obtain this token from: https://api.slack.com/custom-integrations/legacy-tokens
+SLACK_TOKEN=""
+# SLACK_CHANNEL - Channel name to upload the file.
+SLACK_CHANNEL=""
+##########  SLACK #CHANNEL ##########
