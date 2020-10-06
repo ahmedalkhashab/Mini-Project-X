@@ -47,6 +47,13 @@ object FlavorModule {
 
     @Provides
     @JvmStatic
+    @Named("api.key.recipes")
+    fun provideRecipesApiKey(): String {
+        return BuildConfig.RECIPES_API_KEY
+    }
+
+    @Provides
+    @JvmStatic
     @Named("base.url.restaurants")
     fun provideRestaurantsBaseURL(): String {
         return BuildConfig.API_BASE_URL

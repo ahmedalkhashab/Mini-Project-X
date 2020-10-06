@@ -13,7 +13,8 @@ open class GetRecipes @Inject constructor(
 ) : ObservableUseCase<List<Recipe>, Nothing?>(postExecutionThread) {
 
     public override fun buildUseCaseObservable(params: Nothing?): Observable<List<Recipe>> {
-        return recipesRepository.getRecipes()
+        // todo - move parameters
+        return recipesRepository.getRecipes(0, 10)
     }
 
 }

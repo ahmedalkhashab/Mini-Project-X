@@ -5,4 +5,7 @@ import com.squareup.moshi.JsonClass
 import io.android.projectx.remote.features.recipes.model.RecipeModel
 
 @JsonClass(generateAdapter = true)
-class RecipesResponseModel(@Json(name = "content") val items: List<RecipeModel>? = null)
+class RecipesResponseModel(
+    @Json(name = "count") val count: Long,
+    @Json(name = "results") val items: List<RecipeModel>? = null
+)

@@ -7,7 +7,6 @@ import io.android.projectx.domain.features.recipes.model.Recipe
 import io.android.projectx.domain.features.recipes.repository.RecipesRepository
 import io.reactivex.Completable
 import io.reactivex.Observable
-import io.reactivex.functions.BiFunction
 import javax.inject.Inject
 
 class RecipesDataRepository @Inject constructor(
@@ -16,24 +15,20 @@ class RecipesDataRepository @Inject constructor(
     private val factory: RecipesDataStoreFactory
 ) : RecipesRepository {
 
-    override fun getRecipes(): Observable<List<Recipe>> {
+    override fun getRecipes(fromIndex: Int, pageSize: Int): Observable<List<Recipe>> {
         return Observable.zip(cache.areRecipesCached().toObservable(),
             cache.isRecipesCacheExpired().toObservable(),
-            BiFunction<Boolean, Boolean, Pair<Boolean, Boolean>> { areCached, isExpired ->
-                Pair(areCached, isExpired)
-            })
+            { areCached, isExpired -> Pair(areCached, isExpired) })
             .flatMap {
-                factory.getDataStore(it.first, it.second).getRecipes().toObservable()
-                    .distinctUntilChanged()
+                factory.getDataStore(it.first, it.second)
+                    .getRecipes(fromIndex, pageSize).toObservable()
             }
             .flatMap { recipes ->
                 factory.getCacheDataStore()
                     .saveRecipes(recipes)
                     .andThen(Observable.just(recipes))
             }
-            .map {
-                it.map { mapper.mapFromEntity(it) }
-            }
+            .map { it.map { mapper.mapFromEntity(it) } }
     }
 
     override fun bookmarkRecipe(recipeId: Long): Completable {

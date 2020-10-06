@@ -12,13 +12,11 @@ open class RecipesResponseModelMapper @Inject constructor() :
     override fun mapFromModel(model: RecipeModel): RecipeEntity {
         return RecipeEntity(
             model.id,
-            model.author.authorName,
-            model.title,
+            model.title ?: "",
             model.description ?: "",
             model.url ?: "",
             model.urlToImage ?: "",
-            model.publishedAt ?: Date(),
-            model.content ?: "",
+            model.publishedAt?.let { Date(it) } ?: run { Date() },
             false
         )
     }

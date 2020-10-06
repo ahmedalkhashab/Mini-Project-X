@@ -67,7 +67,6 @@ class BookmarkedFragment : BaseFragment(R.layout.bookmarked_fragment) {
 
     private fun <T> onBind(item: T, view: View) {
         val recipe = item as RecipeView
-        view.tvOwnerName.text = recipe.author
         view.tvRecipeName.text = recipe.title
         Glide.with(requireContext())
             .load(recipe.urlToImage)

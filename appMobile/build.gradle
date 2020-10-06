@@ -15,6 +15,13 @@ def appPropertiesObject = new Properties()
 //load all properties into appPropertiesObject
 appPropertiesObject.load(new FileInputStream(appPropertiesFile))
 
+//return a Recipes API KEY from a properties file.
+def getRecipesApiKey(String property){
+    Properties properties = new Properties()
+    properties.load(new FileInputStream(rootProject.file("api.properties")))
+    return "\"" + properties.getProperty(property) +"\""
+}
+
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
 
@@ -33,6 +40,7 @@ android {
         setProperty("archivesBaseName",
                 "ProjectX_" + new Date().format("HHmm-dd-MM-yy")
                         + "_vn" + versionName + "_vc" + versionCode)
+        buildConfigField("String", "RECIPES_API_KEY", getRecipesApiKey("recipesApiKey"))
     }
 
     compileOptions {

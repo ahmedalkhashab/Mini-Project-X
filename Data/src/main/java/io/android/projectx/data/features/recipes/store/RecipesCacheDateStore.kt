@@ -17,7 +17,7 @@ open class RecipesCacheDateStore @Inject constructor(
 
     companion object {
         const val KEY_GET_RECIPES = "key_get_recipes"
-        const val expirationTime = (60 * 10 * 1000).toLong()
+        const val expirationTime = (60 * 1000 * 1).toLong()
     }
 
     override fun clearRecipes(): Completable {
@@ -35,7 +35,7 @@ open class RecipesCacheDateStore @Inject constructor(
         }
     }
 
-    override fun getRecipes(): Flowable<List<RecipeEntity>> {
+    override fun getRecipes(fromIndex: Int, pageSize: Int): Flowable<List<RecipeEntity>> {
         return appDatabase.cachedRecipesDao().getRecipes()
             .map {
                 it.map { cachedRecipe -> mapper.mapFromCached(cachedRecipe) }
@@ -64,10 +64,7 @@ open class RecipesCacheDateStore @Inject constructor(
     }
 
     override fun areRecipesCached(): Single<Boolean> {
-        return appDatabase.cachedRecipesDao().getRecipes().isEmpty
-            .map {
-                !it
-            }
+        return appDatabase.cachedRecipesDao().getRecipes().isEmpty.map { !it }
     }
 
     override fun setLastCacheTime(lastCache: Long): Completable {

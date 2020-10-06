@@ -6,7 +6,7 @@ import io.reactivex.Observable
 
 interface RecipesRepository {
 
-    fun getRecipes(): Observable<List<Recipe>>
+    fun getRecipes(fromIndex: Int, pageSize: Int): Observable<List<Recipe>>
 
     fun bookmarkRecipe(recipeId: Long): Completable
 

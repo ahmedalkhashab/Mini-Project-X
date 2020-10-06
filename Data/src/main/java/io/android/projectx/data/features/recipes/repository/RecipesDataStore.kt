@@ -5,6 +5,6 @@ import io.reactivex.Flowable
 
 interface RecipesDataStore {
 
-    fun getRecipes(): Flowable<List<RecipeEntity>>
+    fun getRecipes(fromIndex: Int, pageSize: Int): Flowable<List<RecipeEntity>>
 
 }

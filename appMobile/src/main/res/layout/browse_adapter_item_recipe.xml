@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="0.498" />
 
     <TextView
-        android:id="@+id/tvOwnerName"
+        android:id="@+id/tvRecipeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -31,19 +31,6 @@
         app:layout_constraintStart_toEndOf="@+id/recipeImage"
         app:layout_constraintTop_toTopOf="@+id/recipeImage"
         tools:text="Mohamed Ahmed" />
-
-    <TextView
-        android:id="@+id/tvRecipeName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/bookmarkedImage"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/recipeImage"
-        app:layout_constraintTop_toBottomOf="@+id/tvOwnerName"
-        tools:text="Some recipe" />
 
     <ImageView
         android:id="@+id/bookmarkedImage"

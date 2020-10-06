@@ -10,15 +10,15 @@ open class RecipeMapper @Inject constructor() :
 
     override fun mapFromEntity(entity: RecipeEntity): Recipe {
         return Recipe(
-            entity.id, entity.author, entity.title, entity.description, entity.url,
-            entity.urlToImage, entity.publishedAt, entity.content, entity.isBookmarked
+            entity.id, entity.title, entity.description, entity.url,
+            entity.urlToImage, entity.publishedAt, entity.isBookmarked
         )
     }
 
     override fun mapToEntity(domain: Recipe): RecipeEntity {
         return RecipeEntity(
-            domain.id, domain.author, domain.title, domain.description, domain.url,
-            domain.urlToImage, domain.publishedAt, domain.content, domain.isBookmarked
+            domain.id, domain.title, domain.description, domain.url,
+            domain.urlToImage, domain.publishedAt, domain.isBookmarked
         )
     }
 

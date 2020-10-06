@@ -16,7 +16,7 @@ class SplashFragment : BaseFragment(R.layout.splash_fragment) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        navigate(Runnable { navigator.toLoginScreen(requireActivity()) })
+        navigate(Runnable { navigator.toBrowseRecipesScreen(requireActivity()) })
     }
 
     private fun navigate(r: Runnable) = Handler().postDelayed(r, SPLASH_TIME_OUT)
