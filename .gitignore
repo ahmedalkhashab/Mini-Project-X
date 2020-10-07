@@ -1,6 +1,3 @@
-#hide api.properties from public repository
-api.properties
-
 .gradle
 .DS_Store
 .cxx
