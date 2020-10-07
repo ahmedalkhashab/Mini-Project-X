@@ -1,5 +1,5 @@
 #hide api.properties from public repository
-api.properties
+#api.properties
 
 .gradle
 .DS_Store
