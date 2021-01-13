@@ -70,7 +70,7 @@ android {
             dimension "default"
             // ConfigFields
             buildConfigField("String", "API_BASE_URL", "\"${production_api_base_url}\"")
-            buildConfigField("Boolean", "APP_CERTIFICATE_IS_ENABLED", "flase")
+            buildConfigField("Boolean", "APP_CERTIFICATE_IS_ENABLED", "false")
         }
         staging {
             applicationId "io.android.projectx"
@@ -78,7 +78,7 @@ android {
             versionNameSuffix "-staging"
             // ConfigFields
             buildConfigField("String", "API_BASE_URL", "\"${staging_api_base_url}\"")
-            buildConfigField("Boolean", "APP_CERTIFICATE_IS_ENABLED", "flase")
+            buildConfigField("Boolean", "APP_CERTIFICATE_IS_ENABLED", "false")
         }
         dev {
             applicationId "io.android.projectx"
@@ -87,7 +87,7 @@ android {
             versionNameSuffix "-dev"
             // ConfigFields
             buildConfigField("String", "API_BASE_URL", "\"${quality_api_base_url}\"")
-            buildConfigField("Boolean", "APP_CERTIFICATE_IS_ENABLED", "flase")
+            buildConfigField("Boolean", "APP_CERTIFICATE_IS_ENABLED", "false")
         }
     }
 
