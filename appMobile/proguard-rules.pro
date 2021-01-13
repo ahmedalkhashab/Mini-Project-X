@@ -28,6 +28,10 @@
 -keep class io.android.projectx.presentation.base.model.UserView
 ##---------------End: proguard configuration for navigation component  ----------
 
+#okhttp
+-keepclassmembers class * implements javax.net.ssl.SSLSocketFactory {
+    private final javax.net.ssl.SSLSocketFactory delegate;
+}
 
 ##---------------Begin: proguard configuration for crashlytics  ----------
 

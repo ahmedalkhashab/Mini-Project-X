@@ -41,6 +41,9 @@ android {
                 "ProjectX_" + new Date().format("HHmm-dd-MM-yy")
                         + "_vn" + versionName + "_vc" + versionCode)
         buildConfigField("String", "RECIPES_API_KEY", getRecipesApiKey("recipesApiKey"))
+
+        buildConfigField("String", "APP_CERTIFICATE_PINNER_KEY", "\"${app_certificate_pinner_key}\"")
+        buildConfigField("String", "APP_CERTIFICATE_PINNER_VALUE", "\"${app_certificate_pinner_value}\"")
     }
 
     compileOptions {

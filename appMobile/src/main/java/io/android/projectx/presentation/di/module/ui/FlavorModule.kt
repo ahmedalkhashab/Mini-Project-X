@@ -59,4 +59,19 @@ object FlavorModule {
         return BuildConfig.API_BASE_URL
     }
 
+    @Provides
+    @JvmStatic
+    @Named("certificate")
+    fun provideCertificate(): Boolean = false/*!BuildConfig.DEBUG*/
+
+    @Provides
+    @JvmStatic
+    @Named("certificate.key")
+    fun provideCertificateKey(): String = BuildConfig.APP_CERTIFICATE_PINNER_KEY
+
+    @Provides
+    @JvmStatic
+    @Named("certificate.value")
+    fun provideCertificateValue(): String = BuildConfig.APP_CERTIFICATE_PINNER_VALUE
+
 }
