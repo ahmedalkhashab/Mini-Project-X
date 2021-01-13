@@ -62,7 +62,7 @@ object FlavorModule {
     @Provides
     @JvmStatic
     @Named("certificate")
-    fun provideCertificate(): Boolean = false/*!BuildConfig.DEBUG*/
+    fun provideCertificate(): Boolean = BuildConfig.APP_CERTIFICATE_IS_ENABLED
 
     @Provides
     @JvmStatic
