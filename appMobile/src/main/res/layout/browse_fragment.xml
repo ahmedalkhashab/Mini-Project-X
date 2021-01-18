@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerRecipes"
@@ -11,6 +13,26 @@
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
         android:scrollbars="vertical" />
+
+    <io.android.projectx.widget.EmptyView
+        android:id="@+id/emptyView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="12dp"
+
+        android:visibility="invisible"
+
+        tools:text="No Item"
+        android:textColor="@color/colorTextThird"
+        tools:src="@drawable/ic_empty"
+        android:background="#FFFFFF"
+        app:buttonText="Retry"
+        app:buttonTextColor="@android:color/white"
+        app:buttonBgColor="@android:color/holo_red_dark"
+        android:layout="@layout/empty_view_default" />
 
     <ProgressBar
         android:id="@+id/progressbar"

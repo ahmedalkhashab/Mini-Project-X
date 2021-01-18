@@ -6,15 +6,14 @@ import android.widget.Filter
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import io.android.projectx.androidextensions.inflate
-import io.android.projectx.androidextensions.initVerticalRecycler
-import io.android.projectx.androidextensions.isRTL
+import io.android.projectx.androidextensions.*
 import io.android.projectx.presentation.R
 import io.android.projectx.presentation.base.Adapter
 import io.android.projectx.presentation.base.BaseFragment
 import io.android.projectx.presentation.base.model.RecipeView
 import io.android.projectx.presentation.base.state.Resource
 import io.android.projectx.presentation.base.state.Resource.Status
+import io.android.projectx.presentation.extensions.getError
 import io.android.projectx.presentation.extensions.updateVisibility
 import kotlinx.android.synthetic.main.browse_adapter_item_recipe.view.*
 import kotlinx.android.synthetic.main.browse_fragment.*
@@ -108,17 +107,20 @@ class BrowseFragment : BaseFragment(R.layout.browse_fragment) {
     private fun handleDataState(resource: Resource<List<RecipeView>?>) {
         progressbar.updateVisibility(resource.status)
         when (resource.status) {
-            Status.SUCCESS -> setupScreenForSuccess(resource.data)
-            Status.LOADING -> {
+            Status.SUCCESS ->
+                if (resource.data.isNullOrEmpty()) {
+                emptyView.show(onClick={ viewModel.fetchRecipes() })
+                recyclerRecipes.hide(true)
+            } else {
+                adapter.items = resource.data.toMutableList()
+                emptyView.hide()
+                recyclerRecipes.show()
             }
-            Status.ERROR -> {
+            Status.LOADING -> emptyView.hide()
+            Status.ERROR ->  {
+                emptyView.show(resource.throwable.getError(requireContext()), onClick={ viewModel.fetchRecipes() })
+                handleError(resource.throwable)
             }
-        }
-    }
-
-    private fun setupScreenForSuccess(recipes: List<RecipeView>?) {
-        recipes?.let {
-            adapter.items = it.toMutableList()
         }
     }
 
