@@ -30,6 +30,7 @@ class BrowseFragment : BaseFragment(R.layout.browse_fragment) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
         subscribeObservers()
+        registerListeners()
         initUi()
         viewModel.fetchRecipes()
     }
@@ -58,6 +59,11 @@ class BrowseFragment : BaseFragment(R.layout.browse_fragment) {
     private fun subscribeObservers() {
         viewModel.getRecipes()
             .observe(viewLifecycleOwner, { it?.let { handleDataState(it) } })
+    }
+
+    private fun registerListeners() {
+        // add Listeners here like "ClickListener"
+        /*TODO("Not yet implemented")*/
     }
 
     private fun initUi() {
