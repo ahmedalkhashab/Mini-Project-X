@@ -14,4 +14,15 @@
         <attr name="android:selectAllOnFocus"/>
     </declare-styleable>
 
+    <declare-styleable name="EmptyView">
+        <attr name="android:layout" format="reference" />
+        <attr name="android:text" />
+        <attr name="android:textColor" format="reference|color" />
+        <attr name="android:src" format="reference" />
+        <attr name="android:background" format="reference|color" />
+        <attr name="buttonText" format="string|reference" />
+        <attr name="buttonTextColor" format="reference|color" />
+        <attr name="buttonBgColor" format="reference|color" />
+    </declare-styleable>
+
 </resources>
