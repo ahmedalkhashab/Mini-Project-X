@@ -5,6 +5,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
@@ -81,8 +82,8 @@ open class BaseDialogFragment(
     private fun initUi() {
         icon.setImageResource(iconRes)
         tvMessage.text = message
-        textOk?.let { btnOk.text = it }
-        textNo?.let { btnNo.text = it }
+        textOk?.let { btnOk.text = it } ?: run { btnOk.visibility = GONE }
+        textNo?.let { btnNo.text = it } ?: run { btnNo.visibility = GONE }
     }
 
 }

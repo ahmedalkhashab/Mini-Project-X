@@ -3,11 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs"
-/*apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services'
 // the Crashlytics Gradle plugin
 apply plugin: 'com.google.firebase.crashlytics'
 // the App Distribution Gradle plugin
-apply plugin: 'com.google.firebase.appdistribution'*/
+apply plugin: 'com.google.firebase.appdistribution'
 
 //load app.properties
 def appPropertiesFile = rootProject.file("app.properties")
@@ -98,7 +98,11 @@ android {
             }
             /*signingConfig signingConfigs.release*/
             //to speed up build disable Crashlytics plugin for debug builds
-            ext.enableCrashlytics = false
+            firebaseCrashlytics {
+                // If you don't need crash reporting for your debug build,
+                // you can speed up your build by disabling mapping file uploading.
+                mappingFileUploadEnabled false
+            }
         }
         release {
             minifyEnabled true
@@ -106,7 +110,7 @@ android {
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
-            /*firebaseAppDistribution {
+            firebaseAppDistribution {
                 def ciBuildNumber = rootProject.ext.ciBuildNumber
                 def versionName = rootProject.ext.app_version_name
                 if (ciBuildNumber != null) {
@@ -114,7 +118,7 @@ android {
                     releaseNotesFile = "./appMobile/release-notes/release-notes-" + versionName + ".txt"
                     groups = "devtesters"
                 }
-            }*/
+            }
         }
     }
 
@@ -159,17 +163,14 @@ dependencies {
     implementation presentationDependencies.navigationFragmentKtx
     implementation presentationDependencies.navigationUiKtx
     implementation presentationDependencies.navigationDynamic
+    /*firebase*/
+    implementation platform(presentationDependencies.firebaseBoM)
     implementation presentationDependencies.firebaseAnalytics
-    /*implementation presentationDependencies.firebaseCrashlytics*/
     implementation presentationDependencies.firebaseMessaging
     implementation presentationDependencies.firebaseConfig
+    implementation presentationDependencies.firebaseCrashlytics
     kapt presentationDependencies.lifecycleCompiler
     kapt presentationDependencies.roomCompiler
-    // Firebase ML Kit dependencies
-    implementation presentationDependencies.firebaseMlVision
-    // CameraX
-    implementation presentationDependencies.cameraCore
-    implementation presentationDependencies.cameraCamera2
 
     //dagger
     implementation presentationDependencies.dagger

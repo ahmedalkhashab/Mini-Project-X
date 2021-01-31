@@ -11,7 +11,7 @@ ext {
 
     //Android
     androidBuildToolsVersion = "29.0.3"
-    androidMinSdkVersion = 23
+    androidMinSdkVersion = 26
     androidTargetSdkVersion = 29
     androidCompileSdkVersion = 29
 
@@ -39,10 +39,7 @@ ext {
     navVersion = '2.3.0-beta01'
     legacyVersion = '1.0.0'
 
-    firebaseConfigVersion = '19.1.4'
-    firebaseMessagingVersion = '20.2.0'
-    firebaseAnalyticsVersion = '17.4.2'
-    firebaseCrashlyticsVersion = '17.0.0'
+    firebaseBoMVersion = '26.0.0'
     daggerVersion = '2.27'
     timberVersion = '4.7.1'
     glideVersion = '4.11.0'
@@ -164,10 +161,11 @@ ext {
             navigationDynamic     : "androidx.navigation:navigation-dynamic-features-fragment:${navVersion}",
             securityCrypto        : "androidx.security:security-crypto:${securityCryptoVersion}",
 
-            firebaseConfig        : "com.google.firebase:firebase-config-ktx:${firebaseConfigVersion}",
-            firebaseMessaging     : "com.google.firebase:firebase-messaging:${firebaseMessagingVersion}",
-            firebaseAnalytics     : "com.google.firebase:firebase-analytics-ktx:${firebaseAnalyticsVersion}",
-            firebaseCrashlytics   : "com.google.firebase:firebase-crashlytics:${firebaseCrashlyticsVersion}",
+            firebaseBoM           : "com.google.firebase:firebase-bom:${firebaseBoMVersion}",
+            firebaseConfig        : "com.google.firebase:firebase-config-ktx",
+            firebaseMessaging     : "com.google.firebase:firebase-messaging-ktx",
+            firebaseAnalytics     : "com.google.firebase:firebase-analytics-ktx",
+            firebaseCrashlytics   : "com.google.firebase:firebase-crashlytics-ktx",
 
             dagger                : "com.google.dagger:dagger:${daggerVersion}",
             daggerCompiler        : "com.google.dagger:dagger-compiler:${daggerVersion}",

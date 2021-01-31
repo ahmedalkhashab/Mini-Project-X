@@ -110,3 +110,12 @@ fun Context?.showToastShort(@StringRes msg: Int) {
 fun Context?.showToastLong(@StringRes msg: Int) {
     this?.let { Toast.makeText(this, msg, Toast.LENGTH_LONG).show() }
 }
+
+fun Context.shareLink(link: String) =
+    startActivity(
+        Intent.createChooser(Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, link)
+            type = "text/plain"
+        }, null)
+    )

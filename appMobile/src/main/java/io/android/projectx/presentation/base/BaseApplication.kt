@@ -4,9 +4,11 @@ import android.content.Context
 import android.content.res.Configuration
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ProcessLifecycleOwner
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import io.android.projectx.androidextensions.LocalizationHandler
+import io.android.projectx.presentation.BuildConfig
 import io.android.projectx.presentation.di.DaggerAppComponent
 import timber.log.Timber
 
@@ -17,8 +19,8 @@ class BaseApplication : DaggerApplication(), LifecycleObserver {
     override fun onCreate() {
         super.onCreate()
         initAppUpdateManager()
-        ProcessLifecycleOwner.get().lifecycle.addObserver(this);
         setupTimber()
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG)
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
@@ -36,6 +38,7 @@ class BaseApplication : DaggerApplication(), LifecycleObserver {
 
     private fun initAppUpdateManager() {
         if (appUpdateManager == null) appUpdateManager = AppUpdateManager(this)
+        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
     }
 
     private fun setupTimber() {
