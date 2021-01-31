@@ -18,6 +18,7 @@ class BaseApplication : DaggerApplication(), LifecycleObserver {
 
     override fun onCreate() {
         super.onCreate()
+        initTheme() // Theme
         initAppUpdateManager()
         setupTimber()
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG)
@@ -33,16 +34,16 @@ class BaseApplication : DaggerApplication(), LifecycleObserver {
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        LocalizationHandler.onAttach(this);
+        LocalizationHandler.onAttach(this)
     }
+
+    private fun initTheme() {}
 
     private fun initAppUpdateManager() {
         if (appUpdateManager == null) appUpdateManager = AppUpdateManager(this)
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
     }
 
-    private fun setupTimber() {
-        Timber.plant(Timber.DebugTree())
-    }
+    private fun setupTimber() = Timber.plant(Timber.DebugTree())
 
 }

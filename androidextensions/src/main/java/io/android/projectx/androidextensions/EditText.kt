@@ -30,3 +30,42 @@ fun EditText.onTextChanged(blockFun: (String) -> Unit) {
         }
     })
 }
+
+fun EditText.setSearchBehaviour(
+    searchAction: (text: String) -> Unit,
+    emptyAction: ((length: Int) -> Unit)? = null,
+    cancelAction: (() -> Unit)? = null
+) = afterTextChanged { text ->
+    SearchHelper.searchText(text, object : SearchHelper.SearchAction {
+        override fun searchStarted(text: String) {
+            searchAction.invoke(text)
+        }
+
+        override fun searchEmpty(length: Int) {
+            emptyAction?.invoke(length)
+        }
+
+        override fun searchCanceled() {
+            cancelAction?.invoke()
+        }
+    })
+}
+
+
+object SearchHelper {
+
+    interface SearchAction {
+        fun searchStarted(text: String)
+        fun searchEmpty(length: Int)
+        fun searchCanceled()
+    }
+
+    fun searchText(text: String, searchAction: SearchAction) {
+        when {
+            text.isNotEmpty() -> searchAction.searchStarted(text)
+            text.isEmpty() -> searchAction.searchCanceled()
+            else -> searchAction.searchEmpty(text.length)
+        }
+    }
+
+}

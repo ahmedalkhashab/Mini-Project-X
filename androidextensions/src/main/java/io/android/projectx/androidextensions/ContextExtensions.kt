@@ -92,6 +92,11 @@ fun Context.isPermissionGranted(permission: String): Boolean {
     return checkSelfPermissionCompat(permission) == PackageManager.PERMISSION_GRANTED
 }
 
+@ColorInt
+fun Context.getThemeColor(@AttrRes attribute: Int): Int {
+    return TypedValue().let { theme.resolveAttribute(attribute, it, true); it.data }
+}
+
 /**
  * Toast/snackbar related extensions
  */

@@ -5,7 +5,6 @@ import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.annotation.LayoutRes
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import dagger.android.support.DaggerAppCompatActivity
@@ -54,8 +53,7 @@ abstract class BaseActivity(@LayoutRes private val layoutRes: Int = 0) : DaggerA
 
     private fun subscribeObservers() {
         statusManager.status.removeObservers(this)
-        statusManager.status
-            .observe(this, Observer { navigator.updatePerStatus(this, it.data) })
+        statusManager.status.observe(this, { navigator.updatePerStatus(this, it.data) })
     }
 
 }
