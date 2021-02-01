@@ -27,11 +27,9 @@ class RecipeMapperTest {
 
     private fun assertEqualData(entity: RecipeEntity, model: Recipe) {
         assertEquals(entity.id, model.id)
-        assertEquals(entity.author, model.author)
         assertEquals(entity.title, model.title)
         assertEquals(entity.description, model.description)
         assertEquals(entity.url, model.url)
-        assertEquals(entity.content, model.content)
         assertEquals(entity.publishedAt, model.publishedAt)
         assertEquals(entity.urlToImage, model.urlToImage)
     }

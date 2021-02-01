@@ -9,8 +9,8 @@ object RecipeFactory {
         return RecipeView(
             DataFactory.uniqueId(), DataFactory.randomString(),
             DataFactory.randomString(), DataFactory.randomString(),
-            DataFactory.randomString(), DataFactory.randomString(),
-            DataFactory.randomDate(), DataFactory.randomString(),
+            DataFactory.randomString(),
+            DataFactory.randomDate(),
             DataFactory.randomBoolean()
         )
     }
@@ -19,8 +19,8 @@ object RecipeFactory {
         return Recipe(
             DataFactory.uniqueId(), DataFactory.randomString(),
             DataFactory.randomString(), DataFactory.randomString(),
-            DataFactory.randomString(), DataFactory.randomString(),
-            DataFactory.randomDate(), DataFactory.randomString(),
+            DataFactory.randomString(),
+            DataFactory.randomDate(),
             DataFactory.randomBoolean()
         )
     }

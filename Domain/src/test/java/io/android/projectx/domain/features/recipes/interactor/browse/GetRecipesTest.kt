@@ -40,7 +40,7 @@ class GetRecipesTest {
     }
 
     private fun stubGetRecipes(observable: Observable<List<Recipe>>) {
-        whenever(recipesRepository.getRecipes())
+        whenever(recipesRepository.getRecipes(0, 10))
             .thenReturn(observable)
     }
 

@@ -13,9 +13,7 @@ object RecipeFactory {
             DataFactory.randomString(),
             DataFactory.randomString(),
             DataFactory.randomString(),
-            DataFactory.randomString(),
             DataFactory.randomDate(),
-            DataFactory.randomString(),
             DataFactory.randomBoolean()
         )
     }
@@ -27,9 +25,7 @@ object RecipeFactory {
             DataFactory.randomString(),
             DataFactory.randomString(),
             DataFactory.randomString(),
-            DataFactory.randomString(),
             DataFactory.randomDate(),
-            DataFactory.randomString(),
             DataFactory.randomBoolean()
         )
     }
