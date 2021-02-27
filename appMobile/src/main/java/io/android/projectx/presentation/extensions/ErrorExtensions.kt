@@ -8,13 +8,17 @@ import io.android.projectx.presentation.R
 import io.android.projectx.presentation.features.Navigator
 import io.android.projectx.remote.base.model.RemoteException
 import io.android.projectx.remote.base.model.RemoteException.Kind
+import timber.log.Timber
 
 fun Activity.handleError(
     throwable: Throwable?,
     navigator: Navigator
 ) {
     if (throwable.shouldLogout()) navigator.toLoginScreen(this)
-    else showErrorAlerter(throwable.getError(this))
+    else {
+        Timber.tag("throwable").e(throwable)
+        showErrorAlerter(throwable.getError(this))
+    }
 }
 
 fun Throwable?.shouldLogout(): Boolean {
